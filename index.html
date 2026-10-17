@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Torqara explores contactless magnetic detumbling for selected conductive objects in orbit. Explore the user model, hardware concept and engineering questions.">
+  <title>Torqara — Control before contact</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site.css?v=2">
+  <script src="site.js?v=2" defer></script>
+  <script type="module" src="hardware.js?v=2"></script>
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Torqara home">TORQARA<span class="brand-orbit" aria-hidden="true"></span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button>
+    <nav class="nav-links" id="site-nav" aria-label="Main navigation">
+      <a href="#mission">Mission</a><a href="explorer.html">Engineering</a><a href="#applications">Applications</a><a href="#development">Development</a>
+      <a class="nav-cta" href="explorer.html#integration">Explore the model</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero cinematic-panel" aria-labelledby="hero-title">
+      <div id="hardware-stage" class="hardware-stage" aria-label="Interactive concept hardware visualization">
+        <canvas id="hardware-canvas" aria-label="Concept robotic arm, motor, permanent magnet and conductive target. Drag to orbit and scroll to zoom."></canvas>
+        <div class="hardware-fallback" id="hardware-fallback" hidden>Concept geometry is unavailable in this browser. Explore the engineering below.</div>
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">Orbital robotics</p>
+        <h1 id="hero-title">CONTROL<br>BEFORE CONTACT.</h1>
+        <a class="button" href="explorer.html#integration">Explore the model</a>
+        <p class="hero-status">Illustrative concept. No demonstrated flight capability.</p>
+      </div>
+      <p class="hardware-caption">CONCEPT HARDWARE<br><span>Drag to orbit · Click, then scroll to zoom</span></p>
+      <a class="scroll-cue" href="#mission" aria-label="Scroll to the mission"><span></span></a>
+    </section>
+
+    <section class="mission cinematic-panel" id="mission" aria-labelledby="mission-heading">
+      <div class="mission-world" aria-hidden="true"><div class="earth-horizon"></div><div class="orbital-trace trace-one"></div><div class="orbital-trace trace-two"></div><span class="orbit-point"></span></div>
+      <div class="panel-copy">
+        <p class="eyebrow">The mission</p>
+        <h2 id="mission-heading">MOTION FIRST.<br>CONTACT NEXT.</h2>
+        <p class="panel-intro">An arm. A rotating permanent magnet. A new way to explore control before capture.</p>
+        <a class="button" href="explorer.html">Explore the engineering</a>
+        <details class="panel-details"><summary>The concept</summary><div><p>Torqara explores an arm-mounted, motor-driven permanent magnet to influence the rotation of selected electrically conductive targets without touching them.</p><p>The concept combines observation, arm positioning, and a commanded magnetic field. Each is a separate engineering problem in a feedback loop.</p><p>Detumbling does not remove an object from orbit. A capture and removal mission requires additional systems and operations.</p></div></details>
+      </div>
+      <span class="scene-caption">ORBITAL CONTEXT / ARTISTIC ILLUSTRATION</span>
+    </section>
+
+    <section class="applications cinematic-panel" id="applications" aria-labelledby="applications-heading">
+      <svg class="approach-visual" viewBox="0 0 1000 800" aria-hidden="true">
+        <defs><radialGradient id="target-glow"><stop stop-color="#8c9eac" stop-opacity=".15"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient><linearGradient id="target-metal" x1="0" x2="1"><stop stop-color="#10161d"/><stop offset=".34" stop-color="#79848a"/><stop offset=".52" stop-color="#c2c9cd"/><stop offset=".7" stop-color="#303a43"/><stop offset="1" stop-color="#121820"/></linearGradient><linearGradient id="target-top"><stop stop-color="#78848d"/><stop offset="1" stop-color="#202a33"/></linearGradient></defs>
+        <circle cx="670" cy="340" r="340" fill="url(#target-glow)"/>
+        <g transform="translate(645 300) rotate(-25)">
+          <path d="M-105-135H105V145C105 185-105 185-105 145Z" fill="url(#target-metal)" stroke="#7b8993" stroke-width=".7"/>
+          <ellipse cy="-135" rx="105" ry="35" fill="url(#target-top)" stroke="#9aa7ad" stroke-width="1.5"/>
+          <ellipse cy="-135" rx="74" ry="24" fill="#27333c" stroke="#a1aeb7" stroke-width="1"/>
+          <path d="M-105-108C-48-68 48-68 105-108M-105 111C-48 151 48 151 105 111" fill="none" stroke="#a0adb5" stroke-width="6" opacity=".6"/>
+          <path d="M-70-114V159M0-100V176M70-114V159" stroke="#131d25" fill="none" opacity=".55"/>
+          <rect x="-30" y="-30" width="60" height="80" rx="3" fill="#919da4" stroke="#bac4cc" stroke-width="2"/>
+          <rect x="-23" y="-23" width="46" height="66" rx="1" fill="#3a4750"/>
+          <path d="M-35-149v-26h70v26" fill="#26333c" stroke="#7d8d98"/>
+        </g>
+        <g fill="none" stroke="#8596a3" stroke-width="1"><ellipse cx="645" cy="300" rx="275" ry="192" transform="rotate(-25 645 300)" opacity=".32"/><path d="M456 148l-18 3 5-18" opacity=".6"/><path d="M117 680C340 621 408 540 440 458" stroke-dasharray="3 8" opacity=".4"/></g>
+        <path d="M70 706L178 653L202 663L94 716ZM106 673L141 650L159 691L124 714Z" fill="#17222a" stroke="#6d7a85"/>
+      </svg>
+      <div class="panel-copy">
+        <p class="eyebrow">Possible applications</p>
+        <h2 id="applications-heading">PREPARE FOR<br>WHAT COMES NEXT.</h2>
+        <p class="panel-intro">Explore a preparatory step for orbital capture, servicing, and inspection.</p>
+        <details class="panel-details"><summary>Mission possibilities</summary><div class="application-options"><article><h3>Capture &amp; removal</h3><p>Help prepare a suitable conductive target for a separate capture and removal operation.</p></article><article><h3>Servicing &amp; towing</h3><p>Explore whether controlled rotation can support rendezvous, attachment, and relocation.</p></article><article><h3>Recovery &amp; inspection</h3><p>Investigate a better starting point for close inspection and possible future recovery.</p></article><p class="fine-print">Potential applications are subject to validation. Prospective users could include servicing and removal primes or space agencies. No customers or partnerships are claimed.</p></div></details>
+      </div>
+      <span class="scene-caption">TARGET AND APPROACH / CONCEPT ONLY</span>
+    </section>
+
+    <section class="development cinematic-panel" id="development" aria-labelledby="development-heading">
+      <div class="field-visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><div class="field-axis"></div><div class="field-core"><span>N</span><span>S</span></div></div>
+      <div class="panel-copy">
+        <p class="eyebrow">The development path</p>
+        <h2 id="development-heading">BUILD EVIDENCE.<br>EARN THE NEXT STEP.</h2>
+        <p class="panel-intro">From a model to a measured interaction. From a laboratory loop to a possible flight experiment.</p>
+        <details class="panel-details"><summary>Proposed development sequence</summary><ol class="development-steps"><li><strong>Model &amp; baseline</strong><span>Define target cases and compare against known field, torque, and control baselines.</span></li><li><strong>Bench characterization</strong><span>Measure representative conductors, gaps, and motor commands.</span></li><li><strong>Close the loop</strong><span>Combine camera estimates, safe arm motion, and motor control.</span></li><li><strong>System validation</strong><span>Test reaction effects, thermal behavior, uncertainty, and safety.</span></li><li><strong>Possible flight experiment</strong><span>Proceed only when performance, mission fit, and readiness are established.</span></li></ol><p class="fine-print">Proposed phases, not completed milestones.</p></details>
+      </div>
+      <span class="scene-caption">FIELD GEOMETRY / SCHEMATIC ILLUSTRATION</span>
+    </section>
+
+    <section class="method-section" aria-labelledby="method-heading">
+      <div><p class="eyebrow">The engineering questions</p><h2 id="method-heading">THE DETAILS<br>MATTER.</h2></div>
+      <div class="method-list">
+        <details><summary>What can respond to the field?</summary><div><p>Aluminum and copper are candidates for target-specific analysis. Mixed structures depend on conductive paths and geometry. Nonconductive glass, plastics, and rock are not directly suited to this eddy-current mechanism.</p></div></details>
+        <details><summary>Does any magnet rotation cause braking?</summary><div><p>No. Material, geometry, separation, relative rotation, and the commanded field determine the response. Arbitrary magnet rotation can add rotational energy. A controller must choose and verify its action.</p></div></details>
+        <details><summary>What does this demonstration establish?</summary><div><p>The website presents a research concept and an illustrative user-provided model. It is not a validated satellite dynamics simulation or measured flight result. It makes no guaranteed stopping-time or efficacy claim.</p><p>Spacecraft reaction and thermal effects are not modeled here. The engineering explorer explains the model and its limits.</p></div></details>
+        <a class="text-link" href="references.html">References &amp; prior art <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="explorer-cta" aria-labelledby="explorer-heading"><div class="cta-rule" aria-hidden="true"></div><p class="eyebrow">The user model</p><h2 id="explorer-heading">LOOK INSIDE<br>THE LOOP.</h2><p>Observe. Position. Actuate.</p><a class="button" href="explorer.html#integration">Launch the explorer</a><p class="integration-note">User model integrated · Illustrative numerical demonstration</p></section>
+  </main>
+  <footer class="site-footer"><a class="brand" href="index.html">TORQARA<span class="brand-orbit" aria-hidden="true"></span></a><nav aria-label="Footer navigation"><a href="explorer.html">Engineering</a><a href="references.html">References &amp; prior art</a></nav><p class="footer-note">© 2026 Torqara · Research concept</p></footer>
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Torqara’s illustrative detumbling model. An illustrative numerical model with orbit, fling, pause, replay and simulated telemetry.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Detumble Explorer — Torqara</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--void:#000;--deck:#000;--ink:#fff;--muted:#a5a5a5;--line:#292929;--line2:#666;--eddy:#eee;--omega:#5cc8ff;--mom:#b7a4ff;--ok:#fff;--bx:#ff6b6b;--by:#5fd3a0;--bz:#6fa8ff;--body:Arial,Helvetica,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#000;color:#fff;font:15px/1.6 var(--body)}button,input,summary,a{-webkit-tap-highlight-color:transparent}button,input{font:inherit}a{color:inherit}button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible,#view:focus-visible{outline:2px solid #fff;outline-offset:5px}button{min-height:44px;padding:11px 18px;border:1px solid #666;border-radius:0;background:transparent;color:#fff;font-size:11px;line-height:1.4;letter-spacing:.07em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:background .18s,color .18s}button:hover{border-color:#fff;background:#202020}button.on,button.primary{border-color:#fff}button.on{background:#fff;color:#000}button.primary:hover{background:#fff;color:#000}button.running{background:#fff;color:#000}.wrap{width:100%;margin:auto}.inner{padding-inline:clamp(20px,5.3vw,110px)}.model-header{padding-block:38px 24px}.model-nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:42px}.model-nav a{text-decoration:none;font-size:10px;letter-spacing:.12em;text-transform:uppercase}.model-nav .wordmark{font-size:21px;letter-spacing:.08em;font-weight:800}.eyebrow,.label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}.model-label{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:#ddd}.model-header h1{font-size:clamp(36px,5.5vw,78px);line-height:.97;letter-spacing:-.035em;margin:22px 0 16px;font-weight:700;text-transform:uppercase;max-width:900px}.lede{font-size:14px;line-height:1.6;color:#aaa;max-width:700px;margin:0}.embedded .model-nav{display:none}.embedded .model-header{padding-block:20px 24px}.embedded .model-header h1{font-size:clamp(30px,4vw,54px)}.scene-wrap{position:relative}#view{position:relative;width:100%;height:clamp(400px,67svh,820px);overflow:hidden;background:#030407;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}#view.flinging{cursor:grabbing}#cv{display:block;width:100%;height:100%}.canvas-label{position:absolute;left:clamp(20px,5.3vw,110px);top:18px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#aaa;pointer-events:none}.banner{position:absolute;left:clamp(20px,5.3vw,110px);top:50px;max-width:calc(100% - 40px);padding:10px 14px;background:rgba(0,0,0,.88);border:1px solid #888;font-size:11px;text-transform:uppercase;letter-spacing:.06em;pointer-events:none}.error{margin:0;padding:18px;border:1px solid #fff;background:#000;color:#fff}.hint{font-size:11px;color:#aaa;line-height:1.6;margin:0}.scene-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px 22px}.live-state{display:flex;align-items:baseline;gap:20px;font-family:var(--mono);font-size:12px;white-space:nowrap}.live-state span{color:#aaa}.live-state strong{color:#fff;font-size:18px;font-weight:400}.actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding-bottom:24px}.actions #auto{min-width:190px}.actions .minor{margin-left:auto}.phases{list-style:none;padding:0;margin:0 0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid #292929}.phases li{display:flex;gap:12px;padding:12px 0;color:#666;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid transparent;margin-bottom:-1px}.phases li span{color:#666}.phases li.on{border-bottom-color:#fff;color:#fff}.phases li.on span,.phases li.done{color:#aaa}.status{font-size:13px;max-width:850px;min-height:42px;color:#bbb;margin-bottom:22px}.scope{color:#999;font-size:11px;line-height:1.8;max-width:1100px;padding-block:10px 28px;border-bottom:1px solid #292929;margin:0}.scope a{color:#ddd;text-underline-offset:3px}.controls{padding-block:36px 56px}.deck{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(30px,7vw,140px)}.panel{display:flex;flex-direction:column;gap:28px;min-width:0}.group{display:flex;flex-direction:column;gap:11px}.group .label{color:#aaa}.seg{display:flex;flex-wrap:wrap;gap:8px}.slider{display:grid;grid-template-columns:90px minmax(0,1fr) 60px;gap:16px;align-items:center;font-size:13px}.slider label{display:flex;align-items:center;gap:10px}.slider i{width:8px;height:8px;display:block}.slider output{font:11px var(--mono);text-align:right}input[type=range]{width:100%;min-width:0;accent-color:#fff}.small{font-size:11px;line-height:1.7;color:#999;margin:0;max-width:60ch}.chips{display:flex;flex-wrap:wrap;gap:10px 20px}.chips label{font-size:12px;display:inline-flex;align-items:center;gap:9px;min-height:36px;cursor:pointer}.chips input{accent-color:#fff;width:14px;height:14px}.legend{display:flex;flex-wrap:wrap;gap:9px 24px;font-size:11px;color:#aaa;margin-top:28px}.legend span{display:inline-flex;align-items:center;gap:8px}.sw{width:18px;height:2px;display:inline-block}.details{border-top:1px solid #292929;border-bottom:1px solid #292929;margin-bottom:56px}.details>summary,.methods>summary{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;list-style:none}.details>summary::-webkit-details-marker,.methods>summary::-webkit-details-marker{display:none}.details[open]>summary span,.methods[open]>summary span{transform:rotate(45deg)}summary span{font-size:20px;font-weight:400;transition:transform .2s}.details-content{padding:4px 0 28px}.tele{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px;margin-bottom:32px}.cell{min-width:0}.num{font-size:26px;line-height:1.2;font-weight:400;white-space:nowrap;margin-top:8px}.num small{font:11px var(--mono);color:#aaa;margin-left:4px}#plot{width:100%;height:170px;display:block}.results{list-style:none;margin:0;padding:0;font:12px/1.6 var(--mono)}.results li{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid #292929}.results li b{white-space:nowrap;font-weight:400}.results .empty{font:12px/1.7 var(--body);color:#aaa;border:0}.methods{border-top:1px solid #292929;margin-bottom:35px}.how{padding:15px 0 40px}.how h2{font-size:clamp(26px,3vw,40px);line-height:1.1;text-transform:uppercase;margin:12px 0 40px;letter-spacing:-.02em}.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 60px}.steps li{min-width:0;border-top:1px solid #292929;padding-top:18px}.steps .n{font-size:10px;color:#aaa;letter-spacing:.12em}.steps h3{font-size:19px;line-height:1.2;margin:12px 0 16px;font-weight:500}.steps p{color:#aaa;font-size:13px;line-height:1.8;margin:0 0 16px}.steps b{color:#ddd}.eq{overflow-x:auto;max-width:100%;padding-block:12px;font-size:13px;border-block:1px solid #191919}math{font-size:1.03em}.how>.group{margin-top:45px}.notes{color:#aaa;font-size:12px;line-height:1.8;padding-left:18px;max-width:950px}.notes li{margin-bottom:8px}.source-note{font-size:10px;color:#888;padding:22px 0 40px;letter-spacing:.02em}.source-note a{color:#bbb;text-underline-offset:3px}[hidden]{display:none!important}
+@media(max-width:800px){.model-header h1{font-size:48px}.deck{grid-template-columns:1fr;gap:34px}.scene-footer{align-items:flex-start;flex-direction:column;gap:12px}.live-state{gap:16px}.steps{grid-template-columns:1fr}.tele{grid-template-columns:repeat(2,minmax(0,1fr))}.phases li{gap:6px;font-size:9px}.hint{font-size:10px}.model-nav{padding-bottom:28px}.model-nav a:last-child{font-size:9px}}
+@media(max-width:520px){.model-header{padding-block:24px 22px}.model-header h1{font-size:40px}.model-label{font-size:8px;letter-spacing:.08em}#view{height:340px;min-height:340px}.canvas-label{font-size:8px;left:16px;top:12px}.banner{left:16px;top:36px;font-size:9px}.actions{gap:8px}.actions #auto{min-width:100%;}.actions button{flex:1;font-size:10px;padding:10px 12px}.actions .minor{margin:0;flex:1}.phases li{flex-direction:column;padding:10px 0;gap:2px;font-size:9px}.scope{font-size:10px}.slider{grid-template-columns:76px minmax(0,1fr) 56px;gap:8px}.seg button{font-size:10px;min-height:42px;padding:10px 12px}.num{font-size:23px}.results li{font-size:10px}.model-nav .wordmark{font-size:19px}.embedded .model-header h1{font-size:31px}.details>summary,.methods>summary{font-size:11px}.controls{padding-block:28px 38px}}
+.embedded .model-header{padding-block:14px}.embedded .model-header h1,.embedded .model-header .lede{display:none}.embedded #view{height:clamp(340px,55svh,540px)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}button,summary span{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="model-header inner">
+    <nav class="model-nav" aria-label="Torqara"><a class="wordmark" href="../index.html">TORQARA</a><a href="../explorer.html#integration">Back to engineering explorer ↗</a></nav>
+    <div class="model-label">Illustrative numerical model • Not flight validated</div>
+    <h1>Take control<br>of the tumble.</h1>
+    <p class="lede">Explore the model in motion. Set the target’s spin, engage the model controller, and compare still-magnet and spinning-field modes.</p>
+  </header>
+  <section class="scene-wrap" aria-label="Interactive model scene">
+    <div id="view" tabindex="0" role="group" aria-label="Interactive scene. Drag the target to fling it, or drag space to orbit. Arrow keys orbit; plus and minus zoom." data-paused="false" data-ready="loading">
+      <canvas id="cv" aria-label="Perspective rendering of the target, chaser, two-link arm and diametric magnet">This interactive model requires Canvas 2D support.</canvas>
+      <div class="canvas-label">Uploaded model / Perspective view</div>
+      <div class="banner" id="banner" hidden>Model threshold reached • Not a capture-safety assessment</div>
+    </div>
+    <p class="error inner" id="model-error" role="alert" hidden>The model could not finish rendering. Reload this page or open it in a current browser.</p>
+    <div class="scene-footer inner">
+      <p class="hint">Drag target to fling · Drag space to orbit · Scroll or pinch to zoom<br>Keyboard: focus the scene, then use arrows and + / −.</p>
+      <div class="live-state"><span>Model spin <strong id="live-spin">—</strong></span><span id="model-time">0.0 model s</span></div>
+    </div>
+  </section>
+  <div class="inner">
+    <div class="actions" aria-label="Playback and brake controls">
+      <button id="auto" class="primary" aria-pressed="false">Engage brake</button>
+      <button id="pause" aria-pressed="false">Pause</button>
+      <button id="replay">Reset / replay</button>
+      <button id="reset-view" class="minor">Reset view</button>
+    </div>
+    <ol class="phases" id="phases" aria-label="Model controller phases">
+      <li data-ph="standby"><span>01</span>Standby</li>
+      <li data-ph="approach"><span>02</span>Approach</li>
+      <li data-ph="detumble"><span>03</span>Detumble</li>
+      <li data-ph="stable"><span>04</span>Threshold</li>
+    </ol>
+    <div class="status" id="status">Initializing model.</div>
+    <p class="scope">Simulated values only. Synthetic camera observations, schematic arm geometry and local-patch drag; the visible magnet angle does not drive the torque calculation. Spacecraft reaction, thermal effects and orbital motion are not modeled. <a href="#methods" id="scope-link">Read the model limits ↓</a></p>
+    <section class="controls" aria-label="Model controls">
+      <div class="deck">
+        <div class="panel">
+          <div class="group">
+            <div class="label">01 / Set target spin</div>
+            <div class="slider"><label for="sx"><i style="background:var(--bx)"></i>Roll · X</label><input type="range" id="sx" min="-60" max="60" step="0.1" value="2.3"><output id="ox" for="sx">2.3°/s</output></div>
+            <div class="slider"><label for="sy"><i style="background:var(--by)"></i>Pitch · Y</label><input type="range" id="sy" min="-60" max="60" step="0.1" value="33"><output id="oy" for="sy">33°/s</output></div>
+            <div class="slider"><label for="sz"><i style="background:var(--bz)"></i>Yaw · Z</label><input type="range" id="sz" min="-60" max="60" step="0.1" value="2.9"><output id="oz" for="sz">2.9°/s</output></div>
+            <div class="seg"><button id="apply" class="primary">Apply spin</button><button data-p="chaos">Chaotic flip</button><button data-p="flat">Flat spin</button><button data-p="roll">Roll</button><button data-p="random">Random</button></div>
+            <p class="small">Illustrative angular rates about the target’s own axes. Applying a preset changes model spin; dragging the target adds a spin impulse.</p>
+          </div>
+          <div class="group"><div class="label">02 / Compare model modes</div><div class="seg" id="modeBtns"><button data-m="spin">Spinning field</button><button data-m="still">Still magnet</button></div><p class="small">The controller chooses a sweep direction using its estimated state. Arbitrary magnet rotation does not always brake.</p></div>
+        </div>
+        <div class="panel">
+          <div class="group"><div class="label">03 / Playback speed</div><div class="seg" id="warpBtns"><button data-w="1">1×</button><button data-w="3">3×</button><button data-w="8">8×</button></div><p class="small">Model seconds are numerical simulation time, not a physical stopping-time forecast.</p></div>
+          <div class="group"><div class="label">04 / Visible layers</div><div class="chips"><label><input type="checkbox" id="l-frames" checked>Frames</label><label><input type="checkbox" id="l-vectors" checked>ω̂ and H</label><label><input type="checkbox" id="l-heat" checked>Placement map</label><label><input type="checkbox" id="l-keep" checked>Keep-out sphere</label><label><input type="checkbox" id="l-cam" checked>Synthetic camera</label></div></div>
+          <div class="group"><div class="label">Completed model runs</div><ul class="results" id="results"><li class="empty">Model threshold runs appear here. These are simulated durations, not stopping-time predictions.</li></ul></div>
+        </div>
+      </div>
+      <div class="legend" aria-label="Scene legend"><span><i class="sw" style="background:#9aa3b5"></i>Target-centered frame</span><span><i class="sw" style="background:linear-gradient(90deg,var(--bx) 33%,var(--by) 33% 66%,var(--bz) 66%)"></i>Body axes</span><span><i class="sw" style="background:var(--omega)"></i>Estimated spin ω̂</span><span><i class="sw" style="background:var(--mom)"></i>Momentum H</span><span><i class="sw" style="background:#f0953a"></i>Model placement / dissipation</span></div>
+    </section>
+    <details class="details" id="telemetry"><summary>Simulated telemetry <span aria-hidden="true">+</span></summary><div class="details-content">
+      <p class="small">All readouts below are model states or estimates. None are measured spacecraft values.</p>
+      <div class="tele">
+        <div class="cell"><div class="label">Synthetic sensor</div><div class="num" id="t-lock">—</div></div>
+        <div class="cell"><div class="label">Model spin</div><div class="num" id="t-w">0</div></div>
+        <div class="cell"><div class="label">Estimated spin</div><div class="num" id="t-we">—</div></div>
+        <div class="cell"><div class="label">Model estimate error</div><div class="num" id="t-err">—</div></div>
+        <div class="cell"><div class="label">Momentum remaining</div><div class="num" id="t-h">100</div></div>
+        <div class="cell"><div class="label">Energy remaining</div><div class="num" id="t-e">100</div></div>
+        <div class="cell"><div class="label">Model hull gap</div><div class="num" id="t-gap">parked</div></div>
+        <div class="cell"><div class="label">Sweep velocity proxy</div><div class="num" id="t-sweep">0</div></div>
+      </div>
+      <div class="group"><div class="label">Last 60 model seconds</div><canvas id="plot" aria-label="Model history: true model spin, estimated spin and remaining angular momentum"></canvas></div>
+    </div></details>
+  <details class="methods" id="methods"><summary>Model methods &amp; limitations <span aria-hidden="true">+</span></summary><section class="how" aria-labelledby="how-h">
+    <div>
+      <div class="eyebrow">Inspect the numerical model</div>
+      <h2 id="how-h">What this model computes</h2>
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="n">01 · MODEL THE TUMBLE</div>
+        <h3>A rigid body with three different moments of inertia</h3>
+        <p>The numerical model integrates rigid-body Euler equations for <b>ω</b>, with a quaternion attitude <b>q</b>. Angular velocity uses RK4 while torque is held fixed within each step. Quaternion updates are normalized. The body dimensions and inertias are illustrative model inputs, not measured spacecraft values.</p>
+        <div class="eq">
+          <math display="block"><mi>I</mi><mover accent="true"><mi>ω</mi><mo>˙</mo></mover><mo>+</mo><mi>ω</mi><mo>×</mo><mrow><mo>(</mo><mi>I</mi><mi>ω</mi><mo>)</mo></mrow><mo>=</mo><mi>τ</mi><mspace width="1.4em"></mspace><mover accent="true"><mi>q</mi><mo>˙</mo></mover><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>q</mi><mo>⊗</mo><mrow><mo>[</mo><mn>0</mn><mo>,</mo><mi>ω</mi><mo>]</mo></mrow></math>
+        </div>
+      </li>
+      <li>
+        <div class="n">02 · FIND THE FIXED ARROW</div>
+        <h3>Angular momentum doesn't wander</h3>
+        <p>In the ideal torque-free equations, angular momentum <b>H</b> is fixed in an inertial frame. Here the planner scores candidate positions by the torque component opposing the estimated H. It does not compute the receiving spacecraft’s reaction dynamics.</p>
+        <div class="eq">
+          <math display="block"><mi>H</mi><mo>=</mo><mi>R</mi><mo>(</mo><mi>q</mi><mo>)</mo><mspace width="0.15em"></mspace><mi>I</mi><mi>ω</mi><mspace width="1.4em"></mspace><mfrac><mrow><mi>d</mi><mi>H</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>τ</mi></math>
+        </div>
+      </li>
+      <li>
+        <div class="n">03 · SEE IT</div>
+        <h3>Synthetic attitude observations</h3>
+        <p>At 15 samples per model second, the code takes the model’s true attitude and adds seeded noise to produce <b>q̃</b>. A filter predicts and corrects attitude and spin. The inset is a rendered camera view with synthetic feature markers; it does not run image-based feature detection or pose solving. Loss of model lock disables commanded sweep while arm positioning continues.</p>
+        <div class="eq">
+          <math display="block"><mi>δ</mi><mi>θ</mi><mo>=</mo><mn>2</mn><mspace width="0.15em"></mspace><mi>vec</mi><mo>(</mo><msup><mover accent="true"><mi>q</mi><mo>^</mo></mover><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⊗</mo><mover accent="true"><mi>q</mi><mo>~</mo></mover><mo>)</mo></math>
+          <math display="block"><mover accent="true"><mi>q</mi><mo>^</mo></mover><mo>←</mo><mover accent="true"><mi>q</mi><mo>^</mo></mover><mo>⊗</mo><mi>exp</mi><mo>(</mo><mi>α</mi><mspace width="0.1em"></mspace><mi>δ</mi><mi>θ</mi><mo>)</mo><mo>,</mo><mspace width="1.2em"></mspace><mover accent="true"><mi>ω</mi><mo>^</mo></mover><mo>←</mo><mover accent="true"><mi>ω</mi><mo>^</mo></mover><mo>+</mo><mfrac><mi>β</mi><mrow><mi>Δ</mi><mi>t</mi></mrow></mfrac><mi>δ</mi><mi>θ</mi></math>
+        </div>
+      </li>
+      <li>
+        <div class="n">04 · DECIDE WHERE, BY PREDICTION</div>
+        <h3>Score a short model prediction</h3>
+        <p>The planner samples 260 directions, excludes directions on the far side, and scores the rest against a 1.5-model-second torque-free attitude prediction. Reach and position-change weights affect the score, refreshed every 0.4 model seconds. The keep-out sphere uses the box dimensions; protrusions and the full arm are not collision checked. The arm is a geometric two-link rendering, not a constrained robot IK or actuator simulation.</p>
+        <div class="eq">
+          <math display="block"><mi>S</mi><mo>(</mo><mi>d</mi><mo>)</mo><mo>=</mo><mo>−</mo><mover accent="true"><mi>H</mi><mo>^</mo></mover><mo>·</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mn>15</mn></munderover><mi>τ</mi><mo>(</mo><mi>d</mi><mo>;</mo><msub><mover accent="true"><mi>q</mi><mo>^</mo></mover><mi>k</mi></msub><mo>,</mo><msub><mover accent="true"><mi>ω</mi><mo>^</mo></mover><mi>k</mi></msub><mo>)</mo><mspace width="0.1em"></mspace><mi>Δ</mi><mi>t</mi><mspace width="0.5em"></mspace><mo>×</mo><mspace width="0.3em"></mspace><mi>w</mi><mo>(</mo><mi>d</mi><mo>)</mo></math>
+        </div>
+      </li>
+      <li>
+        <div class="n">05 · BRAKE WITHOUT CONTACT</div>
+        <h3>Phenomenological local-patch drag</h3>
+        <p>The code chooses the closest clamped point on the box hull, applies a gap-dependent drag to relative tangential velocity, and takes its moment about the center of mass. This is a phenomenological local-patch model. It does not solve electromagnetic fields, current distributions, conductivity, skin depth, magnet dimensions or thermal response. The glow indicates a model quantity; it is not a solved eddy-current image.</p>
+        <div class="eq">
+          <math display="block"><msub><mi>v</mi><mi>rel</mi></msub><mo>=</mo><mi>ω</mi><mo>×</mo><msub><mi>r</mi><mi>p</mi></msub><mo>−</mo><msub><mi>v</mi><mi>f</mi></msub><mspace width="1.2em"></mspace><mi>F</mi><mo>=</mo><mo>−</mo><mi>k</mi><mspace width="0.1em"></mspace><mi>B</mi><msup><mrow><mo>(</mo><mi>g</mi><mo>)</mo></mrow><mn>2</mn></msup><mrow><mo>[</mo><msub><mi>v</mi><mi>rel</mi></msub><mo>−</mo><mo>(</mo><msub><mi>v</mi><mi>rel</mi></msub><mo>·</mo><mover accent="true"><mi>e</mi><mo>^</mo></mover><mo>)</mo><mover accent="true"><mi>e</mi><mo>^</mo></mover><mo>]</mo></mrow></math>
+          <math display="block"><mi>τ</mi><mo>=</mo><msub><mi>r</mi><mi>p</mi></msub><mo>×</mo><mi>F</mi><mspace width="1.2em"></mspace><mi>B</mi><mo>(</mo><mi>g</mi><mo>)</mo><mo>=</mo><msub><mi>B</mi><mn>0</mn></msub><msup><mrow><mo>(</mo><mfrac><mi>a</mi><mrow><mi>a</mi><mo>+</mo><mi>g</mi></mrow></mfrac><mo>)</mo></mrow><mn>3</mn></msup></math>
+        </div>
+      </li>
+      <li>
+        <div class="n">06 · COMMAND A MODEL SWEEP</div>
+        <h3>A commanded sweep and schematic magnet</h3>
+        <p>In spinning mode, the controller commands a local field-velocity proxy opposite the estimated hull motion, limited by <b>G = 2.5</b> and the model speed cap. The red/blue magnet is drawn as diametric poles rotating around its shaft. Its visible angle is schematic and does not enter the torque calculation. The expression below is conditional on this local drag approximation; arbitrary magnet rotation does not always brake a target.</p>
+        <div class="eq">
+          <math display="block"><msub><mi>v</mi><mi>f</mi></msub><mo>=</mo><mo>−</mo><mi>s</mi><mspace width="0.1em"></mspace><msub><mover accent="true"><mi>u</mi><mo>^</mo></mover><mi>t</mi></msub><mo>,</mo><mspace width="1em"></mspace><mi>s</mi><mo>=</mo><mi>min</mi><mrow><mo>(</mo><msub><mi>s</mi><mi>max</mi></msub><mo>,</mo><mi>G</mi><mrow><mo>|</mo><msub><mi>v</mi><mi>t</mi></msub><mo>|</mo></mrow><mo>)</mo></mrow></math>
+          <math display="block"><mfrac><mrow><mi>d</mi><mi>T</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>F</mi><mo>·</mo><msub><mi>v</mi><mi>t</mi></msub><mo>=</mo><mo>−</mo><mi>k</mi><msup><mi>B</mi><mn>2</mn></msup><msup><mrow><mo>|</mo><msub><mi>v</mi><mi>t</mi></msub><mo>|</mo></mrow><mn>2</mn></msup><mo>(</mo><mn>1</mn><mo>+</mo><mi>G</mi><mi>cos</mi><mi>φ</mi><mo>)</mo><mo>&lt;</mo><mn>0</mn><mspace width="0.6em"></mspace><mtext>when</mtext><mspace width="0.4em"></mspace><mi>cos</mi><mi>φ</mi><mo>&gt;</mo><mo>−</mo><mfrac><mn>1</mn><mi>G</mi></mfrac></math>
+        </div>
+      </li>
+    </ol>
+    <div class="group">
+      <div class="label">Model assumptions</div>
+      <ul class="notes">
+        <li>All rates, lengths, energies, durations and thresholds shown here are simulated outputs from illustrative inputs. The export describes scaled braking strength. No real stopping time, efficacy or measured performance is established.</li>
+        <li>The spacecraft holds a fixed position. Spacecraft reaction, thermal effects and orbital motion are not modeled. Detumbling does not remove an object from orbit.</li>
+        <li>The estimator uses deliberately perturbed inertia inputs and true model attitude plus noise. This does not establish real camera accuracy or AI performance.</li>
+        <li>The threshold uses filtered estimated spin, not a verified physical capture criterion. Passive model drag remains while the controller is in standby or the commanded sweep is zero.</li>
+        <li>This browser model includes pause/replay, responsive view fitting and interactive orbit, zoom and target-spin controls.</li>
+      </ul>
+    </div>
+  </section></details>
+    <div class="source-note">Illustrative numerical model; no flight validation.</div>
+  </div>
+</main>
+<script id="core">
+const D2R=Math.PI/180,R2D=180/Math.PI;
+const add=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]];
+const sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+const scl=(a,s)=>[a[0]*s,a[1]*s,a[2]*s];
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const crs=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const len=a=>Math.hypot(a[0],a[1],a[2]);
+const unit=a=>{const l=len(a);return l>1e-12?scl(a,1/l):[0,0,0]};
+const mulv=(a,b)=>[a[0]*b[0],a[1]*b[1],a[2]*b[2]];
+const qmul=(a,b)=>[a[0]*b[0]-a[1]*b[1]-a[2]*b[2]-a[3]*b[3],a[0]*b[1]+a[1]*b[0]+a[2]*b[3]-a[3]*b[2],a[0]*b[2]-a[1]*b[3]+a[2]*b[0]+a[3]*b[1],a[0]*b[3]+a[1]*b[2]-a[2]*b[1]+a[3]*b[0]];
+const qconj=q=>[q[0],-q[1],-q[2],-q[3]];
+const qnorm=q=>{const l=Math.hypot(q[0],q[1],q[2],q[3]);return[q[0]/l,q[1]/l,q[2]/l,q[3]/l]};
+const qrot=(q,v)=>{const u=[q[1],q[2],q[3]],t=scl(crs(u,v),2);return add(add(v,scl(t,q[0])),crs(u,t))};
+const qrotInv=(q,v)=>qrot(qconj(q),v);
+const qexp=th=>{const a=len(th);if(a<1e-9)return qnorm([1,th[0]/2,th[1]/2,th[2]/2]);const s=Math.sin(a/2)/a;return[Math.cos(a/2),th[0]*s,th[1]*s,th[2]*s]};
+const clampv=(x,h)=>Math.max(-h,Math.min(h,x));
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){let u=0;while(u===0)u=r();const v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function qrand(r){const u1=r(),u2=r(),u3=r(),a=Math.sqrt(1-u1),b=Math.sqrt(u1);return qnorm([b*Math.cos(2*Math.PI*u3),a*Math.sin(2*Math.PI*u2),a*Math.cos(2*Math.PI*u2),b*Math.sin(2*Math.PI*u3)])}
+
+const BODY={h:[0.7,0.5,0.4],I:[1.37,2.17,2.47]};
+const CFG={k:1.0,fa:0.6,magR:0.16,smax:0.9,wRamp:3*D2R,camHz:15,camSig:0.3*D2R,alpha:0.2,beta:0.02,
+  armW:0.55,armV:0.9,base:[5,-0.9,2.8],park:[4.1,0.6,2.0],stableW:0.6*D2R,restartW:1.5*D2R,
+  Iest:[1.37*1.04,2.17*0.97,2.47*1.03],vfTau:0.12,G:2.5,horizon:1.5,predN:15,maxW:1.6};
+const RKO=Math.hypot(BODY.h[0],BODY.h[1],BODY.h[2])+0.08;
+const RM=RKO+CFG.magR+0.02;
+const NDIR=260,DIRS=[];
+for(let i=0;i<NDIR;i++){const y=1-2*(i+0.5)/NDIR,r=Math.sqrt(1-y*y),th=i*Math.PI*(3-Math.sqrt(5));DIRS.push([r*Math.cos(th),y,r*Math.sin(th)])}
+const PRESETS={flat:[1.5,1,31],chaos:[2.3,33,2.9],roll:[38,3,-4]};
+
+const euler=(I,w,tb)=>[((I[1]-I[2])*w[1]*w[2]+tb[0])/I[0],((I[2]-I[0])*w[2]*w[0]+tb[1])/I[1],((I[0]-I[1])*w[0]*w[1]+tb[2])/I[2]];
+const Z3=[0,0,0];
+
+function createMission(seed){
+  const r=mulberry32(seed||7);
+  return{t:0,q:qrand(r),w:[0,0,0],H0:1e-6,T0:1e-9,mode:'spin',auto:false,phase:'standby',phaseT:0,
+    est:{q:[1,0,0,0],w:[0,0,0],init:false,inn:1,initT:0,locked:false},camAcc:0,rng:mulberry32((seed||7)*31+5),
+    p:CFG.park.slice(),di:null,dStar:null,score:new Float32Array(NDIR),planAcc:9,planN:0,
+    vf:[0,0,0],s:0,eddy:null,wf:0,stableT:0,events:[],log:[],logAcc:9,runStart:0,runs:[]};
+}
+function setPhase(M,ph){if(M.phase===ph)return;M.phase=ph;M.phaseT=0;M.events.push({t:M.t,ph})}
+function resetRefs(M){const Iw=mulv(BODY.I,M.w);M.runW0=len(M.w)*R2D;M.H0=Math.max(1e-6,len(Iw));M.T0=Math.max(1e-9,0.5*dot(Iw,M.w));M.stableT=0;M.runStart=M.t;M.wf=Math.max(M.wf,len(M.w))}
+function capW(w){const l=len(w);return l>CFG.maxW?scl(w,CFG.maxW/l):w}
+function setSpinBody(M,wb){M.w=capW(wb.slice());resetRefs(M);M.events.push({t:M.t,ph:'spin'});if(M.auto)setPhase(M,'approach')}
+function flingWorld(M,wW){M.w=capW(add(M.w,qrotInv(M.q,wW)));resetRefs(M);M.events.push({t:M.t,ph:'spin'});if(M.auto)setPhase(M,'approach')}
+function setAuto(M,on){M.auto=on;if(on){resetRefs(M);setPhase(M,'approach')}else setPhase(M,'standby')}
+
+function eddyAt(q,w,p,vfB){
+  const h=BODY.h,pb=qrotInv(q,p),rp=[clampv(pb[0],h[0]),clampv(pb[1],h[1]),clampv(pb[2],h[2])];
+  const d=sub(pb,rp),dist=len(d);
+  if(dist<1e-6)return null;
+  const e=scl(d,1/dist),g=Math.max(0.02,dist-CFG.magR),f=Math.pow(CFG.fa/(CFG.fa+g),3),B2=f*f;
+  const v=crs(w,rp),vt=sub(v,scl(e,dot(v,e)));
+  const vfb=typeof vfB==='number'?(vfB&&len(vt)>1e-6?scl(unit(vt),-Math.min(CFG.smax,CFG.G*len(vt))):Z3):vfB;
+  const vr=sub(v,vfb),vrt=sub(vr,scl(e,dot(vr,e)));
+  const Fb=scl(vrt,-CFG.k*B2);
+  return{tb:crs(rp,Fb),Fb,rp,e,g,B2,P:CFG.k*B2*dot(vrt,vrt)};
+}
+function eddy(M){
+  const r=eddyAt(M.q,M.w,M.p,qrotInv(M.q,M.vf));
+  if(!r)return{tb:Z3,P:0,g:0};
+  r.patchW=qrot(M.q,r.rp);r.eW=qrot(M.q,r.e);return r;
+}
+function estimate(M,dt){
+  const E=M.est;
+  if(E.init){const w=E.w,r=eddyAt(E.q,w,M.p,qrotInv(E.q,M.vf)),wd=euler(CFG.Iest,w,r?r.tb:Z3);E.q=qnorm(qmul(E.q,qexp(scl(w,dt))));E.w=add(w,scl(wd,dt))}
+  M.camAcc+=dt;
+  if(M.camAcc>=1/CFG.camHz){
+    M.camAcc-=1/CFG.camHz;
+    const n=[gauss(M.rng),gauss(M.rng),gauss(M.rng)].map(x=>x*CFG.camSig);
+    const qm=qnorm(qmul(M.q,qexp(n)));
+    if(!E.init){E.q=qm;E.w=[0,0,0];E.init=true;E.initT=M.t;return}
+    let dq=qmul(qconj(E.q),qm);if(dq[0]<0)dq=dq.map(x=>-x);
+    const th=[2*dq[1],2*dq[2],2*dq[3]];
+    E.q=qnorm(qmul(E.q,qexp(scl(th,CFG.alpha))));
+    E.w=add(E.w,scl(th,CFG.beta*CFG.camHz));
+    E.inn=E.inn*0.85+len(th)*0.15;
+  }
+  if(!E.init)E.locked=false;else if(E.locked){if(E.inn>6*CFG.camSig)E.locked=false}else if(M.t-E.initT>2&&E.inn<3.5*CFG.camSig)E.locked=true;
+}
+function plan(M){
+  const E=M.est;if(!E.init)return;
+  const Hw=qrot(E.q,mulv(CFG.Iest,E.w));
+  if(len(Hw)<0.02&&M.dStar)return;
+  const Hu=unit(Hw),c=unit(CFG.base),cur=unit(M.p);
+  const traj=[],nsub=6,dt=CFG.horizon/(CFG.predN*nsub);let q=E.q,w=E.w;
+  for(let k=0;k<CFG.predN;k++){for(let j=0;j<nsub;j++){const wd=euler(CFG.Iest,w,Z3);q=qnorm(qmul(q,qexp(scl(w,dt))));w=add(w,scl(wd,dt))}traj.push([q,w])}
+  const sw=M.mode==='spin'?1:0;
+  let best=-1,bi=0;
+  for(let i=0;i<NDIR;i++){
+    const d=DIRS[i],reach=dot(d,c);let s=0;
+    if(reach>-0.15){
+      const pm=scl(d,RM);let dH=0;
+      for(let k=0;k<traj.length;k++){const r=eddyAt(traj[k][0],traj[k][1],pm,sw);if(r)dH-=dot(qrot(traj[k][0],r.tb),Hu)}
+      s=Math.max(0,dH)*(0.55+0.45*(reach+1)/2)*(0.8+0.2*(dot(d,cur)+1)/2);
+    }
+    M.score[i]=s;if(s>best){best=s;bi=i}
+  }
+  if(M.di===null||best>1.08*M.score[M.di])M.di=bi;
+  M.dStar=DIRS[M.di];M.planN++;
+}
+function moveArm(M,dt,target){
+  const r=len(M.p),u=unit(M.p),tr=len(target),tu=unit(target);
+  const ang=Math.acos(Math.max(-1,Math.min(1,dot(u,tu))));
+  let nu=u;
+  if(ang>1e-4){let ax=crs(u,tu);if(len(ax)<1e-6)ax=crs(u,[0,1,0]);nu=qrot(qexp(scl(unit(ax),Math.min(ang,CFG.armW*dt))),u)}
+  let nr=r+Math.sign(tr-r)*Math.min(Math.abs(tr-r),CFG.armV*dt);if(nr<RM)nr=RM;
+  M.p=scl(nu,nr);
+  return ang<3*D2R&&Math.abs(nr-tr)<0.03;
+}
+function control(M,dt){
+  let target=0,dir=null;
+  if(M.phase==='detumble'&&M.mode==='spin'&&M.est.locked){
+    const E=M.est,h=BODY.h,pb=qrotInv(E.q,M.p),rp=[clampv(pb[0],h[0]),clampv(pb[1],h[1]),clampv(pb[2],h[2])];
+    const e=unit(sub(pb,rp)),v=crs(E.w,rp),vt=sub(v,scl(e,dot(v,e)));
+    target=Math.min(CFG.smax,CFG.G*len(vt));
+    if(len(vt)>1e-5)dir=scl(unit(qrot(E.q,vt)),-1);else target=0;
+  }
+  M.s+=(target-M.s)*Math.min(1,dt/CFG.vfTau);
+  M.vf=dir?scl(dir,M.s):(M.s>1e-4&&len(M.vf)>1e-9?scl(unit(M.vf),M.s):Z3);
+}
+function step(M,dt){
+  M.eddy=eddy(M);
+  const I=BODY.I,tb=M.eddy.tb,w0=M.w;
+  const k1=euler(I,w0,tb),k2=euler(I,add(w0,scl(k1,dt/2)),tb),k3=euler(I,add(w0,scl(k2,dt/2)),tb),k4=euler(I,add(w0,scl(k3,dt)),tb);
+  const w1=add(w0,scl(add(add(k1,scl(k2,2)),add(scl(k3,2),k4)),dt/6));
+  M.q=qnorm(qmul(M.q,qexp(scl(add(w0,w1),dt/2))));M.w=w1;M.t+=dt;M.phaseT+=dt;
+  estimate(M,dt);
+  const E=M.est;
+  M.planAcc+=dt;if(E.init&&M.planAcc>=0.4){M.planAcc=0;plan(M)}
+  M.wf+=(len(E.w)-M.wf)*Math.min(1,dt/1.0);
+  if(M.phase==='standby')moveArm(M,dt,CFG.park);
+  else if(M.dStar){
+    const there=moveArm(M,dt,scl(M.dStar,RM));
+    if(M.phase==='approach'&&there&&E.locked)setPhase(M,'detumble');
+  }
+  if(M.phase==='detumble'){
+    if(M.wf<CFG.stableW&&E.locked)M.stableT+=dt;else M.stableT=0;
+    if(M.stableT>2){setPhase(M,'stable');M.runs.push({start:M.runStart,end:M.t,mode:M.mode,w0:M.runW0})}
+  }else if(M.phase==='stable'&&M.wf>CFG.restartW&&E.locked){setPhase(M,'detumble')}
+  control(M,dt);
+  M.logAcc+=dt;
+  if(M.logAcc>=0.1){M.logAcc=0;M.log.push([M.t,len(M.w)*R2D,E.init?len(E.w)*R2D:0,len(mulv(BODY.I,M.w))/M.H0]);if(M.log.length>1200)M.log.shift()}
+}
+
+</script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const view=$('view'),cv=$('cv'),ctx=cv.getContext('2d');
+const errorBox=$('model-error');
+window.addEventListener('error',()=>{errorBox.hidden=false;view.dataset.ready='error'});
+if(!ctx){errorBox.hidden=false;errorBox.textContent='This browser could not initialize the drawing surface. Open the model in a browser with Canvas 2D support.';return}
+if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('embedded');
+let W=1,H=1;
+function size(){W=Math.max(1,view.clientWidth);H=Math.max(1,view.clientHeight);const d=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*d);cv.height=Math.round(H*d);ctx.setTransform(d,0,0,d,0,0)}
+size();if('ResizeObserver' in window)new ResizeObserver(size).observe(view);else window.addEventListener('resize',size);
+
+const LIGHT=unit([-0.45,0.8,0.5]),RIMD=unit([0.55,-0.35,-0.75]);
+const rgba=(c,a)=>'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a==null?1:a)+')';
+function shade(c,n){const k=0.3+0.75*Math.max(0,dot(n,LIGHT))+0.14*Math.max(0,dot(n,RIMD));return[Math.min(255,c[0]*k),Math.min(255,c[1]*k),Math.min(255,c[2]*k)]}
+function basis(pos,target,fov,rect){const fwd=unit(sub(target,pos));let right=crs(fwd,[0,1,0]);if(len(right)<1e-6)right=[1,0,0];right=unit(right);const up=crs(right,fwd);const f=rect.h/2/Math.tan(fov/2);
+  return{pos,fwd,right,up,f,rect,P(p){const d=sub(p,pos),z=dot(d,fwd);if(z<0.05)return null;return[rect.x+rect.w/2+dot(d,right)*f/z,rect.y+rect.h/2-dot(d,up)*f/z,z,f/z]}}}
+
+function box(hx,hy,hz,c,o){o=o||[0,0,0];const P=(x,y,z)=>[x+o[0],y+o[1],z+o[2]];return[
+  {v:[P(hx,-hy,-hz),P(hx,hy,-hz),P(hx,hy,hz),P(hx,-hy,hz)],n:[1,0,0],c},
+  {v:[P(-hx,-hy,hz),P(-hx,hy,hz),P(-hx,hy,-hz),P(-hx,-hy,-hz)],n:[-1,0,0],c},
+  {v:[P(-hx,hy,-hz),P(-hx,hy,hz),P(hx,hy,hz),P(hx,hy,-hz)],n:[0,1,0],c},
+  {v:[P(-hx,-hy,hz),P(-hx,-hy,-hz),P(hx,-hy,-hz),P(hx,-hy,hz)],n:[0,-1,0],c},
+  {v:[P(-hx,-hy,hz),P(hx,-hy,hz),P(hx,hy,hz),P(-hx,hy,hz)],n:[0,0,1],c},
+  {v:[P(hx,-hy,-hz),P(-hx,-hy,-hz),P(-hx,hy,-hz),P(hx,hy,-hz)],n:[0,0,-1],c}]}
+function cyl(r,hh,seg,cf,o,caps){o=o||[0,0,0];const F=[],p=(a,y)=>[r*Math.cos(a)+o[0],y+o[1],r*Math.sin(a)+o[2]];
+  for(let i=0;i<seg;i++){const a0=i/seg*2*Math.PI,a1=(i+1)/seg*2*Math.PI,am=(a0+a1)/2,c=cf(am);
+    F.push({v:[p(a0,-hh),p(a1,-hh),p(a1,hh),p(a0,hh)],n:[Math.cos(am),0,Math.sin(am)],c});
+    if(caps!==false){F.push({v:[[o[0],hh+o[1],o[2]],p(a0,hh),p(a1,hh)],n:[0,1,0],c});F.push({v:[[o[0],-hh+o[1],o[2]],p(a1,-hh),p(a0,-hh)],n:[0,-1,0],c})}}
+  return F}
+function cone(r0,y0,r1,y1,seg,c,ds){const F=[];for(let i=0;i<seg;i++){const a0=i/seg*2*Math.PI,a1=(i+1)/seg*2*Math.PI,am=(a0+a1)/2;
+  F.push({v:[[r0*Math.cos(a0),y0,r0*Math.sin(a0)],[r0*Math.cos(a1),y0,r0*Math.sin(a1)],[r1*Math.cos(a1),y1,r1*Math.sin(a1)],[r1*Math.cos(a0),y1,r1*Math.sin(a0)]],n:unit([Math.cos(am)*(y1-y0),r0-r1,Math.sin(am)*(y1-y0)]),c,ds})}
+  return F}
+function xform(F,q,o){return F.map(f=>({v:f.v.map(v=>add(qrot(q,v),o||[0,0,0])),n:qrot(q,f.n),c:f.c,ds:f.ds}))}
+
+const AL=[205,208,214],DARK=[40,43,50],GOLD=[201,162,39],PANEL=[22,56,108],RED=[226,75,74],BLUE=[55,138,221];
+const h=BODY.h;
+const TGT=[].concat(box(h[0],h[1],h[2],AL),box(0.006,0.31,0.25,DARK,[h[0]+0.006,0,0]),box(0.45,0.3,0.006,GOLD,[0,0,h[2]+0.006]),box(0.006,0.25,0.275,[29,63,122],[-h[0]-0.006,0,0]),
+  cyl(0.03,0.09,8,()=>DARK,[0,h[1]+0.09,0],false),cone(0.05,h[1]+0.17,0.3,h[1]+0.33,16,[233,231,223],true),
+  xform(cone(0.08,h[2],0.17,h[2]+0.22,14,DARK,true),qexp([-Math.PI/2,0,0])));
+const CORN=[];for(const sx of[-1,1])for(const sy of[-1,1])for(const sz of[-1,1])CORN.push([sx*h[0],sy*h[1],sz*h[2]]);
+const EDGES=[[0,1],[2,3],[4,5],[6,7],[0,2],[1,3],[4,6],[5,7],[0,4],[1,5],[2,6],[3,7]];
+const BASE=CFG.base,busC=add(BASE,[0.55,-0.6,0.4]);
+const camPos=add(add(busC,scl(unit(scl(busC,-1)),0.72)),[0,0.15,0]);
+const CHASER=[].concat(xform(box(0.65,0.5,0.55,GOLD),[1,0,0,0],busC),xform(box(0.5,0.015,1.2,PANEL),[1,0,0,0],add(busC,[0.1,0,1.85])),xform(box(0.5,0.015,1.2,PANEL),[1,0,0,0],add(busC,[0.1,0,-1.85])),
+  xform(cyl(0.24,0.06,12,()=>DARK),[1,0,0,0],add(BASE,[0,-0.06,0])),xform(box(0.13,0.11,0.13,DARK),[1,0,0,0],camPos));
+const MAG=[].concat(cyl(CFG.magR,0.11,20,a=>a<Math.PI?RED:BLUE),cyl(0.1,0.11,12,()=>[106,105,100],[0,0.22,0]));
+const STARS=(()=>{const r=mulberry32(99),s=[];for(let i=0;i<700;i++)s.push([unit([gauss(r),gauss(r),gauss(r)]),0.3+0.7*r()]);return s})();
+const EARTH={c:[-14,-62,-40],r:48};
+const KEEP=(()=>{const segs=[],N=32;for(const lat of[-60,-30,0,30,60].map(x=>x*D2R)){for(let i=0;i<N;i++){const a0=i/N*2*Math.PI,a1=(i+1)/N*2*Math.PI;segs.push([[RKO*Math.cos(lat)*Math.cos(a0),RKO*Math.sin(lat),RKO*Math.cos(lat)*Math.sin(a0)],[RKO*Math.cos(lat)*Math.cos(a1),RKO*Math.sin(lat),RKO*Math.cos(lat)*Math.sin(a1)]])}}
+  for(let m=0;m<8;m++){const lo=m/8*Math.PI*2;for(let i=0;i<N/2;i++){const b0=-Math.PI/2+i/(N/2)*Math.PI,b1=-Math.PI/2+(i+1)/(N/2)*Math.PI;segs.push([[RKO*Math.cos(b0)*Math.cos(lo),RKO*Math.sin(b0),RKO*Math.cos(b0)*Math.sin(lo)],[RKO*Math.cos(b1)*Math.cos(lo),RKO*Math.sin(b1),RKO*Math.cos(b1)*Math.sin(lo)]])}}return segs})();
+const GRID=(()=>{const segs=[];for(let i=-6;i<=6;i++){const x=i*0.5;for(let j=0;j<12;j++){const a=-3+j*0.5,b=a+0.5;segs.push([[x,0,a],[x,0,b]]);segs.push([[a,0,x],[b,0,x]])}}return segs})();
+
+let D=[];
+function face(B,f){
+  const cen=scl(f.v.reduce((s,v)=>add(s,v),[0,0,0]),1/f.v.length);let n=f.n;
+  const toCam=sub(B.pos,cen);if(dot(n,toCam)<=0){if(!f.ds)return;n=scl(n,-1)}
+  const pts=[];let z=0;for(const v of f.v){const p=B.P(v);if(!p)return;pts.push(p);z+=p[2]}
+  D.push({z:z/pts.length,k:0,pts,c:rgba(shade(f.c,n))});
+}
+function seg(B,a,b,c,w,n){n=n||1;for(let i=0;i<n;i++){const pa=B.P(add(a,scl(sub(b,a),i/n))),pb=B.P(add(a,scl(sub(b,a),(i+1)/n)));if(pa&&pb)D.push({z:(pa[2]+pb[2])/2,k:1,a:pa,b:pb,c,w})}}
+function dot3(B,p,r,c,k){const q=B.P(p);if(q)D.push({z:q[2],k:k||2,x:q[0],y:q[1],r:Math.max(1.2,r*q[3]),c})}
+function arrow(B,o,d,L,c,w){const tip=add(o,scl(d,L));seg(B,o,add(o,scl(d,L-0.12)),c,w,6);const a=B.P(add(o,scl(d,L-0.2))),t=B.P(tip);if(a&&t)D.push({z:t[2],k:3,a,t,c,s:Math.max(6,0.18*t[3])})}
+function rod(B,a,b,r,c){const ax=unit(sub(b,a));let u=crs(ax,[0,1,0]);if(len(u)<1e-3)u=crs(ax,[1,0,0]);u=unit(u);const v=crs(ax,u),n=10;
+  for(let i=0;i<n;i++){const a0=i/n*2*Math.PI,a1=(i+1)/n*2*Math.PI,am=(a0+a1)/2,d0=add(scl(u,Math.cos(a0)*r),scl(v,Math.sin(a0)*r)),d1=add(scl(u,Math.cos(a1)*r),scl(v,Math.sin(a1)*r));
+    face(B,{v:[add(a,d0),add(a,d1),add(b,d1),add(b,d0)],n:unit(add(scl(u,Math.cos(am)),scl(v,Math.sin(am)))),c})}}
+function draw(){
+  D.sort((p,q)=>q.z-p.z);
+  for(const d of D){
+    if(d.k===0){ctx.beginPath();ctx.moveTo(d.pts[0][0],d.pts[0][1]);for(let i=1;i<d.pts.length;i++)ctx.lineTo(d.pts[i][0],d.pts[i][1]);ctx.closePath();ctx.fillStyle=d.c;ctx.fill();ctx.strokeStyle=d.c;ctx.lineWidth=0.8;ctx.stroke()}
+    else if(d.k===1){ctx.strokeStyle=d.c;ctx.lineWidth=d.w;ctx.beginPath();ctx.moveTo(d.a[0],d.a[1]);ctx.lineTo(d.b[0],d.b[1]);ctx.stroke()}
+    else if(d.k===2){ctx.fillStyle=d.c;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,7);ctx.fill()}
+    else if(d.k===3){const an=Math.atan2(d.t[1]-d.a[1],d.t[0]-d.a[0]);ctx.fillStyle=d.c;ctx.beginPath();ctx.moveTo(d.t[0],d.t[1]);ctx.lineTo(d.t[0]-d.s*Math.cos(an-0.45),d.t[1]-d.s*Math.sin(an-0.45));ctx.lineTo(d.t[0]-d.s*Math.cos(an+0.45),d.t[1]-d.s*Math.sin(an+0.45));ctx.closePath();ctx.fill()}
+    else if(d.k===4){const g=ctx.createRadialGradient(d.x-d.r*0.35,d.y-d.r*0.35,d.r*0.1,d.x,d.y,d.r);g.addColorStop(0,'#5a5f6b');g.addColorStop(1,'#16181d');ctx.fillStyle=g;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,7);ctx.fill()}
+    else if(d.k===5){ctx.save();ctx.globalCompositeOperation='lighter';const g=ctx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.r);g.addColorStop(0,'rgba(255,205,150,'+d.c+')');g.addColorStop(0.4,'rgba(240,149,58,'+(d.c*0.7)+')');g.addColorStop(1,'rgba(240,149,58,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,7);ctx.fill();ctx.restore()}
+    else if(d.k===6){ctx.strokeStyle=d.c;ctx.lineWidth=2;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,7);ctx.stroke()}
+  }
+  D=[];
+}
+function sky(B){
+  ctx.fillStyle='#05060a';ctx.fillRect(B.rect.x,B.rect.y,B.rect.w,B.rect.h);
+  for(const [d,b] of STARS){const p=B.P(add(B.pos,scl(d,400)));if(p){ctx.fillStyle='rgba(255,255,255,'+(0.25+0.6*b)+')';ctx.fillRect(p[0],p[1],b>0.8?1.6:1.1,b>0.8?1.6:1.1)}}
+  const e=B.P(EARTH.c);if(e){const r=EARTH.r*e[3];const sx=e[0]-r*0.35,sy=e[1]-r*0.55;const g=ctx.createRadialGradient(sx,sy,r*0.05,e[0],e[1],r);g.addColorStop(0,'#2f6cb3');g.addColorStop(0.6,'#173d6e');g.addColorStop(1,'#0a1a33');ctx.fillStyle=g;ctx.beginPath();ctx.arc(e[0],e[1],r,0,7);ctx.fill();
+    ctx.strokeStyle='rgba(120,180,255,0.35)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(e[0],e[1],r+1,0,7);ctx.stroke()}
+}
+function label(B,text,p,c,dx,dy){const q=B.P(p);if(!q)return;ctx.font='500 12px ui-monospace,monospace';ctx.fillStyle=c;ctx.fillText(text,q[0]+(dx==null?6:dx),q[1]+(dy==null?-6:dy))}
+
+let M=createMission(7),mode='spin',warp=1,az=-0.42,el=0.3,rad=11.5,lastPlanN=-1,spinAng=0,magAxis=null,uiAcc=9,shownRuns=0;
+let paused=false,mainB=null;
+const ptr=new Map();let pinch0=null,fling=null;
+const focus=[1.7,-0.15,1.0];
+const heatC=new Array(NDIR).fill('rgb(40,46,60)');
+const L=id=>$(id).checked;
+function heatCol(s,ok){if(!ok)return'rgba(38,43,56,0.7)';const t=Math.max(0,Math.min(1,s)),a=[42,48,62],b=[240,149,58],c=[255,226,184];const m=t<0.7?a.map((x,i)=>x+(b[i]-x)*(t/0.7)):b.map((x,i)=>x+(c[i]-x)*((t-0.7)/0.3));return rgba(m,0.55+0.45*t)}
+const cdir=unit(BASE);
+
+const sl={x:$('sx'),y:$('sy'),z:$('sz')};
+function syncOut(){$('ox').textContent=sl.x.value+'°/s';$('oy').textContent=sl.y.value+'°/s';$('oz').textContent=sl.z.value+'°/s'}
+Object.values(sl).forEach(s=>s.addEventListener('input',syncOut));
+function applySliders(){setSpinBody(M,[+sl.x.value*D2R,+sl.y.value*D2R,+sl.z.value*D2R]);$('banner').hidden=true}
+$('apply').addEventListener('click',applySliders);
+document.querySelectorAll('button[data-p]').forEach(b=>b.addEventListener('click',()=>{
+  let v=b.dataset.p==='random'?(()=>{const d=unit([Math.random()*2-1,Math.random()*2-1,Math.random()*2-1]),m=20+Math.random()*35;return d.map(x=>Math.round(x*m))})():PRESETS[b.dataset.p];
+  sl.x.value=v[0];sl.y.value=v[1];sl.z.value=v[2];syncOut();applySliders()}));
+function setModeUI(m){mode=m;M.mode=m;document.querySelectorAll('#modeBtns button').forEach(b=>{const on=b.dataset.m===m;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})}
+document.querySelectorAll('#modeBtns button').forEach(b=>b.addEventListener('click',()=>setModeUI(b.dataset.m)));
+function setWarpUI(w){warp=w;document.querySelectorAll('#warpBtns button').forEach(b=>{const on=+b.dataset.w===w;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})}
+document.querySelectorAll('#warpBtns button').forEach(b=>b.addEventListener('click',()=>setWarpUI(+b.dataset.w)));
+function autoUI(){const a=$('auto');a.textContent=M.auto?'Disengage + park':'Engage brake';a.classList.toggle('running',M.auto);a.setAttribute('aria-pressed',M.auto)}
+$('auto').addEventListener('click',()=>{setAuto(M,!M.auto);$('banner').hidden=true;autoUI()});
+function pauseUI(){
+  $('pause').textContent=paused?'Resume':'Pause';
+  $('pause').setAttribute('aria-pressed',String(paused));
+  view.dataset.paused=String(paused);
+}
+$('pause').addEventListener('click',()=>{paused=!paused;pauseUI();ui()});
+function replay(){
+  for(const pointerId of ptr.keys()){if(view.hasPointerCapture(pointerId))view.releasePointerCapture(pointerId)}
+  ptr.clear();pinch0=null;fling=null;view.classList.remove('flinging');
+  M=createMission(7);paused=false;lastPlanN=-1;spinAng=0;magAxis=null;shownRuns=0;uiAcc=9;
+  sl.x.value=PRESETS.chaos[0];sl.y.value=PRESETS.chaos[1];sl.z.value=PRESETS.chaos[2];syncOut();
+  setSpinBody(M,PRESETS.chaos.map(x=>x*D2R));setModeUI('spin');setWarpUI(1);setAuto(M,false);
+  $('banner').hidden=true;$('results').innerHTML='<li class="empty">Model threshold runs appear here. These are simulated durations, not stopping-time predictions.</li>';
+  autoUI();pauseUI();
+}
+$('replay').addEventListener('click',()=>{replay();ui()});
+$('reset-view').addEventListener('click',()=>{az=-0.42;el=0.3;rad=11.5});
+replay();
+$('scope-link').addEventListener('click',()=>{$('methods').open=true});
+
+view.addEventListener('pointerdown',e=>{
+  const r=view.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  ptr.set(e.pointerId,[e.clientX,e.clientY]);try{view.setPointerCapture(e.pointerId)}catch(_){}
+  if(ptr.size===1&&mainB){const c=mainB.P([0,0,0]);if(c&&Math.hypot(x-c[0],y-c[1])<1.05*c[3]){fling={samples:[[x,y,performance.now()]],start:[x,y],cur:[x,y],z:c[2],f:mainB.f};view.classList.add('flinging')}}
+  if(ptr.size===2){fling=null;view.classList.remove('flinging')}
+});
+view.addEventListener('pointermove',e=>{
+  if(!ptr.has(e.pointerId))return;const prev=ptr.get(e.pointerId);ptr.set(e.pointerId,[e.clientX,e.clientY]);
+  const r=view.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  if(fling){fling.cur=[x,y];fling.samples.push([x,y,performance.now()]);if(fling.samples.length>8)fling.samples.shift();return}
+  if(ptr.size===1){az-=(e.clientX-prev[0])*0.006;el=Math.max(-1.25,Math.min(1.25,el+(e.clientY-prev[1])*0.006))}
+  else if(ptr.size===2){const [a,b]=[...ptr.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pinch0)rad=Math.max(5,Math.min(24,rad*pinch0/d));pinch0=d}
+});
+function endPtr(e){
+  if(fling&&mainB){const s=fling.samples,now=performance.now();let i=0;while(i<s.length-1&&now-s[i][2]>90)i++;const a=s[i],b=s[s.length-1],dt=Math.max(0.016,(b[2]-a[2])/1000);
+    const vx=(b[0]-a[0])/dt,vy=(b[1]-a[1])/dt;
+    if(Math.hypot(vx,vy)>40){const k=fling.z/fling.f;const vW=add(scl(mainB.right,vx*k),scl(mainB.up,-vy*k));const toCam=unit(mainB.pos);const wW=scl(crs(toCam,vW),0.09);flingWorld(M,wW);$('banner').hidden=true}
+    fling=null;view.classList.remove('flinging')}
+  ptr.delete(e.pointerId);if(ptr.size<2)pinch0=null;
+}
+view.addEventListener('pointerup',endPtr);
+// A canceled gesture must not impart angular velocity to the target.
+view.addEventListener('pointercancel',e=>{fling=null;view.classList.remove('flinging');ptr.delete(e.pointerId);if(ptr.size<2)pinch0=null});
+view.addEventListener('keydown',e=>{
+  const actions={ArrowLeft:()=>az-=0.08,ArrowRight:()=>az+=0.08,ArrowUp:()=>el=Math.min(1.25,el+0.08),ArrowDown:()=>el=Math.max(-1.25,el-0.08),'+':()=>rad=Math.max(5,rad*0.92),'=':()=>rad=Math.max(5,rad*0.92),'-':()=>rad=Math.min(24,rad*1.08)};
+  if(actions[e.key]){e.preventDefault();actions[e.key]()}
+});
+view.addEventListener('wheel',e=>{e.preventDefault();rad=Math.max(5,Math.min(24,rad*(1+Math.sign(e.deltaY)*0.08)))},{passive:false});
+
+let last=performance.now();
+function frame(now){
+  const dt=Math.min(0.05,(now-last)/1000);last=now;
+  const simDt=paused?0:dt*warp;
+  if(simDt>0){const n=Math.max(1,Math.ceil(simDt/0.005));for(let i=0;i<n;i++)step(M,simDt/n)}
+  const E=M.est;
+  // Fit the existing scene into portrait viewports without changing any dynamics.
+  const displayRad=rad*Math.max(1,1.4/(W/H));
+  const campos=[focus[0]+displayRad*Math.cos(el)*Math.sin(az),focus[1]+displayRad*Math.sin(el),focus[2]+displayRad*Math.cos(el)*Math.cos(az)];
+  const B=basis(campos,focus,40*D2R,{x:0,y:0,w:W,h:H});mainB=B;
+  sky(B);
+  if(L('l-frames')){for(const s of GRID)seg(B,s[0],s[1],'rgba(70,82,104,0.32)',1);[[1,0,0],[0,1,0],[0,0,1]].forEach(a=>arrow(B,[0,0,0],a,2.5,'#9aa3b5',1.6));seg(B,camPos,[0,0,0],'rgba(92,200,255,0.22)',1,10)}
+  if(L('l-keep'))for(const s of KEEP)seg(B,s[0],s[1],'rgba(92,200,255,0.13)',1);
+  const tq=M.q;
+  for(const f of TGT)face(B,{v:f.v.map(v=>qrot(tq,v)),n:qrot(tq,f.n),c:f.c,ds:f.ds});
+  CORN.forEach(c=>dot3(B,qrot(tq,c),0.035,'#ffffff'));
+  if(L('l-frames'))[[1,0,0,'#ff6b6b'],[0,1,0,'#5fd3a0'],[0,0,1,'#6fa8ff']].forEach(a=>arrow(B,[0,0,0],qrot(tq,a),1.15,a[3],2));
+  for(const f of CHASER)face(B,f);
+  dot3(B,add(camPos,scl(unit(scl(camPos,-1)),0.14)),0.06,'#5cc8ff');
+  if(M.planN!==lastPlanN){lastPlanN=M.planN;let mx=1e-9;for(let i=0;i<NDIR;i++)mx=Math.max(mx,M.score[i]);for(let i=0;i<NDIR;i++)heatC[i]=heatCol(M.score[i]/mx,dot(DIRS[i],cdir)>-0.15)}
+  const heatOn=L('l-heat')&&M.dStar;
+  if(heatOn){DIRS.forEach((d,i)=>dot3(B,scl(d,RM),0.038,heatC[i]));const q=B.P(scl(M.dStar,RM));if(q)D.push({z:q[2]-0.01,k:6,x:q[0],y:q[1],r:Math.max(5,0.15*q[3]),c:'#f0953a'})}
+  const wN=E.init?qrot(E.q,E.w):[0,0,0],HN=E.init?qrot(E.q,mulv(CFG.Iest,E.w)):[0,0,0];
+  const showW=L('l-vectors')&&len(wN)>0.15*D2R,showH=L('l-vectors')&&len(HN)>0.01;
+  if(showW)arrow(B,[0,0,0],unit(wN),0.7+len(wN)*3.2,'#5cc8ff',2.6);
+  if(showH)arrow(B,[0,0,0],unit(HN),0.7+len(HN)*1.2,'#b7a4ff',2.6);
+  const ed=M.eddy;
+  if(ed&&ed.eW&&len(M.vf)>0.02){const a=unit(crs(scl(ed.eW,-1),unit(M.vf)));if(len(a)>0.5)magAxis=a}
+  if(!magAxis)magAxis=unit(crs(unit(scl(M.p,-1)),[0,1,0]));
+  const y=[0,1,0],dd=dot(y,magAxis);const qa=dd<-0.999?[0,1,0,0]:qnorm([1+dd,...crs(y,magAxis)]);
+  spinAng+=len(M.vf)/CFG.magR*simDt*0.35;const qm=qmul(qa,qexp([0,spinAng,0]));
+  for(const f of MAG)face(B,{v:f.v.map(v=>add(qrot(qm,v),M.p)),n:qrot(qm,f.n),c:f.c});
+  const pm=M.p,wrist=add(pm,scl(unit(pm),0.5)),Dv=sub(wrist,BASE),dl=Math.min(len(Dv),6.59),dh=unit(Dv);
+  const aa=(dl*dl)/(2*dl),hh=Math.sqrt(Math.max(0,3.3*3.3-aa*aa));let perp=sub([0,1,0],scl(dh,dh[1]));if(len(perp)<1e-3)perp=[1,0,0];perp=unit(perp);
+  const elbow=add(add(BASE,scl(dh,aa)),scl(perp,hh)),wr=add(BASE,scl(dh,dl));
+  rod(B,BASE,elbow,0.1,[214,211,201]);rod(B,elbow,wr,0.085,[214,211,201]);rod(B,wr,pm,0.06,[214,211,201]);
+  [BASE,elbow,wr].forEach(p=>{const q=B.P(p);if(q)D.push({z:q[2],k:4,x:q[0],y:q[1],r:0.14*q[3]})});
+  if(ed&&ed.patchW&&ed.P>1e-5){const q=B.P(add(ed.patchW,scl(unit(ed.patchW),0.03)));const op=Math.min(1,Math.sqrt(ed.P/0.25));if(q)D.push({z:q[2]-0.05,k:5,x:q[0],y:q[1],r:(0.3+0.5*op)*q[3],c:op})}
+  draw();
+  // Diametric poles follow the rendered rotor, not the independent drag proxy.
+  const poleN=B.P(add(qrot(qm,[0,0,CFG.magR]),M.p));
+  const poleS=B.P(add(qrot(qm,[0,0,-CFG.magR]),M.p));
+  if(poleN&&poleS){
+    let dx=poleN[0]-poleS[0],dy=poleN[1]-poleS[1],d=Math.hypot(dx,dy);
+    if(d<1){dx=1;dy=0;d=1}
+    ctx.save();ctx.font='700 11px Arial,Helvetica,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    [[poleN,'N','#ff8d8d',1],[poleS,'S','#81bdff',-1]].forEach(([p,text,color,side])=>{
+      const x=p[0]+side*dx/d*14,y=p[1]+side*dy/d*14;
+      ctx.strokeStyle=color;ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(x-side*dx/d*6,y-side*dy/d*6);ctx.stroke();
+      ctx.lineWidth=3;ctx.strokeStyle='#05060a';ctx.strokeText(text,x,y);ctx.fillStyle=color;ctx.fillText(text,x,y);
+    });ctx.restore();
+  }
+  if(L('l-frames'))label(B,'motor / shaft',add(qrot(qa,[0,0.4,0]),M.p),'#c8c8c8',12,-10);
+  if(L('l-frames')){label(B,'X',[2.62,0,0],'#9aa3b5');label(B,'Y',[0,2.62,0],'#9aa3b5');label(B,'Z',[0,0,2.62],'#9aa3b5')}
+  if(showW)label(B,'ω̂ spin',scl(unit(wN),0.85+len(wN)*3.2),'#5cc8ff');
+  if(showH)label(B,'H momentum',scl(unit(HN),0.85+len(HN)*1.2),'#b7a4ff');
+  if(heatOn&&M.phase!=='stable')label(B,M.phase==='standby'?'best spot (if engaged)':'best spot',scl(M.dStar,RM+0.15),'#f0953a',10,4);
+  if(fling){ctx.strokeStyle='rgba(240,149,58,0.8)';ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(fling.start[0],fling.start[1]);ctx.lineTo(fling.cur[0],fling.cur[1]);ctx.stroke();ctx.setLineDash([])}
+  if(L('l-cam'))pip(tq,E);
+  uiAcc+=dt;if(uiAcc>0.1){uiAcc=0;ui()}
+  requestAnimationFrame(frame);
+}
+function pip(tq,E){
+  const pw=Math.round(Math.min(330,Math.max(160,W*0.3))),ph=Math.round(pw*0.75),px=W-pw-12,py=H-ph-12;
+  ctx.save();ctx.beginPath();ctx.rect(px,py,pw,ph);ctx.clip();
+  const B=basis(camPos,[0,0,0],22*D2R,{x:px,y:py,w:pw,h:ph});
+  ctx.fillStyle='#030407';ctx.fillRect(px,py,pw,ph);
+  for(const f of TGT)face(B,{v:f.v.map(v=>qrot(tq,v)),n:qrot(tq,f.n),c:f.c,ds:f.ds});
+  CORN.forEach(c=>dot3(B,qrot(tq,c),0.035,'#ffffff'));
+  draw();
+  ctx.strokeStyle='#5fd3a0';ctx.lineWidth=1.2;
+  CORN.forEach(c=>{const p=B.P(qrot(tq,c));if(p){const j=paused?0:(Math.random()-0.5)*2;ctx.strokeRect(p[0]-4+j,p[1]-4-j,8,8)}});
+  if(E.init){const pr=CORN.map(c=>B.P(qrot(E.q,c)));ctx.strokeStyle='rgba(92,200,255,0.9)';ctx.lineWidth=1.3;ctx.beginPath();EDGES.forEach(([a,b])=>{if(pr[a]&&pr[b]){ctx.moveTo(pr[a][0],pr[a][1]);ctx.lineTo(pr[b][0],pr[b][1])}});ctx.stroke()}
+  ctx.fillStyle='rgba(5,6,10,0.8)';ctx.fillRect(px,py,pw,20);
+  ctx.font='500 11px ui-monospace,monospace';ctx.fillStyle='#8a92a5';ctx.fillText('SYNTHETIC CAMERA',px+8,py+14);
+  ctx.textAlign='right';ctx.fillStyle=E.locked?'#5fd3a0':'#f0953a';ctx.fillText(E.locked?'LOCK':'SEARCH',px+pw-8,py+14);ctx.textAlign='left';
+  ctx.restore();ctx.strokeStyle='#2b3345';ctx.lineWidth=1;ctx.strokeRect(px+0.5,py+0.5,pw-1,ph-1);
+}
+const ORDER=['standby','approach','detumble','stable'];
+function ui(){
+  const E=M.est,wt=len(M.w)*R2D,we=len(E.w)*R2D,err=E.init?len(sub(qrot(M.q,M.w),qrot(E.q,E.w)))*R2D:null;
+  const lk=$('t-lock');lk.textContent=E.locked?'Model lock':'Searching';lk.className='num '+(E.locked?'ok':'warn');
+  $('t-w').innerHTML=wt.toFixed(1)+'<small>°/s</small>';
+  $('t-we').innerHTML=E.init?we.toFixed(1)+'<small>°/s</small>':'–';
+  $('t-err').innerHTML=err===null?'–':err.toFixed(2)+'<small>°/s</small>';
+  const Iw=mulv(BODY.I,M.w);
+  $('t-h').innerHTML=Math.min(999,len(Iw)/M.H0*100).toFixed(1)+'<small>%</small>';
+  $('t-e').innerHTML=Math.min(999,0.5*dot(Iw,M.w)/M.T0*100).toFixed(1)+'<small>%</small>';
+  $('t-gap').innerHTML=M.phase!=='standby'&&M.eddy&&M.eddy.g<1.2?(M.eddy.g*100).toFixed(0)+'<small>cm</small>':'parked';
+  $('t-sweep').innerHTML=len(M.vf).toFixed(2)+'<small>m/s</small>';
+  const ci=ORDER.indexOf(M.phase);
+  document.querySelectorAll('#phases li').forEach((li,i)=>{li.classList.toggle('on',i===ci);li.classList.toggle('done',M.phase!=='standby'&&i>0&&i<ci);if(i===ci)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current')});
+  const st={standby:E.locked?'Controller in standby. The synthetic camera estimates the tumble. Engage the brake to approach the model’s selected position.':'Controller in standby. Synthetic attitude observations are initializing the estimator.',
+    approach:E.locked?'Arm moving toward the position selected by the simplified model.':'Estimator acquiring lock. Arm positioning continues; the commanded field sweep remains off.',
+    detumble:!E.locked?'Estimator lost model lock. The commanded sweep decays toward zero; passive drag remains.':M.mode==='spin'?'The model commands a field sweep opposite the estimated local hull motion.':'Still-magnet mode. The model applies local passive drag.',
+    stable:'Model threshold reached: filtered estimated spin below 0.6°/s for two model seconds. This is not a capture-safety assessment.'};
+  $('status').textContent=(paused?'Paused. ':'')+st[M.phase];
+  $('model-time').textContent=M.t.toFixed(1)+' model s';
+  $('live-spin').textContent=wt.toFixed(1)+'°/s';
+  view.dataset.modelTime=M.t.toFixed(6);view.dataset.spinRate=wt.toFixed(6);
+  view.dataset.magnetPhase=spinAng.toFixed(6);view.dataset.modelPhase=M.phase;
+  view.dataset.orbitAzimuth=az.toFixed(6);view.dataset.zoomRadius=rad.toFixed(6);
+  view.dataset.ready='true';
+  if(M.phase==='stable'&&$('banner').hidden&&M.auto)$('banner').hidden=false;
+  if(M.phase!=='stable'&&!$('banner').hidden)$('banner').hidden=true;
+  if(M.runs.length>shownRuns){const ul=$('results');if(!shownRuns)ul.innerHTML='';for(;shownRuns<M.runs.length;shownRuns++){const r=M.runs[shownRuns],li=document.createElement('li');li.innerHTML='<span>'+r.w0.toFixed(0)+'°/s tumble · '+(r.mode==='spin'?'spinning field':'still magnet')+'</span><b>'+(r.end-r.start).toFixed(0)+' model s</b>';ul.prepend(li)}while(ul.children.length>6)ul.lastChild.remove()}
+  drawPlot();
+}
+const plot=$('plot'),pc=plot.getContext('2d');
+function sizePlot(){const d=Math.min(2,window.devicePixelRatio||1);plot.width=Math.max(1,plot.clientWidth)*d;plot.height=170*d;pc.setTransform(d,0,0,d,0,0)}
+sizePlot();window.addEventListener('resize',sizePlot);
+$('telemetry').addEventListener('toggle',()=>{sizePlot();drawPlot()});
+if('ResizeObserver' in window)new ResizeObserver(sizePlot).observe(plot);
+const PN={approach:'approach',detumble:'detumble',stable:'stable',standby:'standby',spin:'new spin'};
+function drawPlot(){
+  const w=plot.clientWidth,hh=170;pc.clearRect(0,0,w,hh);
+  const x0=44,x1=w-40,y0=14,y1=hh-22,t1=Math.max(60,M.t),t0=t1-60,lg=M.log.filter(r=>r[0]>=t0);
+  let wmax=10;for(const r of lg)wmax=Math.max(wmax,r[1],r[2]);wmax=Math.ceil(wmax/10)*10;
+  const X=t=>x0+(t-t0)/60*(x1-x0),Yw=v=>y1-(Math.min(v,wmax)/wmax)*(y1-y0);
+  pc.font='11px ui-monospace,monospace';
+  for(let i=0;i<=4;i++){const y=y1-i/4*(y1-y0);pc.strokeStyle='#161b26';pc.lineWidth=1;pc.beginPath();pc.moveTo(x0,y);pc.lineTo(x1,y);pc.stroke();pc.fillStyle='#8a92a5';pc.textAlign='right';pc.fillText(Math.round(wmax*i/4)+'°/s',x0-5,y+4);pc.textAlign='left';pc.fillStyle='#8f84c4';pc.fillText(i*25+'%',x1+5,y+4)}
+  pc.fillStyle='#8a92a5';pc.textAlign='center';for(let t=Math.ceil(t0/10)*10;t<=t1;t+=10)pc.fillText(Math.round(t)+'s',X(t),hh-6);
+  M.events.filter(e=>e.t>=t0).forEach(e=>{const x=X(e.t);pc.strokeStyle='#2b3345';pc.setLineDash([3,3]);pc.beginPath();pc.moveTo(x,y0);pc.lineTo(x,y1);pc.stroke();pc.setLineDash([]);pc.fillStyle=e.ph==='spin'?'#f0953a':'#8a92a5';pc.textAlign='left';pc.fillText(PN[e.ph]||e.ph,x+3,y0+8)});
+  const line=(idx,Y,col,wid,dash)=>{if(lg.length<2)return;pc.strokeStyle=col;pc.lineWidth=wid;pc.setLineDash(dash||[]);pc.beginPath();lg.forEach((r,i)=>{const x=X(r[0]),y=Y(r[idx]);i?pc.lineTo(x,y):pc.moveTo(x,y)});pc.stroke();pc.setLineDash([])};
+  line(3,v=>y1-Math.min(1,v)*(y1-y0),'#b7a4ff',1.6);line(1,Yw,'#e8eaf0',2);line(2,Yw,'#5cc8ff',1.4,[5,4]);
+  pc.textAlign='left';pc.fillStyle='#e8eaf0';pc.fillText('model spin',x0+6,y1-8);pc.fillStyle='#5cc8ff';pc.fillText('estimate',x0+84,y1-8);pc.fillStyle='#b7a4ff';pc.fillText('momentum left',x0+154,y1-8);
+}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

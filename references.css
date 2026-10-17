@@ -1,0 +1,82 @@
+/* References-page styles only. Shared navigation and footer live in site.css. */
+.references-page{background:#f1f0ea;color:#0b1015;font-family:Arial,Helvetica,sans-serif}
+.references-page .site-header{position:relative;color:#0b1015;border-bottom-color:#cccec6}
+.references-page .site-footer{color:#f1f0ea}
+.references-page .skip-link{position:fixed;left:18px;top:-70px;z-index:1000;padding:12px 18px;background:#0b1015;color:#f1f0ea;text-decoration:none}
+.references-page .skip-link:focus{top:14px}
+.refs-shell{width:min(1180px,calc(100% - 96px));margin-inline:auto}
+.refs-hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.75fr);gap:90px;align-items:end;padding-block:70px 90px}
+.references-page .eyebrow,.refs-kicker{font-size:10px;font-weight:600;line-height:1.4;letter-spacing:.14em;text-transform:uppercase}
+.refs-intro h1{font-size:clamp(50px,6.2vw,86px);line-height:1.03;letter-spacing:-.065em;font-weight:500;margin:28px 0 29px}
+.refs-intro h1 em{font-style:normal;color:#996342}
+.refs-lead{max-width:520px;font-size:18px;line-height:1.6;color:#4e5457;margin:0}
+.refs-jump{display:inline-flex;align-items:center;gap:32px;font-size:12px;font-weight:600;text-decoration:none;color:inherit;margin-top:30px;padding-bottom:9px;border-bottom:1px solid #b4b5ae}
+.refs-jump span{font-size:19px;color:#996342}
+.refs-jump:hover{border-color:#996342}
+.refs-position{position:relative;border-top:2px solid #bd825f;padding-top:28px;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;max-width:360px}
+.refs-position-mark{display:block;margin-bottom:auto;padding-bottom:42px;color:#996342;font-size:11px;letter-spacing:.12em}
+.refs-position .refs-kicker{margin:0 0 17px;color:#6a706d}
+.refs-position h2{font-weight:500;font-size:31px;line-height:1.15;letter-spacing:-.035em;margin:0 0 20px}
+.refs-position p{font-size:13px;line-height:1.7;color:#4f5555;margin:0 0 19px}
+.refs-position .refs-position-note{font-size:11px;line-height:1.7;padding-top:18px;border-top:1px solid #d1d2ca;margin-bottom:0}
+.refs-register{padding-block:48px 0;border-top:1px solid #bfc1ba;scroll-margin-top:100px}
+.refs-section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:32px}
+.refs-kicker{margin:0 0 17px;color:#7b513a}
+.refs-section-heading h2,.refs-scope h2,.refs-close h2{font-weight:500;font-size:clamp(29px,3.2vw,42px);line-height:1.13;letter-spacing:-.045em;margin:0}
+.refs-section-heading>p{font-size:11px;line-height:1.8;color:#4f5555;text-align:right;margin:0 0 1px}
+.refs-section-heading>p span{color:#747a76}
+.refs-register-note{max-width:710px;font-size:12px;line-height:1.8;color:#606763;margin:20px 0 39px}
+.reference-list{list-style:none;margin:0;padding:0;border-top:1px solid #bfc1ba}
+.reference-row{display:grid;grid-template-columns:92px 1fr;padding:42px 0 45px;border-bottom:1px solid #cccec6;scroll-margin-top:100px}
+.reference-index{padding-top:3px;font-size:13px;letter-spacing:.08em;color:#996342;font-variant-numeric:tabular-nums}
+.reference-meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:9px;line-height:1.5;font-weight:600;text-transform:uppercase;letter-spacing:.095em;color:#707772;margin-bottom:15px}
+.reference-meta>span:first-child{color:#7b513a}
+.reference-content h3{max-width:900px;font-size:clamp(21px,2.3vw,30px);font-weight:500;line-height:1.22;letter-spacing:-.035em;margin:0 0 14px}
+.reference-citation{max-width:890px;margin:0;color:#68706a;font-size:11px;line-height:1.8;overflow-wrap:anywhere}
+.reference-citation cite{font-style:normal}
+.reference-citation a{color:inherit;text-decoration-color:#a4aaa0;text-underline-offset:3px}
+.reference-citation a:hover{color:#0b1015}
+.reference-reading{display:grid;grid-template-columns:1fr 1fr;gap:34px 54px;margin:28px 0 25px}
+.reference-reading>div{margin:0}
+.reference-reading dt{font-size:10px;text-transform:uppercase;letter-spacing:.10em;font-weight:600;color:#4e5651;margin-bottom:9px}
+.reference-reading dd{font-size:13px;line-height:1.8;color:#3e4643;margin:0}
+.reference-reading>div+div{padding-left:27px;border-left:1px solid #d0d3ca}
+.reference-reading>div+div dt{color:#87674e}
+.reference-source{display:inline-flex;align-items:center;gap:13px;font-size:12px;font-weight:600;line-height:1.6;color:#0b1015;text-decoration:none;padding:7px 0;border-bottom:1px solid #8e9990;max-width:100%}
+.reference-source .source-kind{font-size:9px;letter-spacing:.045em;color:#6c756d;font-weight:400}
+.reference-source>span:last-child{font-size:19px;line-height:1;color:#996342;margin-left:11px}
+.reference-source:hover{border-bottom-color:#996342;color:#7b513a}
+.refs-scope{display:grid;grid-template-columns:.85fr 1.55fr;gap:80px;padding-block:87px 88px}
+.refs-scope-intro>p:last-child{font-size:14px;line-height:1.8;color:#4f5850;max-width:290px;margin:22px 0 0}
+.refs-scope-intro a{font-size:11px;text-decoration:none;color:#7b513a}
+.refs-materials table{border-collapse:collapse;width:100%;text-align:left;border-top:1px solid #bfc1ba}
+.refs-materials caption{text-align:left;font-size:11px;line-height:1.5;padding-bottom:16px;color:#576257}
+.refs-materials th,.refs-materials td{padding:18px 0;vertical-align:top;border-bottom:1px solid #cdd1c6}
+.refs-materials thead th{font-size:9px;text-transform:uppercase;letter-spacing:.13em;font-weight:600;color:#70796c;padding-block:13px}
+.refs-materials tbody th{width:34%;font-size:13px;line-height:1.6;font-weight:500;padding-right:25px}
+.refs-materials td{font-size:12px;line-height:1.8;color:#4f5850}
+.refs-table-note{font-size:10px;line-height:1.8;color:#6c7468;margin:17px 0 0}
+.refs-close{display:grid;grid-template-columns:1fr 1fr;gap:100px;border-top:1px solid #bfc1ba;padding-block:57px 100px}
+.refs-close-copy p{font-size:14px;line-height:1.85;color:#4f5850;margin:0 0 19px}
+.refs-close-copy .button{margin-top:9px}
+.references-page :is(a,button):focus-visible{outline:2px solid #7b513a;outline-offset:5px}
+@media(min-width:1450px){.refs-shell{width:min(1240px,calc(100% - 120px))}.refs-hero{padding-top:76px;gap:130px}.reference-row{grid-template-columns:112px 1fr}.refs-scope{gap:110px}}
+@media(max-width:760px){.references-page .nav-links{color:#f1f0ea}}
+@media(max-width:900px){.refs-shell{width:calc(100% - 56px)}.refs-hero{gap:42px;grid-template-columns:1.4fr .85fr;padding-block:80px 68px}.refs-intro h1{font-size:60px}.refs-lead{font-size:16px}.refs-position h2{font-size:25px}.refs-position-mark{padding-bottom:29px}.reference-row{grid-template-columns:54px 1fr}.reference-reading{gap:24px}.reference-reading>div+div{padding-left:20px}.refs-scope{gap:40px;grid-template-columns:1fr 1.6fr}.refs-close{gap:50px}}
+@media(max-width:640px){.refs-shell{width:calc(100% - 38px)}.refs-hero{grid-template-columns:1fr;gap:44px;padding-block:63px 49px}.refs-intro h1{font-size:clamp(44px,12vw,62px);margin-block:23px}.refs-lead{font-size:16px;line-height:1.65;max-width:420px}.refs-position{max-width:none;padding:24px 0 0;display:grid;grid-template-columns:1fr 1.35fr;gap:0 24px}.refs-position-mark{display:none}.refs-position .refs-kicker{grid-column:1/-1;margin-bottom:15px}.refs-position h2{font-size:24px;line-height:1.2}.refs-position p{font-size:12px;margin:0 0 14px}.refs-position .refs-position-note{grid-column:1/-1;font-size:10px;padding-top:14px}.refs-register{padding-top:32px;scroll-margin-top:75px}.refs-section-heading{display:block}.refs-section-heading h2{font-size:31px}.refs-section-heading>p{text-align:left;margin-top:18px;font-size:10px}.refs-section-heading>p br{display:none}.refs-section-heading>p span::before{content:" · "}.refs-register-note{font-size:11px;margin:15px 0 25px}.reference-row{grid-template-columns:32px minmax(0,1fr);padding-block:30px 32px;scroll-margin-top:80px}.reference-index{font-size:10px;padding-top:2px}.reference-meta{gap:7px 11px;font-size:8px;margin-bottom:13px}.reference-content h3{font-size:23px;line-height:1.24;letter-spacing:-.035em}.reference-citation{font-size:10px;line-height:1.8}.reference-reading{grid-template-columns:1fr;gap:18px;margin-top:22px;margin-bottom:19px}.reference-reading dt{font-size:9px}.reference-reading dd{font-size:12px}.reference-reading>div+div{padding:0 0 0 13px;border-left:2px solid #bd825f}.reference-source{flex-wrap:wrap;gap:4px 10px;font-size:11px}.reference-source .source-kind{font-size:8px}.reference-source>span:last-child{margin-left:1px;font-size:16px}.refs-scope{grid-template-columns:1fr;gap:32px;padding-block:46px 48px}.refs-scope-intro h2{font-size:31px}.refs-scope-intro h2 br{display:none}.refs-scope-intro>p:last-child{font-size:13px;max-width:100%;margin-top:18px}.refs-materials caption{font-size:10px}.refs-materials tbody th{width:35%;font-size:12px;padding-right:18px}.refs-materials td{font-size:11px}.refs-table-note{font-size:10px}.refs-close{grid-template-columns:1fr;gap:25px;padding-block:39px 55px}.refs-close h2{font-size:31px}.refs-close-copy p{font-size:13px}.refs-kicker{font-size:9px;margin-bottom:15px}}
+@media(prefers-reduced-motion:reduce){.references-page{scroll-behavior:auto}.references-page *{transition:none!important;animation:none!important}}
+
+/* Cinematic monochrome direction: technical references remain a quiet reading surface. */
+.references-page{background:#000;color:#fff}
+.references-page .site-header{position:fixed;color:#fff;background:linear-gradient(#000d,transparent);border:0}
+.refs-hero{min-height:80svh;padding-top:160px;align-items:center}
+.refs-intro h1{font-weight:700;text-transform:uppercase;letter-spacing:-.04em}
+.refs-intro h1 em,.refs-kicker,.reference-index,.reference-meta>span:first-child,.refs-position-mark,.refs-jump span,.reference-source>span:last-child{color:#fff}
+.references-page :is(.refs-lead,.refs-position p,.refs-register-note,.reference-citation,.reference-reading dd,.refs-materials td,.refs-table-note,.refs-close-copy p,.refs-scope-intro>p:last-child,.refs-section-heading>p){color:#aaa}
+.references-page :is(.reference-meta,.reference-reading dt,.refs-position .refs-kicker,.refs-materials caption,.refs-materials thead th,.source-kind){color:#929292}
+.references-page :is(.refs-position,.refs-position-note,.refs-register,.reference-list,.reference-row,.reference-reading>div+div,.refs-materials table,.refs-materials th,.refs-materials td,.refs-close,.refs-jump){border-color:#333}
+.references-page :is(.reference-source,.reference-source:hover,.reference-citation a:hover,.refs-scope-intro a){color:#fff;border-color:#777}
+.references-page :is(h2,h3){text-transform:uppercase;font-weight:600;letter-spacing:-.025em}
+.references-page :is(a,button):focus-visible{outline-color:#fff}
+.references-page .refs-position{border-top-width:1px}
+@media(max-width:640px){.refs-hero{padding-top:130px}.refs-intro h1{font-size:clamp(44px,12vw,62px)}}
