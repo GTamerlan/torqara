@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="Torqara explores contactless magnetic detumbling for selected conductive objects in orbit. Explore the user model, hardware concept and engineering questions.">
+  <meta name="description" content="Torqara explores contactless magnetic detumbling for selected conductive objects in orbit. Explore the interactive model and engineering questions.">
   <title>Torqara — Control before contact</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="site.css?v=2">
+  <link rel="stylesheet" href="hero.css?v=earth-1">
   <script src="site.js?v=2" defer></script>
-  <script type="module" src="hardware.js?v=2"></script>
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -23,9 +23,8 @@
   </header>
   <main id="main">
     <section class="hero cinematic-panel" aria-labelledby="hero-title">
-      <div id="hardware-stage" class="hardware-stage" aria-label="Interactive concept hardware visualization">
-        <canvas id="hardware-canvas" aria-label="Concept robotic arm, motor, permanent magnet and conductive target. Drag to orbit and scroll to zoom."></canvas>
-        <div class="hardware-fallback" id="hardware-fallback" hidden>Concept geometry is unavailable in this browser. Explore the engineering below.</div>
+      <div class="orbital-hero" aria-hidden="true">
+        <img src="assets/orbital-horizon.svg" alt="" width="1600" height="1000" fetchpriority="high">
       </div>
       <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-copy">
@@ -34,7 +33,7 @@
         <a class="button" href="explorer.html#integration">Explore the model</a>
         <p class="hero-status">Illustrative concept. No demonstrated flight capability.</p>
       </div>
-      <p class="hardware-caption">CONCEPT HARDWARE<br><span>Drag to orbit · Click, then scroll to zoom</span></p>
+      <p class="orbital-caption">EARTH ORBIT / ARTISTIC ILLUSTRATION</p>
       <a class="scroll-cue" href="#mission" aria-label="Scroll to the mission"><span></span></a>
     </section>
 
