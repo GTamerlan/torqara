@@ -518,11 +518,11 @@ function frame(now){
       ctx.lineWidth=3;ctx.strokeStyle='#05060a';ctx.strokeText(text,x,y);ctx.fillStyle=color;ctx.fillText(text,x,y);
     });ctx.restore();
   }
-  if(L('l-frames'))label(B,'motor / shaft',add(qrot(qa,[0,0.4,0]),M.p),'#c8c8c8',12,-10);
+  if(!portrait&&L('l-frames'))label(B,'motor / shaft',add(qrot(qa,[0,0.4,0]),M.p),'#c8c8c8',12,-10);
   if(L('l-frames')){label(B,'X',[2.62,0,0],'#9aa3b5');label(B,'Y',[0,2.62,0],'#9aa3b5');label(B,'Z',[0,0,2.62],'#9aa3b5')}
-  if(showW)label(B,'ω̂ spin',scl(unit(wN),0.85+len(wN)*3.2),'#5cc8ff');
-  if(showH)label(B,'H momentum',scl(unit(HN),0.85+len(HN)*1.2),'#b7a4ff');
-  if(heatOn&&M.phase!=='stable')label(B,M.phase==='standby'?'best spot (if engaged)':'best spot',scl(M.dStar,RM+0.15),'#f0953a',10,4);
+  if(!portrait&&showW)label(B,'ω̂ spin',scl(unit(wN),0.85+len(wN)*3.2),'#5cc8ff');
+  if(!portrait&&showH)label(B,'H momentum',scl(unit(HN),0.85+len(HN)*1.2),'#b7a4ff');
+  if(!portrait&&heatOn&&M.phase!=='stable')label(B,M.phase==='standby'?'best spot (if engaged)':'best spot',scl(M.dStar,RM+0.15),'#f0953a',10,4);
   if(fling){ctx.strokeStyle='rgba(240,149,58,0.8)';ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(fling.start[0],fling.start[1]);ctx.lineTo(fling.cur[0],fling.cur[1]);ctx.stroke();ctx.setLineDash([])}
   if(L('l-cam'))pip(tq,E);
   uiAcc+=dt;if(uiAcc>0.1){uiAcc=0;ui()}
@@ -540,7 +540,7 @@ function pip(tq,E){
   CORN.forEach(c=>{const p=B.P(qrot(tq,c));if(p){const j=paused?0:(Math.random()-0.5)*2;ctx.strokeRect(p[0]-4+j,p[1]-4-j,8,8)}});
   if(E.init){const pr=CORN.map(c=>B.P(qrot(E.q,c)));ctx.strokeStyle='rgba(92,200,255,0.9)';ctx.lineWidth=1.3;ctx.beginPath();EDGES.forEach(([a,b])=>{if(pr[a]&&pr[b]){ctx.moveTo(pr[a][0],pr[a][1]);ctx.lineTo(pr[b][0],pr[b][1])}});ctx.stroke()}
   ctx.fillStyle='rgba(5,6,10,0.8)';ctx.fillRect(px,py,pw,20);
-  ctx.font='500 11px ui-monospace,monospace';ctx.fillStyle='#8a92a5';ctx.fillText('SYNTHETIC CAMERA',px+8,py+14);
+  ctx.font='500 11px ui-monospace,monospace';ctx.fillStyle='#8a92a5';ctx.fillText(pw<220?'SYNTHETIC':'SYNTHETIC CAMERA',px+8,py+14);
   ctx.textAlign='right';ctx.fillStyle=E.locked?'#5fd3a0':'#f0953a';ctx.fillText(E.locked?'LOCK':'SEARCH',px+pw-8,py+14);ctx.textAlign='left';
   ctx.restore();ctx.strokeStyle='#2b3345';ctx.lineWidth=1;ctx.strokeRect(px+0.5,py+0.5,pw-1,ph-1);
 }
