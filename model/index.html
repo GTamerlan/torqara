@@ -471,9 +471,11 @@ function frame(now){
   if(simDt>0){const n=Math.max(1,Math.ceil(simDt/0.005));for(let i=0;i<n;i++)step(M,simDt/n)}
   const E=M.est;
   // Fit the existing scene into portrait viewports without changing any dynamics.
-  const displayRad=rad*Math.max(1,1.4/(W/H));
-  const campos=[focus[0]+displayRad*Math.cos(el)*Math.sin(az),focus[1]+displayRad*Math.sin(el),focus[2]+displayRad*Math.cos(el)*Math.cos(az)];
-  const B=basis(campos,focus,40*D2R,{x:0,y:0,w:W,h:H});mainB=B;
+  const portrait=W<600;
+  const viewFocus=portrait?[2.6,0.5,1.15]:focus;
+  const displayRad=rad*Math.max(1,(portrait?1.9:1.4)/(W/H));
+  const campos=[viewFocus[0]+displayRad*Math.cos(el)*Math.sin(az),viewFocus[1]+displayRad*Math.sin(el),viewFocus[2]+displayRad*Math.cos(el)*Math.cos(az)];
+  const B=basis(campos,viewFocus,40*D2R,{x:0,y:0,w:W,h:H});mainB=B;
   sky(B);
   if(L('l-frames')){for(const s of GRID)seg(B,s[0],s[1],'rgba(70,82,104,0.32)',1);[[1,0,0],[0,1,0],[0,0,1]].forEach(a=>arrow(B,[0,0,0],a,2.5,'#9aa3b5',1.6));seg(B,camPos,[0,0,0],'rgba(92,200,255,0.22)',1,10)}
   if(L('l-keep'))for(const s of KEEP)seg(B,s[0],s[1],'rgba(92,200,255,0.13)',1);
