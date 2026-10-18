@@ -1,0 +1,42 @@
+Category,Item,Specification,Qty,Unit price USD,Line total USD,Source / note,Price status
+Actuators,J1 actuator Leadshine HJ290NKF101D24-NK-EC,"90 mm harmonic integrated actuator, 50.0/102.0 N m, 101:1, 24-bit encoder, EtherCAT, 1.229 kg",1,799,799,store.leadshine.com,listed
+Actuators,J2 actuator Leadshine HJ2110BKF101D24-BK-EC,"110 mm harmonic integrated actuator, 84.0/194.0 N m, 101:1, 24-bit encoder, EtherCAT, brake, 2.6 kg",1,929,929,store.leadshine.com,listed
+Actuators,J3 actuator Leadshine HJ290BKF101D24-BK-EC,"90 mm harmonic integrated actuator, 50.0/102.0 N m, 101:1, 24-bit encoder, EtherCAT, brake, 1.6 kg",1,859,859,store.leadshine.com,listed
+Actuators,J4 actuator Leadshine HJ270NKF101D24-NK-EC,"70 mm harmonic integrated actuator, 9.6/34.0 N m, 101:1, 24-bit encoder, EtherCAT, 0.598 kg",1,659,659,store.leadshine.com,listed
+Actuators,J5 actuator Leadshine HJ270BKF101D24-BK-EC,"70 mm harmonic integrated actuator, 9.6/34.0 N m, 101:1, 24-bit encoder, EtherCAT, brake, 0.8 kg",1,729,729,store.leadshine.com,listed
+Spindle,"maxon EC-i 40 brushless motor, 70 W, 36 V, hall sensors (449470)","40 mm, 240 g, 10700 rpm no load, 85 mN m nominal",1,290.0,290.0,maxongroup.com (EUR 268 ex VAT),listed
+Spindle,ODrive S1 motor controller,"48 V FOC drive for the spindle, hall + encoder input",1,149.0,149.0,odriverobotics.com,listed
+Spindle,"Bellows coupling 6 x 10 mm, zero backlash","aluminum, 25 mm OD, 28 mm long",1,45.0,45.0,Ruland / Misumi,estimate
+Spindle,Titanium grade 5 rod Ø10 x 150 mm and Ø8 x 60 mm,rotor shaft stubs (non-magnetic),1,38.0,38.0,McMaster-Carr,estimate
+Spindle,Full-ceramic bearing 6000 ZrO2 (10 x 26 x 8),rear spindle bearings,2,24.0,48.0,Boca Bearings,estimate
+Spindle,Full-ceramic bearing 608 ZrO2 (8 x 22 x 7),nose spindle bearing,1,16.0,16.0,Boca Bearings,estimate
+Spindle,"Carbon tube 61 x 58 x 100 mm (rotor), cut to 68",roll-wrapped 3K,1,22.0,22.0,Rock West Composites,estimate
+Spindle,"Polycarbonate tube 66 x 63 x 300 mm (guard), cut to length",clear,1,18.0,18.0,McMaster-Carr,estimate
+Magnet,K&J BY0Y0X0-N52 block 2 x 2 x 1 in,"50.8 x 50.8 x 25.4 mm, 0.574 kg, Br 1.48 T, surface 0.49 T",1,159.54,159.54,kjmagnetics.com BY0Y0X0-N52,listed
+Magnet,"Epoxy potting (3M DP420 or West System), 200 g",rotor potting + tube bonding,1,35.0,35.0,,estimate
+Arm structure,"Carbon tube 60 x 56 x 1000 mm (upper arm), cut to 445",roll-wrapped 3K twill,1,95.0,95.0,Rock West Composites,estimate
+Arm structure,"Carbon tube 50 x 46 x 500 mm (forearm), cut to 227",roll-wrapped 3K twill,1,55.0,55.0,Rock West Composites,estimate
+Arm structure,"Ceramic-hybrid bearing 6204 (20 x 47 x 14), wrist idler","steel races, Si3N4 balls",1,42.0,42.0,Boca Bearings,estimate
+Arm structure,6061-T6 aluminum stock for machined parts,"plate 20/15/12/10 mm, round bar 110/100/70 mm (see Machined sheet)",1,420.0,420.0,Midwest Steel & Aluminum,estimate
+Arm structure,CNC machining of the aluminum parts (11 parts),"3-axis, turning for hubs; see Machined sheet",1,2600.0,2600.0,quote: Xometry / local shop,quote
+Arm structure,"Base pedestal: steel tube 180 x 5 x 700 mm, 600 x 600 x 15 mm foot plate, top ring, 4 leveling feet","welded, powder coated",1,480.0,480.0,local fabrication,estimate
+Target + gimbal,"1100-H14 aluminum sheet 1.5 mm, 500 x 1000 mm","hull, bent + riveted/epoxied box 200 x 160 x 140",1,60.0,60.0,,estimate
+Target + gimbal,"G10/FR4 sheet 12 mm, 400 x 400 mm (pitch ring, waterjet)",ID 320 / OD 380 ring with 4 notches,1,140.0,140.0,waterjet quote,quote
+Target + gimbal,"Full-ceramic bearing 608 ZrO2 (8 x 22 x 7), gimbal",roll + pitch bearings,4,16.0,64.0,Boca Bearings,estimate
+Target + gimbal,"Full-ceramic bearing 6903 ZrO2 (17 x 30 x 7), yaw",yaw shaft bearings,2,32.0,64.0,Boca Bearings,estimate
+Target + gimbal,316 stainless rod Ø8 x 300 mm and Ø17 x 200 mm,gimbal pins and yaw shaft,1,30.0,30.0,McMaster-Carr,estimate
+Target + gimbal,"Brass plate 4 mm, 120 x 80 mm (ballast), + trim weights",hull inertia ballast and balancing,2,18.0,36.0,,estimate
+Target + gimbal,"Stand: 6061 tube 60 x 3 x 1000 mm, 500 x 500 x 15 mm base, bearing housing stock",,1,190.0,190.0,,estimate
+Vision,Arducam OV9281 1 MP global-shutter USB camera + 6 mm M12 lens,"mono, 120 fps",2,69.0,138.0,arducam.com,listed
+Vision,"LED panel light 60 x 40 mm, 5600 K, dimmable",flicker-free,2,45.0,90.0,,estimate
+Vision,"4040 aluminum extrusion 1.5 m + 0.8 m, brackets, base plate",camera mast,1,110.0,110.0,8020 / Misumi,estimate
+Vision,"ChArUco calibration board (printed on 3 mm dibond), ArUco marker prints",,1,40.0,40.0,,estimate
+Controller,Fanless industrial PC (Intel N100 class) with Linux + EtherCAT master (IgH/SOEM),,1,420.0,420.0,,estimate
+Controller,"Mean Well RSP-1500-48 (48 V, 1500 W)","48 V, 1500 W",1,370.0,370.0,Mean Well distributor,listed
+Controller,Pilz PNOZ s3 safety relay + 48 V DC contactor + 2 E-stop buttons,STO chain,1,260.0,260.0,,estimate
+Controller,"Steel enclosure 500 x 400 x 210 mm, DIN rails, breaker, terminals, glands",,1,260.0,260.0,,estimate
+Controller,"Cabling: EtherCAT M8 cables (6), power cables, through-bore harness, drag chain",,1,240.0,240.0,,estimate
+Printed parts,PA12-CF filament / SLS print service for the printed parts,see Printed sheet,1,320.0,320.0,Craftcloud / JLC3DP quote,quote
+Fasteners,"ISO 4762 socket head cap screws, set screws, nyloc nuts, heat-set inserts (A2 stainless)",see Fasteners sheet,1,90.0,90.0,McMaster-Carr,estimate
+Tools / test,Rotor balancing service (ISO G2.5 at 3000 rpm),,1,150.0,150.0,,estimate
+Tools / test,Hall-effect gaussmeter (for field verification),,1,180.0,180.0,,estimate

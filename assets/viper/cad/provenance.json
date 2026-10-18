@@ -1,0 +1,84 @@
+{
+  "provenance": "User-supplied detumbler-arm-v2 package, cad/glb. Proposed ground-test assembly; not manufactured or flight hardware.",
+  "geometry": "13 original GLBs copied byte for byte; browser display reverses the OCC glTF Y-up conversion to the original CAD Z-up frame, in millimetres.",
+  "components": [
+    {
+      "file": "ARM_BASE.glb",
+      "bytes": 1271696,
+      "sha256": "2f2b1c1849bb9ef1da1a71cb2ae333f6526235fc7708d06c3279275a112e74de"
+    },
+    {
+      "file": "ARM_L1_TURRET.glb",
+      "bytes": 1183160,
+      "sha256": "a75a28a1b33551cb557cea4d5b55b3da2b3c8e67edd48ea86ff653116e0766dd"
+    },
+    {
+      "file": "ARM_L2_UPPER.glb",
+      "bytes": 1712232,
+      "sha256": "82e8033333d768d50deb779cb4d2e3dde013ea1770cba8f6ef592a24eb6e5df6"
+    },
+    {
+      "file": "ARM_L3_FOREARM.glb",
+      "bytes": 1519344,
+      "sha256": "cfcfa0d377a73799ef6a977126d2287470f3af005151b62f126cdc1b09af9943"
+    },
+    {
+      "file": "ARM_L4_FORK.glb",
+      "bytes": 1243420,
+      "sha256": "30af8e0f22aec4247e769e4e0b5ded6b00dc74011b60575f9f536a67c3cb0352"
+    },
+    {
+      "file": "ARM_L5_HEAD.glb",
+      "bytes": 1400320,
+      "sha256": "ed4e132f4894377dc75c4d5e80a719b4e2a97e4183352dd89299c991b293319e"
+    },
+    {
+      "file": "ARM_L6_ROTOR.glb",
+      "bytes": 89712,
+      "sha256": "fd8f1016ed3e4b70a5c7e8ccb432e3625e5d97066f5eee2ef414c133e862e6d4"
+    },
+    {
+      "file": "CAMERA_MAST.glb",
+      "bytes": 117848,
+      "sha256": "77595160cfc8eeaf417dc9f6db558b0c4d8817de656b71ed4a483badb428ab46"
+    },
+    {
+      "file": "CONTROLLER.glb",
+      "bytes": 180204,
+      "sha256": "b9e1fa6cef35b9dbdc0403a1ebc2378850bfc7922d782fae4ab8225b192d06ce"
+    },
+    {
+      "file": "TARGET_BOX.glb",
+      "bytes": 491640,
+      "sha256": "8e930e0f5e365b51f1a59d873b4ba68b4155141b0d0d79a02b8e9e22add3efad"
+    },
+    {
+      "file": "TARGET_RING.glb",
+      "bytes": 791168,
+      "sha256": "3883dda029ef0b678ff3f8e2705d0258119d8f906027a89096337c910201db0a"
+    },
+    {
+      "file": "TARGET_STAND.glb",
+      "bytes": 422268,
+      "sha256": "313e490d80f90f231f519674a8b4f67c7f1063b7bc799057c6ac550179233c4f"
+    },
+    {
+      "file": "TARGET_YOKE.glb",
+      "bytes": 86104,
+      "sha256": "b677328e8e4a42cfd757d0b30f1711c83c5e9ed6e818ad96d791335f551f1787"
+    }
+  ],
+  "replay": {
+    "source": "fusion/DetumblerArmV2/trajectory.json",
+    "sha256": "09863dc4be1983347176e5e97fc8c1c7609352bfc7a286b1c033f025021903a1",
+    "frames": 2701,
+    "duration_s": 180,
+    "interpretation": "Recorded MuJoCo simulation poses only. The viewer interpolates documented Fusion as-built joint angles and does not solve dynamics. The supplied run reports 18 geometric gimbal-overlap samples with collision response disabled. Bearing friction confounds interpretation of spin decay; overlaps flag clearance violations rather than physical impacts."
+  },
+  "viewer_dependencies": {
+    "three": "r172, local vendor directory, MIT",
+    "GLTFLoader": "Official Three.js r172; relative import paths adapted for local delivery.",
+    "BufferGeometryUtils": "Official Three.js r172; relative import path adapted.",
+    "RoomEnvironment": "Official Three.js r172; relative import path adapted."
+  }
+}

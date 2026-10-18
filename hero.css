@@ -1,14 +1,41 @@
-/* Homepage orbital artwork. The saved hardware model is intentionally not loaded. */
-.home-page .orbital-hero{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#000}
-.home-page .orbital-hero img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:center 45%;display:block}
-.home-page .hero-shade{background:linear-gradient(90deg,#0008 0%,#0002 50%,transparent 75%),linear-gradient(0deg,#000 0%,#0008 8%,transparent 45%)}
-.home-page .hero-copy{bottom:13%}
-.orbital-caption{position:absolute;right:var(--gutter);bottom:6%;color:#81919d;font-size:8px;letter-spacing:.08em;line-height:1.8;margin:0;pointer-events:none}
-@media(max-width:760px){
- .home-page .orbital-hero img{object-position:58% 24%;height:83%;width:100%;object-fit:cover}
- .home-page .hero-shade{background:linear-gradient(0deg,#000 8%,#000e 27%,#0005 56%,transparent 78%)}
- .home-page .hero-copy{bottom:13%}
- .orbital-caption{bottom:5.5%;left:var(--gutter);right:auto;font-size:7px;color:#657681}
- .home-page .scroll-cue{bottom:18px}
+/* Viper Space: supplied ground-test CAD, with original geometry preserved. */
+.home-page .hero{background:radial-gradient(ellipse at 75% 45%,#111921,transparent 60%),#030507;min-height:790px}
+.hero-grid{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(#61717c30 1px,transparent 1px),linear-gradient(90deg,#61717c30 1px,transparent 1px);background-size:95px 95px;mask-image:linear-gradient(90deg,transparent 25%,#000)}
+.home-page .hero-copy{bottom:16%;z-index:2;max-width:42%}
+.home-page .hero h1{font-size:clamp(58px,6.1vw,96px);line-height:.98;margin-bottom:24px}
+.home-page .hero-copy .eyebrow{font-size:11px;letter-spacing:.12em;color:#a5afb8}
+.hero-intro{font-size:15px;color:#aeb7bf;line-height:1.6;margin-bottom:26px}
+.hero-actions{display:flex;align-items:flex-start;flex-direction:column;gap:17px}
+.hero-video-link{font-size:10px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #64717b;padding-bottom:6px;display:inline-flex;gap:26px}
+.home-page .hero-status{font-size:9px;color:#85919a;max-width:330px}
+.hero-cad{position:absolute;left:42%;right:2%;top:15%;bottom:11%;min-width:0}
+.hero-cad .cad-viewer{width:100%;height:100%;min-height:0;background:transparent;border:0}
+.home-page .scroll-cue{bottom:25px}
+.home-demonstration{padding:110px var(--gutter) 105px;background:#000;scroll-margin-top:90px}
+.demo-heading{display:grid;grid-template-columns:1.1fr 1fr;align-items:end;gap:8%;margin-bottom:38px}
+.demo-heading h2{font-weight:700;font-size:clamp(44px,4.8vw,74px);margin-bottom:0}
+.demo-heading .eyebrow{font-size:11px;letter-spacing:.08em;color:#9aa4ad}
+.demo-copy{max-width:470px;padding-bottom:4px}.demo-copy p{font-size:14px;color:#aab2b9;margin-bottom:20px}
+.home-demonstration video{display:block;width:100%;max-height:78vh;aspect-ratio:16/9;object-fit:contain;background:#0b0e15;border:1px solid #ffffff1a}
+.demo-caption{display:flex;justify-content:space-between;gap:20px;padding-top:16px;color:#8b969e;font-size:9px;letter-spacing:.035em;line-height:1.7}.demo-caption a{text-decoration:underline;text-underline-offset:4px}
+@media(min-width:921px) and (max-width:1150px){.site-header{gap:25px}.nav-links{gap:18px;font-size:9px}.brand{font-size:21px}.home-page .hero h1{font-size:64px}.hero-cad{left:40%;right:0}.home-page .hero-copy{max-width:42%}.hero-intro{font-size:13px}.hero-actions .button{padding:18px 23px;min-width:180px}}
+@media(max-width:920px){
+ .home-page .hero{height:auto;min-height:1050px;max-height:none;display:flex;flex-direction:column;padding:88px var(--gutter) 75px}
+ .hero-cad{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:100%;height:490px;order:0}
+ .home-page .hero-copy{position:relative;left:auto;right:auto;bottom:auto;max-width:none;width:100%;order:1;margin-top:20px}
+ .home-page .hero h1{font-size:clamp(52px,9.4vw,80px);line-height:1;max-width:570px}
+ .hero-copy h1 br:nth-of-type(2){display:none}
+ .hero-actions{flex-direction:row;align-items:center;gap:25px;flex-wrap:wrap}
+ .home-page .hero-status{max-width:none}.home-page .hero-copy .eyebrow{font-size:10px}
+ .hero-intro{font-size:14px}.hero-grid{background-size:65px 65px;mask-image:linear-gradient(#000,transparent)}
+ .home-demonstration{padding:80px var(--gutter)}.demo-heading{grid-template-columns:1fr;gap:25px;margin-bottom:30px}.demo-heading h2{font-size:clamp(43px,8vw,66px)}.demo-copy{max-width:560px}.demo-caption{flex-direction:column;gap:8px}
 }
-@media(prefers-reduced-motion:no-preference){.home-page .orbital-hero img{animation:orbital-reveal 1.8s ease-out both}@keyframes orbital-reveal{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}}
+@media(max-width:540px){
+ .home-page .hero{min-height:920px;padding:78px 20px 65px}
+ .hero-cad{height:410px;margin-left:-10px;width:calc(100% + 20px)}
+ .home-page .hero-copy{margin-top:24px;padding:0 5px}.home-page .hero h1{font-size:clamp(45px,11.6vw,62px);margin-bottom:20px}
+ .hero-copy h1 br:nth-of-type(2){display:initial}.hero-actions{gap:18px;align-items:flex-start;flex-direction:column}
+ .hero-intro{font-size:12px;margin-bottom:22px}.home-page .hero-status{font-size:8px;line-height:1.6;margin-top:18px}
+ .home-page .hero-copy .eyebrow{font-size:9px;margin-bottom:12px}.hero-actions .button{font-size:10px;padding:17px 23px;min-height:51px}
+ .hero-video-link{font-size:9px}.demo-copy p{font-size:13px}.demo-caption{font-size:8px}
+}
