@@ -17,13 +17,13 @@ const contextObserver = new MutationObserver(() => {
   if (container.dataset.sceneState === 'context-lost') {
     root.classList.remove('scene-ready');
     document.querySelector('.journey-load').textContent = '3D paused while your browser restores its graphics. The engineering pages are still available.';
-  } else if (container.dataset.sceneState === 'ready' && scene && openingComplete) {
+  } else if (container.dataset.sceneState === 'ready' && scene) {
     root.classList.add('scene-ready');
     document.querySelector('.journey-load').textContent = '';
   }
 });
 contextObserver.observe(container,{attributes:true,attributeFilter:['data-scene-state']});
-let scene, openingComplete = false, paused = false, exploring = false, targetProgress = 0, active = -1, syncFrame = 0;
+let scene, paused = false, exploring = false, targetProgress = 0, active = -1, syncFrame = 0;
 const clamp = value => Math.max(0, Math.min(1, value));
 function chapterFor(p) {
   const index = positions.findIndex((position,i) => i < positions.length - 1 && p < (position + positions[i + 1]) / 2);
@@ -36,8 +36,9 @@ function showCaption(p) {
   previous.disabled = i === 0; next.disabled = i === positions.length - 1;
   if (active === i) return;
   active = i; stage.dataset.caption = String(i);
-  chapters.forEach((chapter, index) => {
-    const on = index === i;
+  chapters.forEach(chapter => {
+    // The first headline spans the Earth overview and its first encounter.
+    const on = Number(chapter.dataset.chapter) === Math.max(1, i);
     chapter.classList.toggle('is-active', on); chapter.inert = !on || exploring;
     chapter.setAttribute('aria-hidden', String(!on || exploring));
   });
@@ -49,11 +50,11 @@ function readScroll() {
   scene?.setProgress(reduced.matches ? positions[chapterFor(targetProgress)] : targetProgress);
   if (!scene) showCaption(targetProgress);
 }
-function jump(p) {
+function jump(p, smooth = p !== 0) {
   if(exploring) setExploring(false);
   const top = scrollY + journey.getBoundingClientRect().top;
-  scrollTo({top: top + p * Math.max(1, journey.offsetHeight - innerHeight), behavior: reduced.matches || p === 0 ? 'instant' : 'smooth'});
-  if(p === 0) {
+  scrollTo({top: top + p * Math.max(1, journey.offsetHeight - innerHeight), behavior: reduced.matches || !smooth ? 'instant' : 'smooth'});
+  if(p === 0 && !smooth) {
     readScroll();
     // Finish a reset after any native smooth-scroll step already queued by the browser.
     requestAnimationFrame(()=>{scrollTo({top,behavior:'instant'});readScroll();});
@@ -88,6 +89,10 @@ function setExploring(value) {
 }
 root.classList.add('journey-enabled');
 showCaption(0);
+document.querySelector('[data-start-journey]').addEventListener('click', event => {
+  event.preventDefault();
+  jump(0, true);
+});
 document.querySelectorAll('[data-jump]').forEach(button => button.addEventListener('click', () => jump(Number(button.dataset.jump))));
 previous.addEventListener('click', () => jump(positions[Math.max(0, active - 1)]));
 next.addEventListener('click', () => jump(positions[Math.min(positions.length - 1, active + 1)]));
@@ -105,9 +110,6 @@ try {
   const { mountOrbitalScene } = await import('./orbital-scene.js?v=brand-8');
   scene = await mountOrbitalScene(container);
   scene.setPaused(paused);
-  // Hold the opening horizon for three extra seconds after the 3D scene is ready.
-  await new Promise(resolve => setTimeout(resolve, 3000));
-  openingComplete = true;
   if (container.dataset.sceneState === 'ready') {
     root.classList.add('scene-ready');
     document.querySelector('.journey-load').textContent='';

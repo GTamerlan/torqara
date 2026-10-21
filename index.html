@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#03070e">
   <meta name="description" content="Explore crowded Earth orbit, contactless detumbling, an imagined microgravity experiment, proposed arm CAD and a concept rocket launch. Illustrative animation, not validated satellite dynamics.">
-  <title>Vyper Space — Control before contact</title>
+  <title>Vyper Space — Control without contact</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/vyper/orbital-dawn.jpg" as="image">
   <link rel="stylesheet" href="site.css?v=orbit-3">
   <link rel="stylesheet" href="vyper.css?v=brand-9">
-  <link rel="stylesheet" href="hero.css?v=brand-10">
+  <link rel="stylesheet" href="hero.css?v=brand-11">
   <script src="site.js?v=orbit-3" defer></script>
-  <script type="module" src="home.js?v=brand-10"></script>
-  <noscript><style>.journey-load,.journey-side,.journey-bottom,.journey-begin,.journey-explore{display:none}</style></noscript>
+  <script type="module" src="home.js?v=brand-11"></script>
+  <noscript><style>.journey-load,.journey-side,.journey-bottom,.journey-explore{display:none}</style></noscript>
 </head>
 <body class="vyper-home orbit-home">
   <a class="skip-link" href="#engineering-link">Skip the animation</a>
@@ -23,6 +23,12 @@
     <nav class="nav-links" id="site-nav" aria-label="Main navigation"><a href="#mission">The mission</a><a href="prototype.html">Prototype</a><a class="nav-cta" href="explorer.html">Engineering explorer <span aria-hidden="true">↗</span></a></nav>
   </header>
   <main id="main">
+    <section class="horizon-intro" aria-labelledby="opening-title">
+      <div class="horizon-copy">
+        <h1 id="opening-title">Orbit is<br>already crowded.</h1>
+        <a class="journey-begin" href="#mission" data-start-journey>Follow the journey <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
     <section class="orbital-journey" id="mission" aria-label="An illustrative journey from crowded Earth orbit to the laboratory, launch and orbital detumbling">
       <div class="journey-stage">
         <div class="journey-fallback" aria-hidden="true"></div>
@@ -32,12 +38,8 @@
         <button class="journey-explore" type="button" data-explore aria-pressed="false" aria-describedby="explore-help" disabled><span aria-hidden="true">⤢</span><span data-explore-label>Look around</span></button>
         <p class="journey-explore-hint" id="explore-help" aria-live="polite"><span class="desktop-hint">Drag or arrow keys to orbit · Scroll or +/− to zoom</span><span class="mobile-hint">Drag to orbit · Pinch to zoom</span></p>
         <div class="journey-captions">
-          <article class="journey-chapter opening earth-opening is-active" data-chapter="0">
-            <h1>Orbit is<br>already crowded.</h1>
-            <button class="journey-begin" type="button" data-jump="0.08">Follow the journey <span aria-hidden="true">↓</span></button>
-          </article>
-          <article class="journey-chapter" data-chapter="1" aria-hidden="true" inert>
-            <h2>Control before<br>contact.</h2>
+          <article class="journey-chapter is-active" data-chapter="1">
+            <h2>Control without<br>contact.</h2>
           </article>
           <article class="journey-chapter" data-chapter="2" aria-hidden="true" inert>
             <h2>Back on Earth.<br>Start with a test.</h2>
@@ -97,7 +99,7 @@
         <div class="journey-progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
-    <noscript><section class="no-script-story"><h2>Control before contact.</h2><p>This concept animation starts in crowded Earth orbit with an illustrative detumbling encounter. It returns to a microgravity laboratory concept and proposed arm assembly, then follows an imagined rocket launch and deployment before another orbital encounter. Enable JavaScript for the 3D journey.</p><a href="explorer.html">Open the engineering explorer ↗</a></section></noscript>
+    <noscript><section class="no-script-story"><h2>Control without contact.</h2><p>This concept animation starts in crowded Earth orbit with an illustrative detumbling encounter. It returns to a microgravity laboratory concept and proposed arm assembly, then follows an imagined rocket launch and deployment before another orbital encounter. Enable JavaScript for the 3D journey.</p><a href="explorer.html">Open the engineering explorer ↗</a></section></noscript>
     <section class="journey-after" id="engineering-link" aria-labelledby="after-title"><div><p class="journey-eyebrow">Go deeper</p><h2 id="after-title">The details live here.</h2></div><nav aria-label="Explore the project"><a href="explorer.html">Engineering explorer <span aria-hidden="true">↗</span></a><a href="prototype.html">CAD, replay &amp; parts <span aria-hidden="true">↗</span></a></nav></section>
     <section class="journey-notes" aria-label="Animation context">
       <details>
