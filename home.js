@@ -25,7 +25,10 @@ const contextObserver = new MutationObserver(() => {
 contextObserver.observe(container,{attributes:true,attributeFilter:['data-scene-state']});
 let scene, paused = false, exploring = false, targetProgress = 0, active = -1, syncFrame = 0;
 const clamp = value => Math.max(0, Math.min(1, value));
-function chapterFor(p) { return p < .12 ? 0 : p < .27 ? 1 : p < .45 ? 2 : p < .63 ? 3 : p < .81 ? 4 : p < .94 ? 5 : 6; }
+function chapterFor(p) {
+  const index = positions.findIndex((position,i) => i < positions.length - 1 && p < (position + positions[i + 1]) / 2);
+  return index < 0 ? positions.length - 1 : index;
+}
 function showCaption(p) {
   const i = chapterFor(p);
   root.style.setProperty('--journey-progress', String(p));
@@ -99,7 +102,7 @@ addEventListener('scroll',readScroll,{passive:true});
 addEventListener('resize',()=>{scene?.resize();readScroll();},{passive:true});
 reduced.addEventListener('change',motionPreference);
 try {
-  const { mountOrbitalScene } = await import('./orbital-scene.js?v=orbit-4');
+  const { mountOrbitalScene } = await import('./orbital-scene.js?v=brand-8');
   scene = await mountOrbitalScene(container);
   scene.setPaused(paused);
   root.classList.add('scene-ready');

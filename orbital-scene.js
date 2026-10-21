@@ -8,12 +8,60 @@ import * as THREE from './vendor/three.module.js';
 import { RoomEnvironment } from './vendor/RoomEnvironment.js';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { createSatellite, createServicer } from './orbital-hardware.js';
+import { createGroundSequence } from './ground-sequence.js';
+import { createOrbitalPopulation } from './orbital-population.js';
+import { createLaunchSequence } from './launch-sequence.js';
 
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
 const TAU = Math.PI * 2;
 const ROOT = new URL('./assets/vyper/', import.meta.url);
 const STORY_BEATS = [0, .18, .36, .54, .72, .87, 1];
+const GLOBAL_BEATS = [0,.08,.16,.24,.32,.40,.48,.56,.64,.73,.82,.91,1];
+const GLOBAL_PHASES = ['population','teaser','experiment','experiment-detail','prototype','launchpad','liftoff','ascent','deployment','debris','approach','interaction','settled'];
+
+// Monotone Hermite retiming keeps a reversible story without camera cuts at
+// chapter boundaries. All coordinates are illustrative, not mission data.
+function retime(value,stops,values) {
+  if (value <= stops[0]) return values[0];
+  if (value >= stops.at(-1)) return values.at(-1);
+  let i = 0;
+  while (i < stops.length - 2 && value > stops[i+1]) i++;
+  const span = stops[i+1]-stops[i], t = clamp((value-stops[i])/span), t2=t*t,t3=t2*t;
+  const secant = k => (values[k+1]-values[k])/(stops[k+1]-stops[k]);
+  const slope = k => {
+    if (k===0) return secant(0);
+    if (k===stops.length-1) return secant(k-1);
+    const a=secant(k-1),b=secant(k);
+    return a*b<=0 ? 0 : 2*a*b/(a+b);
+  };
+  return (2*t3-3*t2+1)*values[i] + (t3-2*t2+t)*span*slope(i)
+    + (-2*t3+3*t2)*values[i+1] + (t3-t2)*span*slope(i+1);
+}
+
+function orbitalStoryProgress(globalProgress) {
+  return globalProgress < .36
+    ? retime(globalProgress,[0,.08,.105,.135],[.18,.72,.87,.87])
+    : retime(globalProgress,[.625,.64,.73,.82,.91,.965,1],[.14,.18,.36,.54,.72,.87,1]);
+}
+
+function chapterAt(progress) {
+  let index=0;
+  while(index<GLOBAL_BEATS.length-1 && progress>=(GLOBAL_BEATS[index]+GLOBAL_BEATS[index+1])/2) index++;
+  return GLOBAL_PHASES[index];
+}
+
+function makeTransition() {
+  const material=new THREE.ShaderMaterial({
+    uniforms:{opacity:{value:0}},
+    vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
+    fragmentShader:'uniform float opacity;varying vec2 vUv;void main(){vec3 c=mix(vec3(.018,.032,.052),vec3(.055,.105,.16),vUv.y);gl_FragColor=vec4(c,opacity);}',
+    transparent:true,depthWrite:false,depthTest:false,
+  });
+  const mesh=new THREE.Mesh(new THREE.PlaneGeometry(2,2),material);
+  mesh.name='Editorial atmospheric transitions';mesh.renderOrder=10000;mesh.frustumCulled=false;
+  return mesh;
+}
 
 // Keep camera velocity continuous across the unevenly spaced story beats.
 function storyPathTime(p) {
@@ -48,6 +96,7 @@ function addStars(scene) {
   const stars = new THREE.Points(geometry, new THREE.PointsMaterial({ size: .19, sizeAttenuation: true, vertexColors: true, transparent: true, opacity: .7, depthWrite: false }));
   stars.name = 'Artistic background stars';
   scene.add(stars);
+  return stars;
 }
 
 function cloudTexture() {
@@ -151,6 +200,7 @@ export async function mountOrbitalScene(container) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.22;
   const scene = new THREE.Scene();
+  const orbitalWorld = new THREE.Group(); orbitalWorld.name = 'Illustrative orbital environment'; scene.add(orbitalWorld);
   const camera = new THREE.PerspectiveCamera(43, 1, .1, 700);
   const pmrem = new THREE.PMREMGenerator(renderer), room = new RoomEnvironment();
   const environment = pmrem.fromScene(room, .04);
@@ -162,28 +212,32 @@ export async function mountOrbitalScene(container) {
   sunlight.position.set(-25, 32, 60); scene.add(sunlight);
   const rim = new THREE.DirectionalLight(0x83b8ff, 1.7); rim.position.set(15, 2, -12); scene.add(rim);
   const fill = new THREE.DirectionalLight(0xffffff, .6); fill.position.set(0, 9, 25); scene.add(fill);
-  addStars(scene);
-  let earth, cloud, servicer, target, currents;
+  const stars = addStars(scene);
+  const atmosphereLayers = [];
+  const bridge=makeTransition();scene.add(bridge);
+  let earth, cloud, servicer, target, currents, ground, launch;
   try {
     const loader = new THREE.TextureLoader();
-    const [day, loadedServicer] = await Promise.all([
-      loader.loadAsync(new URL('earth-day.jpg', ROOT).href), createServicer(THREE),
+    const [day, loadedServicer, loadedGround, loadedLaunch] = await Promise.all([
+      loader.loadAsync(new URL('earth-day.jpg', ROOT).href), createServicer(THREE), createGroundSequence(THREE), createLaunchSequence(THREE),
     ]);
     day.colorSpace = THREE.SRGBColorSpace;
     day.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
-    const planet = new THREE.Group(); planet.position.set(0, -27, -32); scene.add(planet);
-    earth = new THREE.Mesh(new THREE.SphereGeometry(25, 96, 64), new THREE.MeshPhongMaterial({ map: day, shininess: 9, specular: new THREE.Color(0x183447), color: 0xd8e9ff }));
+    const planet = new THREE.Group(); planet.position.set(0, -27, -32); orbitalWorld.add(planet);
+    earth = new THREE.Mesh(new THREE.SphereGeometry(25, 96, 64), new THREE.MeshPhongMaterial({ map: day, shininess: 9, specular: new THREE.Color(0x183447), color: 0xd8e9ff, transparent: true }));
     earth.rotation.y = .7; planet.add(earth);
     cloud = new THREE.Mesh(new THREE.SphereGeometry(25.13, 80, 48), new THREE.MeshPhongMaterial({ map: cloudTexture(), transparent: true, opacity: .055, depthWrite: false, shininess: 2 }));
     cloud.rotation.y = .72; planet.add(cloud);
-    planet.add(atmosphere(25.15, .12, 3.5, THREE.FrontSide));
-    planet.add(atmosphere(25.38, .24, 4.5, THREE.BackSide));
+    atmosphereLayers.push(atmosphere(25.15, .12, 3.5, THREE.FrontSide),atmosphere(25.38, .24, 4.5, THREE.BackSide));
+    planet.add(...atmosphereLayers);
     servicer = loadedServicer;
     servicer.group.name = 'Concept servicer with supplied prototype arm';
-    scene.add(servicer.group);
+    orbitalWorld.add(servicer.group);
     target = createSatellite(THREE, { variant: 0, damaged: true, selected: true, scale: 1.25 });
-    target.name = 'Selected illustrative conductive target'; scene.add(target);
+    target.name = 'Selected illustrative conductive target'; orbitalWorld.add(target);
     currents = makeCurrents(target);
+    ground = loadedGround; scene.add(ground.group);
+    launch = loadedLaunch; scene.add(launch.group);
   } catch (error) {
     container.dataset.sceneState = 'error'; disposeScene(scene, renderer, environment); throw error;
   }
@@ -195,7 +249,7 @@ export async function mountOrbitalScene(container) {
   const fleetWindows = [[.12,.205],[.205,.29],[.29,.375],[.375,.46]];
   const fleet = fleetSpec.map(([x,y,z,scale,variant,speed],index) => {
     const group = createSatellite(THREE, { variant, damaged: true, scale });
-    group.position.set(x,y,z); scene.add(group);
+    group.position.set(x,y,z); orbitalWorld.add(group);
     const materials = new Set();
     group.traverse(object => {
       for (const material of (Array.isArray(object.material) ? object.material : [object.material])) {
@@ -204,7 +258,7 @@ export async function mountOrbitalScene(container) {
     });
     return { group, position: new THREE.Vector3(x,y,z), speed, variant, scale, materials, window: fleetWindows[Math.floor(index / 2)], opacity: 0 };
   });
-  const field = makeField(); scene.add(field.group);
+  const field = makeField(); orbitalWorld.add(field.group);
   const tip = new THREE.Vector3(), finalTarget = new THREE.Vector3();
   const finalTargetAngle = .66 * 36 + 36 * (1 - Math.exp(-.34 * 13)) / 13;
   const rotatingQuaternion = new THREE.Quaternion(), euler = new THREE.Euler();
@@ -233,17 +287,40 @@ export async function mountOrbitalScene(container) {
   });
   const cameraPos = new THREE.Vector3(), lookAt = new THREE.Vector3(), delta = new THREE.Vector3();
   const earthCenter = new THREE.Vector3(0,-27,-32);
+  const population = createOrbitalPopulation(THREE,{center:earthCenter,radius:25}); orbitalWorld.add(population.group);
   const controls = new OrbitControls(camera,canvas);
   controls.enabled = false; controls.enablePan = false; controls.enableDamping = false;
   controls.rotateSpeed = .55; controls.zoomSpeed = .7;
   controls.minPolarAngle = .08; controls.maxPolarAngle = Math.PI * .49;
   canvas.style.touchAction = 'pan-y';
   let destination = 0, progress = 0, paused = false, reduced = false, exploring = false, disposed = false, visible = true, raf = 0, previousTime = 0, lastDraw = -1;
-  let phase = 'earth', targetAngle = 0, magnetAngle = 0, braking = 0;
+  let phase = 'population', targetAngle = 0, magnetAngle = 0, braking = 0, orbitalProgress = 0, groundProgress = 0, launchProgress = 0, transition = 0, world = 'orbit';
   let size = { width: 1, height: 1 };
 
-  function setPoses(p) {
-    phase = p < .12 ? 'earth' : p < .27 ? 'orbit' : p < .45 ? 'debris' : p < .63 ? 'approach' : p < .81 ? 'interaction' : p < .94 ? 'perspective' : 'settled';
+  function setPoses(globalProgress) {
+    const p = orbitalStoryProgress(globalProgress);
+    orbitalProgress = p;
+    groundProgress = retime(globalProgress,[.16,.24,.32,.375],[0,.23,.46,.84]);
+    launchProgress = retime(globalProgress,[.36,.40,.48,.56,.60],[0,.14,.43,.78,1]);
+    const toLab = smooth(.105,.132,globalProgress)*(1-smooth(.14,.165,globalProgress));
+    const toLaunch = smooth(.345,.373,globalProgress)*(1-smooth(.38,.405,globalProgress));
+    const toOrbit = smooth(.595,.622,globalProgress)*(1-smooth(.63,.655,globalProgress));
+    transition=Math.max(toLab,toLaunch,toOrbit);
+    bridge.material.uniforms.opacity.value=transition;bridge.visible=transition>.001;
+    phase = chapterAt(globalProgress);
+    world = globalProgress<.135 || globalProgress>=.625 ? 'orbit' : globalProgress<.375 ? 'ground' : 'launch';
+    const mobile = camera.aspect < 1;
+    ground.update(groundProgress,mobile);
+    launch.update(launchProgress,mobile);
+    ground.group.visible = world==='ground';
+    launch.group.visible = world==='launch';
+    orbitalWorld.visible = world==='orbit';
+    earth.material.opacity = 1;
+    cloud.material.opacity = .055;
+    atmosphereLayers.forEach((layer,index) => { layer.material.uniforms.uOpacity.value = index ? .24 : .12; });
+    stars.material.opacity = .7;
+    stars.visible = world==='orbit';
+    population.update(p);
     const targetReveal = smooth(.305,.38,p);
     target.visible = targetReveal > 0;
     target.scale.setScalar(1.25 * Math.max(.001,targetReveal));
@@ -270,9 +347,12 @@ export async function mountOrbitalScene(container) {
     magnetAngle = Math.max(0,p-.59) * 105;
     if (servicer.updateRotor) servicer.updateRotor(magnetAngle);
     else (servicer.rotor || servicer.magnetRotor).rotation.x = magnetAngle;
+    // The opening establishes the Earth-relative population shells. The larger
+    // camera-staged craft enter only once the camera travels toward encounters.
+    const fleetReveal = globalProgress < .135 ? smooth(.022,.042,globalProgress) : 1;
     for (const item of fleet) {
       const [start,end] = item.window;
-      item.opacity = smooth(start,start+.025,p) * (1-smooth(end-.025,end,p));
+      item.opacity = smooth(start,start+.025,p) * (1-smooth(end-.025,end,p)) * fleetReveal;
       item.group.visible = item.opacity > .001;
       item.materials.forEach(material => { material.opacity = item.opacity; });
       const angle = p * 9 * item.speed;
@@ -301,17 +381,41 @@ export async function mountOrbitalScene(container) {
     lookAt.y -= portrait * smooth(.38,.66,p) * 1.7;
     delta.subVectors(cameraPos,lookAt).multiplyScalar(1 + portrait * (.48 + smooth(.42,.72,p) * .42));
     camera.position.copy(lookAt).add(delta);
+    if(globalProgress<.165){
+      // The opening encounter is a wider mission overview. The final return
+      // keeps the closer camera for a distinct view of the physical gap.
+      const overview=smooth(.025,.07,globalProgress);
+      camera.position.sub(lookAt).multiplyScalar(1+overview*(mobile?.23:.42)).add(lookAt);
+      camera.position.x+=overview*3.5;camera.position.y+=overview*1.5;
+    }
+    const groundCamera = ground.getCamera(groundProgress,mobile);
+    const launchCamera = launch.getCamera(launchProgress,mobile);
+    if (globalProgress>=.105 && globalProgress<.345) {
+      const blend=smooth(.105,.165,globalProgress);
+      camera.position.lerp(groundCamera.position,blend);
+      lookAt.lerp(groundCamera.focus,blend);
+    } else if (globalProgress>=.345 && globalProgress<.595) {
+      const blend=smooth(.345,.405,globalProgress);
+      camera.position.copy(groundCamera.position).lerp(launchCamera.position,blend);
+      lookAt.copy(groundCamera.focus).lerp(launchCamera.focus,blend);
+    } else if(globalProgress>=.595 && globalProgress<.655) {
+      const blend=smooth(.595,.655,globalProgress);
+      camera.position.lerp(launchCamera.position,1-blend);
+      lookAt.lerp(launchCamera.focus,1-blend);
+    }
     camera.lookAt(lookAt);
     // Neither camera path nor framing adjustment may enter the planet.
     keepOutsideEarth();
     camera.updateMatrixWorld();
-    container.dataset.sceneProgress = p.toFixed(5);
+    container.dataset.sceneProgress = globalProgress.toFixed(5);
+    container.dataset.orbitalProgress = p.toFixed(5);
     container.dataset.scenePhase = phase;
     container.dataset.targetAngle = targetAngle.toFixed(5);
     container.dataset.magnetAngle = magnetAngle.toFixed(5);
   }
 
   function keepOutsideEarth() {
+    if (world!=='orbit') return;
     if (camera.position.distanceTo(earthCenter) < 26.4) {
       camera.position.copy(earthCenter).add(delta.subVectors(camera.position,earthCenter).normalize().multiplyScalar(26.4));
       camera.lookAt(exploring ? controls.target : lookAt);
@@ -355,15 +459,18 @@ export async function mountOrbitalScene(container) {
     canvas.style.touchAction = exploring ? 'none' : 'pan-y';
     canvas.style.cursor = exploring ? 'grab' : '';
     if (exploring) {
+      bridge.visible=false;
       // Manual inspection has no story caption: center its subject rather than
       // retaining the deliberately offset focus of the guided composition.
-      if (progress < .27) controls.target.copy(earthCenter);
-      else if (progress >= .45) {
+      if (world==='ground') controls.target.copy(ground.getExploreFocus?.(groundProgress) || lookAt);
+      else if (world==='launch') controls.target.copy(launch.getCamera(launchProgress,camera.aspect<1).focus);
+      else if (orbitalProgress < .27) controls.target.copy(earthCenter);
+      else if (orbitalProgress >= .45) {
         controls.target.copy(servicer.group.position).lerp(target.position,.5);
         controls.target.y += .65;
       } else controls.target.copy(lookAt);
       const distance = camera.position.distanceTo(controls.target);
-      controls.minDistance = Math.max(progress < .27 ? 32 : 4.8, distance * .45);
+      controls.minDistance = Math.max(world==='ground' ? 2.8 : world==='launch' ? 7 : orbitalProgress<.27 ? 32 : 4.8, distance*.45);
       controls.maxDistance = Math.min(200, Math.max(28,distance * 1.85));
       controls.enabled = true; controls.update();
     } else {
@@ -426,7 +533,7 @@ export async function mountOrbitalScene(container) {
     setReducedMotion(value) { reduced = Boolean(value); if (raf) { cancelAnimationFrame(raf); raf = 0; } if (reduced && !exploring) progress = destination; draw(true); if (!reduced) wake(); },
     setExplore,
     resize,
-    getState() { return { progress, targetProgress: destination, phase, paused, reduced, exploring, targetAngle, magnetAngle, braking, fleetVisible: fleet.filter(item => item.opacity > .1).length, targetQuaternion: target.quaternion.toArray(), camera: camera.position.toArray(), focus: (exploring ? controls.target : lookAt).toArray(), magnetPosition: tip.toArray(), targetPosition: target.position.toArray(), calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, viewport: size }; },
+    getState() { return { progress, targetProgress: destination, phase, paused, reduced, exploring, orbitalProgress, groundProgress, launchProgress, transition, world, worldVisibility: {orbit:orbitalWorld.visible,ground:ground.group.visible,launch:launch.group.visible}, ground: {...ground.getState(),visible:ground.group.visible}, launch: {...launch.getState(),visible:launch.group.visible}, population: {...population.getState(),visible:orbitalWorld.visible&&population.group.visible}, targetAngle, magnetAngle, braking, fleetVisible: fleet.filter(item => item.opacity > .1).length, fleet: fleet.map(item => ({variant:item.variant,opacity:item.opacity,visible:orbitalWorld.visible&&item.group.visible,position:item.group.position.toArray()})), targetQuaternion: target.quaternion.toArray(), camera: camera.position.toArray(), focus: (exploring ? controls.target : lookAt).toArray(), magnetPosition: tip.toArray(), targetPosition: target.position.toArray(), calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, viewport: size }; },
     dispose() {
       if (disposed) return; disposed = true; if (raf) cancelAnimationFrame(raf);
       observer.disconnect(); document.removeEventListener('visibilitychange',onVisibility);
