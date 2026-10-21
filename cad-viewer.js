@@ -1,5 +1,5 @@
 /**
- * Viper Space — viewer for the supplied, proposed ground-test assembly.
+ * Vyper Space — viewer for the supplied, proposed ground-test assembly.
  * Geometry is loaded unmodified from cad/glb in detumbler-arm-v2.
  * OCC -> glTF conversion is reversed exactly as in cad/source/render/render.html.
  * Replay applies the supplied Fusion trajectory to its documented as-built joint
@@ -50,7 +50,7 @@ async function mount(container) {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const image = node('img', 'cad-poster');
   image.src = container.dataset.poster || new URL('renders/v2_01_hero.png', ASSET_ROOT).href;
-  image.alt = 'Supplied CAD render of the proposed Viper Space ground-test arm and target assembly';
+  image.alt = 'Supplied CAD render of the proposed Vyper Space ground-test arm and target assembly';
   image.decoding = 'async';
   image.fetchPriority = replay ? 'low' : 'high';
   const stage = node('div', 'cad-stage');

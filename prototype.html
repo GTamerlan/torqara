@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="Explore Viper Space’s proposed ground-test prototype: supplied CAD, simulation replay, candidate parts and the path to measured evidence.">
-  <title>Viper Space — Prototype</title>
+  <meta name="description" content="Explore Vyper Space’s proposed ground-test prototype: supplied CAD, simulation replay, candidate parts and the path to measured evidence.">
+  <title>Vyper Space — Prototype</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="site.css?v=viper-1">
   <link rel="stylesheet" href="prototype.css?v=viper-1">
   <link rel="stylesheet" href="cad-viewer.css?v=viper-1">
+  <link rel="stylesheet" href="vyper.css?v=vyper-1">
   <script src="site.js?v=viper-1" defer></script>
   <script type="module" src="cad-viewer.js?v=viper-1"></script>
 </head>
 <body class="prototype-page">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Viper Space home">VIPER SPACE<span class="brand-orbit" aria-hidden="true"></span></a>
+    <a class="brand" href="index.html" aria-label="Vyper Space home">Vyper Space<span class="brand-orbit" aria-hidden="true"></span></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button>
     <nav class="nav-links" id="site-nav" aria-label="Main navigation">
       <a href="index.html#mission">Mission</a><a href="prototype.html" aria-current="page">Prototype</a><a href="explorer.html">Engineering</a><a href="#build-plan">Development</a>
@@ -26,25 +27,25 @@
   <main id="main">
     <section class="prototype-intro" aria-labelledby="prototype-title">
       <p class="prototype-eyebrow">PROTOTYPE / ARM V2</p>
-      <div class="prototype-intro-grid"><h1 id="prototype-title">BUILT IN CAD.<br>OPEN TO REVIEW.</h1><div class="prototype-intro-copy"><p>A five-axis arm, a motor-driven permanent magnet, and a free-gimbal target. A proposed ground-test rig for exploring contactless spin control.</p><p class="prototype-status"><span aria-hidden="true"></span>Design and simulation only. No hardware built.</p></div></div>
+      <div class="prototype-intro-grid"><h1 id="prototype-title">Built in CAD.<br>Open to Review.</h1><div class="prototype-intro-copy"><p>A five-axis arm, a motor-driven permanent magnet, and a free-gimbal target. A proposed ground-test rig for exploring contactless spin control.</p><p class="prototype-status"><span aria-hidden="true"></span>Design and simulation only. No hardware built.</p></div></div>
       <nav class="prototype-jump" aria-label="Prototype sections"><a href="#video">Watch the replay <span aria-hidden="true">↓</span></a><a href="#simulation">Explore in 3D <span aria-hidden="true">↓</span></a><a href="#parts">Parts & budget <span aria-hidden="true">↓</span></a><a href="#build-plan">Build sequence <span aria-hidden="true">↓</span></a></nav>
     </section>
 
     <section class="prototype-media-section" id="video" aria-labelledby="video-title">
-      <div class="prototype-section-bar"><h2 id="video-title">THE ASSEMBLY IN MOTION.</h2><span>SUPPLIED SIMULATION REPLAY</span></div>
+      <div class="prototype-section-bar"><h2 id="video-title">The Assembly in Motion.</h2><span>SUPPLIED SIMULATION REPLAY</span></div>
       <figure class="prototype-film"><video controls playsinline preload="metadata" poster="assets/viper/renders/v2_01_hero.png" width="1280" height="720" aria-label="Supplied simulation replay of the proposed ground-test arm and gimbal target"><source src="assets/viper/video/detumbler_v2_physics.mp4" type="video/mp4">Your browser does not support this video. <a href="assets/viper/video/detumbler_v2_physics.mp4">Download the MP4 replay.</a></video><figcaption><span>Simulation replay · no hardware built</span><a href="assets/viper/video/detumbler_v2_physics.mp4" download>Download MP4 <span aria-hidden="true">↓</span></a></figcaption></figure>
       <p class="prototype-media-note">The supplied animation shows a modeled ground-test sequence. Its stopping behavior includes modeled bearing friction; it does not establish contactless braking performance.</p>
     </section>
 
     <section class="prototype-section" id="simulation" aria-labelledby="simulation-title">
-      <div class="prototype-heading"><div><p class="prototype-eyebrow">01 / INSPECT THE DESIGN</p><h2 id="simulation-title">EVERY ANGLE.<br>ONE ASSEMBLY.</h2></div><p>Orbit the supplied CAD, then play or scrub its recorded trajectory. This is a replay of the supplied MuJoCo run, with no live physics solving in the viewer.</p></div>
+      <div class="prototype-heading"><div><p class="prototype-eyebrow">01 / INSPECT THE DESIGN</p><h2 id="simulation-title">Every Angle.<br>One Assembly.</h2></div><p>Orbit the supplied CAD, then play or scrub its recorded trajectory. This is a replay of the supplied MuJoCo run, with no live physics solving in the viewer.</p></div>
       <p class="prototype-viewer-label">Supplied MuJoCo simulation replay · proposed ground-test assembly</p>
       <div class="cad-viewer" data-cad-viewer="replay" data-poster="assets/viper/renders/v2_01_hero.png"><noscript><img class="cad-poster" src="assets/viper/renders/v2_01_hero.png" alt="Supplied CAD of the proposed ground-test arm; no physical hardware built"><p class="cad-status">Enable JavaScript to orbit the CAD. The video and original downloads remain available.</p></noscript></div>
       <div class="prototype-interpretation"><p>Recorded overlap samples include the gimbal and, in one run, arm links against the hull. Target hull, ring and yoke collision response was disabled. These are geometric checks, not validated contact-force events.</p><a class="text-link" href="explorer.html#report-review">Read the engineering interpretation <span aria-hidden="true">↗</span></a></div>
     </section>
 
     <section class="prototype-section prototype-detail-section" aria-labelledby="architecture-title">
-      <div class="prototype-heading"><div><p class="prototype-eyebrow">02 / THE PROPOSED HARDWARE</p><h2 id="architecture-title">POSITION.<br>ROTATE. OBSERVE.</h2></div><p>Five arm joints place the source beside a marked aluminum target. The spindle turns the magnet about a transverse axis; two cameras are proposed for observation.</p></div>
+      <div class="prototype-heading"><div><p class="prototype-eyebrow">02 / THE PROPOSED HARDWARE</p><h2 id="architecture-title">Position.<br>Rotate. Observe.</h2></div><p>Five arm joints place the source beside a marked aluminum target. The spindle turns the magnet about a transverse axis; two cameras are proposed for observation.</p></div>
       <div class="prototype-detail-grid">
         <figure><img src="assets/viper/renders/v2_06_head_closeup.png" alt="Supplied CAD detail of the magnet head, shaft, coupling and spindle motor" width="1920" height="1080" loading="lazy"><figcaption><span>01 / MAGNET HEAD</span><h3>A rotating field source.</h3><p>A proposed maxon spindle, coupling, titanium shafts, ceramic bearings and guarded N52 block magnet. Materials aim to reduce parasitic magnetic interaction; that still requires measurement.</p></figcaption></figure>
         <figure><img src="assets/viper/renders/v2_07_target_gimbal.png" alt="Supplied CAD detail of the marked aluminum target inside its ring and yoke" width="1920" height="1080" loading="lazy"><figcaption><span>02 / TARGET & STAND</span><h3>A controlled place to learn.</h3><p>The box target sits in a ring-and-yoke gimbal. Balance, free-decay measurements and moving-ring clearance must be established before interpreting a braking test.</p></figcaption></figure>
@@ -53,7 +54,7 @@
     </section>
 
     <section class="prototype-section" id="parts" aria-labelledby="parts-title">
-      <div class="prototype-heading"><div><p class="prototype-eyebrow">03 / CANDIDATE PARTS</p><h2 id="parts-title">THE BUILD,<br>LINE BY LINE.</h2></div><p>All 41 purchased line items from the supplied bill of materials. Open a group to inspect quantities and source estimates; the original workbook also includes fabrication schedules.</p></div>
+      <div class="prototype-heading"><div><p class="prototype-eyebrow">03 / CANDIDATE PARTS</p><h2 id="parts-title">The Build,<br>Line by Line.</h2></div><p>All 41 purchased line items from the supplied bill of materials. Open a group to inspect quantities and source estimates; the original workbook also includes fabrication schedules.</p></div>
       <div class="prototype-budget"><div><span>PARTS ESTIMATE</span><strong>$11,740</strong><small>USD · rounded source subtotal</small></div><div><span>WITH 15% CONTINGENCY</span><strong>$13,500</strong><small>USD · rounded source budget</small></div><p>Estimates from the supplied report and parts list, not verified vendor prices or a purchase quote. Availability, interfaces, fabrication scope and final quantities need confirmation. Taxes, shipping and full validation costs are not established.</p></div>
       <div class="parts-groups"><details class="parts-group"><summary><span class="group-name"><span class="group-number">01</span>Actuators</span><span class="group-meta">5 lines <span class="group-total">$3,975.00</span><span class="group-toggle" aria-hidden="true">+</span></span></summary><div class="parts-table-wrap"><table class="parts-table"><caption>Actuators — proposed items from the supplied parts list; prices unverified.</caption><thead><tr><th scope="col">Proposed item</th><th scope="col">Qty</th><th scope="col">Source estimate (USD)</th></tr></thead><tbody><tr><th scope="row">J1 actuator Leadshine HJ290NKF101D24-NK-EC</th><td class="part-qty">1</td><td class="part-cost">$799.00<small>Source: listed</small></td></tr><tr><th scope="row">J2 actuator Leadshine HJ2110BKF101D24-BK-EC</th><td class="part-qty">1</td><td class="part-cost">$929.00<small>Source: listed</small></td></tr><tr><th scope="row">J3 actuator Leadshine HJ290BKF101D24-BK-EC</th><td class="part-qty">1</td><td class="part-cost">$859.00<small>Source: listed</small></td></tr><tr><th scope="row">J4 actuator Leadshine HJ270NKF101D24-NK-EC</th><td class="part-qty">1</td><td class="part-cost">$659.00<small>Source: listed</small></td></tr><tr><th scope="row">J5 actuator Leadshine HJ270BKF101D24-BK-EC</th><td class="part-qty">1</td><td class="part-cost">$729.00<small>Source: listed</small></td></tr></tbody></table></div></details>
 <details class="parts-group"><summary><span class="group-name"><span class="group-number">02</span>Spindle</span><span class="group-meta">8 lines <span class="group-total">$626.00</span><span class="group-toggle" aria-hidden="true">+</span></span></summary><div class="parts-table-wrap"><table class="parts-table"><caption>Spindle — proposed items from the supplied parts list; prices unverified.</caption><thead><tr><th scope="col">Proposed item</th><th scope="col">Qty</th><th scope="col">Source estimate (USD)</th></tr></thead><tbody><tr><th scope="row">maxon EC-i 40 brushless motor, 70 W, 36 V, hall sensors (449470)</th><td class="part-qty">1</td><td class="part-cost">$290.00<small>Source: listed</small></td></tr><tr><th scope="row">ODrive S1 motor controller</th><td class="part-qty">1</td><td class="part-cost">$149.00<small>Source: listed</small></td></tr><tr><th scope="row">Bellows coupling 6 x 10 mm, zero backlash</th><td class="part-qty">1</td><td class="part-cost">$45.00<small>Source: estimate</small></td></tr><tr><th scope="row">Titanium grade 5 rod Ø10 x 150 mm and Ø8 x 60 mm</th><td class="part-qty">1</td><td class="part-cost">$38.00<small>Source: estimate</small></td></tr><tr><th scope="row">Full-ceramic bearing 6000 ZrO2 (10 x 26 x 8)</th><td class="part-qty">2</td><td class="part-cost">$48.00<small>Source: estimate</small></td></tr><tr><th scope="row">Full-ceramic bearing 608 ZrO2 (8 x 22 x 7)</th><td class="part-qty">1</td><td class="part-cost">$16.00<small>Source: estimate</small></td></tr><tr><th scope="row">Carbon tube 61 x 58 x 100 mm (rotor), cut to 68</th><td class="part-qty">1</td><td class="part-cost">$22.00<small>Source: estimate</small></td></tr><tr><th scope="row">Polycarbonate tube 66 x 63 x 300 mm (guard), cut to length</th><td class="part-qty">1</td><td class="part-cost">$18.00<small>Source: estimate</small></td></tr></tbody></table></div></details>
@@ -72,7 +73,7 @@
     </section>
 
     <section class="prototype-section" id="build-plan" aria-labelledby="build-title">
-      <div class="prototype-heading"><div><p class="prototype-eyebrow">04 / DEVELOPMENT SEQUENCE</p><h2 id="build-title">FROM DRAWINGS<br>TO EVIDENCE.</h2></div><p>A staged path for reviewing and testing the prototype. Each step resolves a question before the next layer of complexity is added.</p></div>
+      <div class="prototype-heading"><div><p class="prototype-eyebrow">04 / DEVELOPMENT SEQUENCE</p><h2 id="build-title">From Drawings<br>to Evidence.</h2></div><p>A staged path for reviewing and testing the prototype. Each step resolves a question before the next layer of complexity is added.</p></div>
       <ol class="prototype-build-list">
         <li><span class="build-number">01</span><h3>Verify the design.</h3><p>Check vendor drawings, actuator bolt patterns, connector clearances and delivered dimensions. Reconcile the magnet mass and CAD mass model, repeat load checks, and review interference-check exclusions before machining.</p></li>
         <li><span class="build-number">02</span><h3>Establish the baseline.</h3><p>Build and balance the target stand first. Measure free decay, bearing friction and repeatability with the magnet inactive. Use those measurements to separate stand losses from magnetic effects.</p></li>
@@ -84,7 +85,7 @@
     </section>
 
     <section class="prototype-section prototype-downloads" id="downloads" aria-labelledby="downloads-title">
-      <div class="prototype-heading"><div><p class="prototype-eyebrow">05 / SOURCE FILES</p><h2 id="downloads-title">INSPECT THE<br>UNDERLYING DESIGN.</h2></div><p>Original supplied geometry and parts files, preserved for review. Read the engineering corrections alongside the source’s design claims.</p></div>
+      <div class="prototype-heading"><div><p class="prototype-eyebrow">05 / SOURCE FILES</p><h2 id="downloads-title">Inspect the<br>Underlying Design.</h2></div><p>Original supplied geometry and parts files, preserved for review. Read the engineering corrections alongside the source’s design claims.</p></div>
       <div class="prototype-package-note"><p>The complete package includes CAD sources, configurations, MuJoCo models and results, the Fusion script and the original report. That report contains uncorrected statements.</p><a class="text-link" href="explorer.html#report-review">Read the corrections before using the package <span aria-hidden="true">↗</span></a></div>
       <div class="prototype-download-list">
         <a href="assets/viper/downloads/detumbler-arm-v2.zip" download><span><strong>Original design & simulation package</strong><small>ZIP · complete supplied archive · includes uncorrected report</small></span><span aria-hidden="true">↓</span></a>
@@ -96,6 +97,6 @@
       <p class="prototype-caption">The source files retain their original Arm v2 names. Source price classifications and material claims have not been independently validated. <a href="explorer.html#report-review">See the report review.</a></p>
     </section>
   </main>
-  <footer class="site-footer"><a class="brand" href="index.html">VIPER SPACE</a><nav aria-label="Footer navigation"><a href="explorer.html">Engineering</a><a href="references.html">Research</a><a href="index.html">Home</a></nav><p class="footer-note">Proposed ground-test prototype<br>Design and simulation · no hardware built</p></footer>
+  <footer class="site-footer"><a class="brand" href="index.html">Vyper Space</a><nav aria-label="Footer navigation"><a href="explorer.html">Engineering</a><a href="references.html">Research</a><a href="index.html">Home</a></nav><p class="footer-note">Proposed ground-test prototype<br>Design and simulation · no hardware built</p></footer>
 </body>
 </html>
