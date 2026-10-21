@@ -151,3 +151,12 @@ html.journey-exploring .journey-stage .journey-shade{background:linear-gradient(
  .earth-opening .journey-begin { margin-top: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .journey-notes summary span { transition: none; } }
+
+/* Longer engineering captions retain the same quiet layout on small screens. */
+.journey-chapter.journey-chapter-detailed h2 { font-size: clamp(30px,3vw,46px); line-height: 1.12; }
+@media (max-width: 760px) {
+ .journey-chapter.journey-chapter-detailed h2 { font-size: clamp(25px,7vw,32px); }
+}
+@media (max-height: 500px) {
+ .journey-chapter.journey-chapter-detailed h2 { font-size: clamp(21px,5.6vh,28px); }
+}
