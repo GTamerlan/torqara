@@ -17,13 +17,13 @@ const contextObserver = new MutationObserver(() => {
   if (container.dataset.sceneState === 'context-lost') {
     root.classList.remove('scene-ready');
     document.querySelector('.journey-load').textContent = '3D paused while your browser restores its graphics. The engineering pages are still available.';
-  } else if (container.dataset.sceneState === 'ready' && scene) {
+  } else if (container.dataset.sceneState === 'ready' && scene && openingComplete) {
     root.classList.add('scene-ready');
     document.querySelector('.journey-load').textContent = '';
   }
 });
 contextObserver.observe(container,{attributes:true,attributeFilter:['data-scene-state']});
-let scene, paused = false, exploring = false, targetProgress = 0, active = -1, syncFrame = 0;
+let scene, openingComplete = false, paused = false, exploring = false, targetProgress = 0, active = -1, syncFrame = 0;
 const clamp = value => Math.max(0, Math.min(1, value));
 function chapterFor(p) {
   const index = positions.findIndex((position,i) => i < positions.length - 1 && p < (position + positions[i + 1]) / 2);
@@ -105,9 +105,14 @@ try {
   const { mountOrbitalScene } = await import('./orbital-scene.js?v=brand-8');
   scene = await mountOrbitalScene(container);
   scene.setPaused(paused);
-  root.classList.add('scene-ready');
+  // Hold the opening horizon for three extra seconds after the 3D scene is ready.
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  openingComplete = true;
+  if (container.dataset.sceneState === 'ready') {
+    root.classList.add('scene-ready');
+    document.querySelector('.journey-load').textContent='';
+  }
   explore.disabled = typeof scene.setExplore !== 'function';
-  document.querySelector('.journey-load').textContent='';
   motionPreference(); readScroll(); sync();
   // Inspectable presentation state; this is scripted illustration, never a physics result.
   window.vyperJourney = {getState: () => scene.getState(), goTo: jump};
