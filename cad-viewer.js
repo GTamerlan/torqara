@@ -50,12 +50,12 @@ async function mount(container) {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const image = node('img', 'cad-poster');
   image.src = container.dataset.poster || new URL('renders/v2_01_hero.png', ASSET_ROOT).href;
-  image.alt = 'Supplied CAD render of the proposed Vyper Space ground-test arm and target assembly';
+  image.alt = 'Arm V2 CAD render of the ground-test arm and target assembly';
   image.decoding = 'async';
   image.fetchPriority = replay ? 'low' : 'high';
   const stage = node('div', 'cad-stage');
   const overlay = node('div', 'cad-overlay');
-  const badge = node('span', 'cad-badge', replay ? 'SUPPLIED SIMULATION REPLAY' : 'PROPOSED GROUND-TEST CAD');
+  const badge = node('span', 'cad-badge', replay ? 'MuJoCo trajectory · recorded poses' : 'Arm V2 · ground-test CAD');
   const status = node('p', 'cad-status', 'Loading interactive CAD…');
   status.setAttribute('role', 'status');
   const controlsBar = node('div', 'cad-controls');
@@ -110,8 +110,8 @@ async function mount(container) {
       const canvas = node('canvas', 'cad-canvas');
       canvas.tabIndex = 0;
       canvas.setAttribute('aria-label', replay
-        ? 'Interactive CAD replay of a supplied simulation. Drag to orbit, pinch to zoom. Arrow keys rotate, plus and minus zoom.'
-        : 'Interactive supplied CAD assembly. Drag to orbit, pinch to zoom. Arrow keys rotate, plus and minus zoom.');
+        ? 'Interactive Arm V2 simulation replay. Drag to orbit, pinch to zoom. Arrow keys rotate, plus and minus zoom.'
+        : 'Interactive Arm V2 CAD assembly. Drag to orbit, pinch to zoom. Arrow keys rotate, plus and minus zoom.');
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
       renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -314,7 +314,7 @@ async function mount(container) {
         playButton.finishReplay = () => { playing = false; syncPlayback(); };
       }
       for (const element of container.querySelectorAll('button')) element.disabled = false;
-      status.textContent = replay ? 'Recorded poses · no live physics solver' : '13 supplied CAD components · orbit to inspect';
+      status.textContent = replay ? '' : '13 CAD components';
       renderer.render(scene, camera);
       container.dataset.cadComponents = String(COMPONENTS.length);
       container.dataset.cadState = 'ready';
@@ -334,7 +334,7 @@ async function mount(container) {
         event.preventDefault();
         renderer.setAnimationLoop(null);
         container.dataset.cadState = 'error';
-        status.textContent = '3D view paused by this browser. Supplied CAD render shown.';
+        status.textContent = '3D view paused by this browser. CAD render shown.';
         for (const element of container.querySelectorAll('button, input')) element.disabled = true;
       });
       window.addEventListener('pagehide', event => {
@@ -347,8 +347,8 @@ async function mount(container) {
     } catch (error) {
       if (renderer) { renderer.setAnimationLoop(null); renderer.dispose(); }
       container.dataset.cadState = 'error';
-      status.textContent = 'Interactive view unavailable. Supplied CAD render shown.';
-      hint.textContent = 'The supplied video and CAD downloads remain available below.';
+      status.textContent = 'Interactive view unavailable. CAD render shown.';
+      hint.textContent = 'The video and CAD downloads remain available below.';
       for (const element of container.querySelectorAll('button, input')) element.disabled = true;
     }
   }

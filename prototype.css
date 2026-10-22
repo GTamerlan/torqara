@@ -10,3 +10,23 @@
 @media(max-width:360px){.prototype-intro h1{font-size:38px}.prototype-heading h2{font-size:34px}.prototype-intro{padding-top:115px}.prototype-film figcaption{display:block}.prototype-film figcaption>a{display:inline-block;margin-top:10px}.prototype-budget strong{font-size:30px}.group-name{font-size:14px;gap:11px}.prototype-jump{column-gap:18px}.prototype-jump a{font-size:8px}.prototype-page .brand{font-size:19px}}
 
 .prototype-package-note{padding:0 0 28px;max-width:760px}.prototype-package-note p{font-size:12px;color:#929fa9;line-height:1.75;margin-bottom:12px}.prototype-package-note .text-link{font-size:9px;gap:22px}@media(max-width:760px){.prototype-package-note p{font-size:11px}.prototype-package-note .text-link{font-size:8px;gap:15px;line-height:1.8}}
+
+/* Technical names, compact specifications and a consistent reading scale. */
+.prototype-intro-grid { align-items: center; }
+.prototype-intro h1 { font-size: clamp(56px,4.3vw,64px); }
+.prototype-heading h2 { font-size: 48px; }
+.prototype-specs { display: grid; grid-template-columns: .45fr 1.6fr .8fr; gap: 20px; margin: 0 0 22px; }
+.prototype-specs dt { color: #8e9aa4; font-size: 10px; line-height: 1.5; margin-bottom: 8px; }
+.prototype-specs dd { color: #dce3e9; font-size: 14px; line-height: 1.5; margin: 0; }
+.prototype-status { display: block; }
+.prototype-jump { text-transform: none; letter-spacing: 0; font-size: 11px; font-weight: 400; }
+.prototype-page .text-link { text-transform: none; letter-spacing: 0; }
+.prototype-film figcaption { justify-content: flex-end; }
+.prototype-package-note .text-link { font-size: 12px; }
+.prototype-interpretation > .text-link { font-size: 11px; }
+@media (max-width: 760px) {
+ .prototype-heading h2 { font-size: clamp(32px,8.4vw,40px); }
+ .prototype-specs { gap: 16px; }
+ .prototype-specs dd { font-size: 13px; }
+ .prototype-package-note .text-link, .prototype-interpretation > .text-link { font-size: 11px; }
+}
