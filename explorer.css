@@ -26,3 +26,15 @@
 .exp-validation{display:grid;grid-template-columns:1fr 1.05fr;gap:9vw;background:radial-gradient(ellipse at 0 20%,#111317,#000 65%)}.exp-validation-heading>p:not(.exp-eyebrow){font-size:15px;line-height:1.8;color:#aab0b6;max-width:360px;margin:28px 0}.exp-validation-heading>a{display:inline-block;font-size:11px;line-height:1.5;border-bottom:1px solid #777;padding:0 0 12px}.exp-validation-heading>a>span{margin-left:20px}.exp-validation-list{list-style:none;margin:0;padding:0;border-top:1px solid #3b3b3b}.exp-validation-list li{display:grid;grid-template-columns:30px 1fr;gap:22px;padding:28px 0;border-bottom:1px solid #3b3b3b}.exp-validation-list li>span{font-size:11px;color:#8f949a;padding-top:5px}.exp-validation-list h3{font-size:21px;font-weight:500;letter-spacing:-.025em;line-height:1.3;margin:0 0 12px}.exp-validation-list p{font-size:13px;line-height:1.8;color:#aab0b6;margin:0}.explorer-page .site-footer>a:not(.brand){font-size:10px;color:#aab0b6}
 @media(max-width:1000px){.exp-findings-heading{gap:5vw}.exp-findings-heading>p{font-size:15px}.exp-finding-grid{gap:4vw}.exp-finding-grid h3{font-size:21px}.exp-validation{gap:6vw}.exp-validation-list h3{font-size:19px}}
 @media(max-width:760px){.exp-findings,.exp-validation{padding-top:70px;padding-bottom:70px;scroll-margin-top:75px}.exp-findings-heading{grid-template-columns:1fr;gap:29px}.exp-findings h2,.exp-validation h2{font-size:clamp(44px,11.7vw,72px)}.exp-findings-heading>p{font-size:15px}.exp-design-facts{grid-template-columns:1fr 1fr;margin:35px 0}.exp-design-facts>div{padding:22px 12px 24px 0}.exp-design-facts>div:last-child{grid-column:1/-1;border-top:1px solid #2e2e2e}.exp-design-facts dt{font-size:8px}.exp-design-facts dd{font-size:30px;margin-top:9px}.exp-design-facts>div:last-child dd{font-size:24px}.exp-finding-grid{grid-template-columns:1fr;gap:32px}.exp-finding-grid h3{font-size:23px;margin:13px 0}.exp-finding-grid p{font-size:13px;max-width:520px}.exp-findings-links{align-items:flex-start;gap:24px;flex-direction:column;margin:35px 0}.exp-report-review>div{columns:auto;padding-bottom:25px}.exp-report-review{scroll-margin-top:85px}.exp-validation{grid-template-columns:1fr;gap:42px}.exp-validation-heading>p:not(.exp-eyebrow){max-width:440px;font-size:14px}.exp-validation-list li{gap:12px;padding:24px 0}.exp-validation-list h3{font-size:21px}.exp-validation-list p{font-size:12px}}
+
+/* Keep the longer engineering headings readable beside the diagrams and on phones. */
+.exp-findings-heading>div,.exp-model-heading>div,.exp-validation-heading{min-width:0}
+.exp-findings h2{font-size:clamp(38px,4.2vw,64px)}
+.exp-model-heading h2,.exp-chapter h2,.exp-validation h2{font-size:clamp(40px,4.4vw,68px)}
+.exp-intro-copy>p:not(.exp-eyebrow){max-width:520px}
+@media(max-width:760px){
+  .exp-intro h1{font-size:clamp(43px,10.8vw,78px)}
+  .exp-findings h2{font-size:clamp(31px,8.4vw,56px)}
+  .exp-model-heading h2,.exp-chapter h2,.exp-validation h2{font-size:clamp(36px,9.4vw,64px)}
+  .exp-intro-copy>p:not(.exp-eyebrow){max-width:340px}
+}
