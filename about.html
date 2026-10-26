@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="The founders of Vyper Space, building contactless detumbling for low-Earth orbit.">
+  <title>Vyper Space — About</title>
+  <link rel="icon" href="assets/vyper/favicon.png?v=20261026" type="image/png" sizes="2048x2048">
+  <link rel="stylesheet" href="site.css?v=orbit-3">
+  <link rel="stylesheet" href="vyper.css?v=brand-12">
+  <link rel="stylesheet" href="about.css?v=about-1">
+  <script src="site.js?v=orbit-3" defer></script>
+  <script src="about.js?v=about-1" defer></script>
+</head>
+<body class="about-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand brand-logo" href="index.html" aria-label="Vyper Space home"><img src="assets/vyper/vyper-wordmark.png" alt="Vyper" width="1983" height="793" decoding="async"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span></button>
+    <nav class="nav-links" id="site-nav" aria-label="Main navigation"><a href="index.html#mission">Mission</a><a href="prototype.html">Prototype</a><a href="explorer.html">Engineering</a><a href="references.html">Research</a><a href="about.html" aria-current="page">About</a><a class="nav-cta" href="mailto:tamerlan.goglichidze@yale.edu">Contact</a></nav>
+  </header>
+  <main id="main">
+    <section class="about-intro" aria-labelledby="about-title">
+      <p class="about-eyebrow">ABOUT</p>
+      <div class="about-intro-grid">
+        <h1 id="about-title">The team</h1>
+        <p>Vyper Space is building contactless detumbling for low-Earth orbit, starting with the Arago V2 ground-test arm.</p>
+      </div>
+    </section>
+
+    <section class="about-founders" aria-labelledby="founders-title">
+      <h2 class="about-section-label" id="founders-title">Founders</h2>
+      <ul class="founder-grid">
+        <li>
+          <button class="founder-card" type="button" data-founder="panel-brandon" aria-haspopup="dialog">
+            <span class="founder-photo"><img src="assets/vyper/team/brandon-chang.jpg" alt="Portrait of Brandon Chang" width="1000" height="1311" loading="lazy" decoding="async"></span>
+            <span class="founder-meta"><strong>Brandon Chang</strong><small>Co-founder</small><span class="founder-more" aria-hidden="true">+</span></span>
+          </button>
+        </li>
+        <li>
+          <button class="founder-card" type="button" data-founder="panel-tamerlan" aria-haspopup="dialog">
+            <span class="founder-photo founder-photo-placeholder" role="img" aria-label="Photo coming soon"><span class="founder-mark" aria-hidden="true"></span></span>
+            <span class="founder-meta"><strong>Tamerlan Goglichidze</strong><small>Co-founder</small><span class="founder-more" aria-hidden="true">+</span></span>
+          </button>
+        </li>
+      </ul>
+    </section>
+
+    <dialog class="founder-panel" id="panel-brandon" aria-labelledby="panel-brandon-name">
+      <div class="founder-panel-inner">
+        <button class="founder-close" type="button" aria-label="Close">×</button>
+        <p class="about-eyebrow">CO-FOUNDER</p>
+        <h2 id="panel-brandon-name">Brandon Chang</h2>
+        <p class="founder-school">Harvard University · Applied Mathematics &amp; Computer Science</p>
+        <div class="founder-bio">
+          <p>Brandon works on orbital modeling and flight software. At UC Santa Barbara’s Yeung Group he built ODEM-S, a nonlinear dynamical model that forecasts low-Earth-orbit debris growth through 2050 using coupled differential equations, stochastic collision probabilities and time-varying launch rates, calibrated against roughly 12,000 satellite launches.</p>
+          <p>He was principal scientist and software lead for payloads on NASA’s High Altitude Student Platform and RockSat-X, leading six developers across downlink, sensor integration and post-flight analysis. That work included a custom telemetry protocol and Python data pipeline for a 10-channel Geiger-counter payload. With the Colorado Space Grant Consortium he programmed the sensor suite of a LunaSat bound for the lunar surface.</p>
+          <p>Before Vyper he founded Hubble, an academic collaboration platform with more than 5,600 monthly users, and Shaman, a model-based forecasting engine.</p>
+        </div>
+        <ul class="founder-tags" aria-label="Focus areas"><li>Orbital debris modeling</li><li>Flight software</li><li>Telemetry &amp; data pipelines</li></ul>
+        <nav class="founder-links" aria-label="Brandon Chang links"><a href="https://www.linkedin.com/in/brandonwonhyukchang" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a><a href="mailto:bchang@college.harvard.edu">Email <span aria-hidden="true">↗</span></a></nav>
+      </div>
+    </dialog>
+
+    <dialog class="founder-panel" id="panel-tamerlan" aria-labelledby="panel-tamerlan-name">
+      <div class="founder-panel-inner">
+        <button class="founder-close" type="button" aria-label="Close">×</button>
+        <p class="about-eyebrow">CO-FOUNDER</p>
+        <h2 id="panel-tamerlan-name">Tamerlan Goglichidze</h2>
+        <div class="founder-bio">
+          <p>Tamerlan builds hardware and robotics. He designed and built the Pi Board, a Raspberry Pi–controlled robotic chessboard in which a stepper-driven XY mechanism moves magnets beneath the board to slide the pieces, with custom software that tracks every piece across the 8×8 grid. The project was featured by Raspberry Pi Official Magazine and Hackaday.</p>
+          <p>He is also a FIDE-rated chess player.</p>
+        </div>
+        <ul class="founder-tags" aria-label="Focus areas"><li>Robotics</li><li>Embedded systems</li><li>Magnetic actuation</li></ul>
+        <nav class="founder-links" aria-label="Tamerlan Goglichidze links"><a href="https://www.linkedin.com/in/tamerlan-goglichidze-838077259/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a><a href="mailto:tamerlan.goglichidze@yale.edu">Email <span aria-hidden="true">↗</span></a></nav>
+      </div>
+    </dialog>
+  </main>
+  <footer class="site-footer"><nav aria-label="Footer navigation"><a href="prototype.html">Prototype</a><a href="explorer.html">Engineering</a><a href="index.html">Home</a></nav><p class="footer-note">Vyper Space<br>Contactless detumbling</p><a class="footer-mark" href="index.html" aria-label="Vyper Space home"></a></footer>
+</body>
+</html>
