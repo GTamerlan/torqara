@@ -211,6 +211,7 @@ body .site-footer { flex-wrap: wrap; }
           mask: url("assets/vyper/vyper-wordmark.png") 47% 49.9% / 105.31% 325% no-repeat;
   opacity: .92;
 }
+.site-footer .footer-mark:hover { opacity: .92; }
 .footer-mark:focus-visible { outline: 1px solid #fff6; outline-offset: 8px; }
 @media (max-width: 1100px) { body .orbit-footer { grid-template-columns: 1fr auto; } }
 @media (max-width: 760px) { body .orbit-footer { grid-template-columns: 1fr; } }
