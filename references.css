@@ -85,3 +85,10 @@
 .refs-project{display:grid;grid-template-columns:.85fr 1.55fr;gap:80px;padding-block:66px 74px;border-top:1px solid #333}.refs-project h2{font-size:clamp(29px,3.3vw,46px);line-height:1.08;margin:0}.refs-project-status{font-size:9px;line-height:1.8;letter-spacing:.035em;color:#999;margin:22px 0 0;max-width:250px}.refs-project-copy h3{font-size:22px;line-height:1.3;margin:0 0 21px}.refs-project-copy p{font-size:13px;color:#aaa;line-height:1.85;margin:0 0 18px}.refs-project-copy .reference-source{margin-top:8px}.refs-project-downloads{display:block;width:fit-content;font-size:11px;line-height:1.7;margin-top:24px;text-decoration:none;color:#ccc}.refs-project-downloads>span{margin-left:12px}.refs-project-downloads:hover{color:#fff}
 @media(max-width:900px){.refs-project{gap:40px;grid-template-columns:1fr 1.6fr}}
 @media(max-width:640px){.refs-project{grid-template-columns:1fr;gap:29px;padding-block:42px 48px}.refs-project h2{font-size:31px}.refs-project h2 br{display:none}.refs-project-status{max-width:none;margin-top:17px;font-size:8px}.refs-project-copy h3{font-size:21px;margin-bottom:18px}.refs-project-copy p{font-size:12px}}
+
+/* Rig parameters in the hero side panel. */
+.refs-position-specs{margin:0 0 20px;padding:0}
+.refs-position-specs>div{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:9px 0;border-top:1px solid #333}
+.refs-position-specs dt{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#929292;padding-top:2px}
+.refs-position-specs dd{margin:0;font-size:12px;line-height:1.55;color:#ddd}
+@media(max-width:760px){.refs-position-specs{grid-column:1/-1}}

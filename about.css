@@ -64,3 +64,15 @@
   .founder-panel-inner { padding: 84px 24px 44px; }
   .founder-close { top: 20px; right: 20px; }
 }
+
+/* Whitepaper page: live Google Doc preview in a framed viewer. */
+.whitepaper-aside > p { margin: 0 0 22px; font-size: 16px; line-height: 1.6; color: #bbc1c5; }
+.whitepaper-link { display: inline-flex; gap: 26px; padding-bottom: 10px; border-bottom: 1px solid #ffffff66; font-size: 12px; color: #fff; transition: border-color .2s; }
+.whitepaper-link:hover { border-bottom-color: #fff; }
+.whitepaper-viewer { max-width: 1800px; margin: 0 auto; padding: 56px var(--gutter) 120px; }
+.whitepaper-viewer iframe { display: block; width: 100%; max-width: 1100px; height: max(720px, calc(100svh - 160px)); margin: 0 auto; border: 1px solid #ffffff1f; border-radius: 10px; background: #fff; }
+@media (max-width: 920px) {
+  .whitepaper-aside > p { font-size: 14px; }
+  .whitepaper-viewer { padding-top: 36px; padding-bottom: 80px; }
+  .whitepaper-viewer iframe { height: calc(100svh - 120px); min-height: 560px; border-radius: 6px; }
+}

@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="Project-source review and open prior art for Vyper Space’s proposed ground prototype and magnetic detumbling research.">
-  <title>References &amp; prior art — Vyper Space</title>
+  <meta name="description" content="Prior work in rotating-dipole eddy-current manipulation and detumbling, target-material requirements, and the Arago V2 design report and validation plan.">
+  <title>Research — Vyper Space</title>
   <link rel="icon" href="assets/vyper/favicon.png?v=20261026" type="image/png" sizes="2048x2048">
   <link rel="stylesheet" href="site.css?v=viper-1">
-  <link rel="stylesheet" href="references.css?v=viper-1">
-  <link rel="stylesheet" href="vyper.css?v=brand-13">
+  <link rel="stylesheet" href="references.css?v=research-2">
+  <link rel="stylesheet" href="vyper.css?v=brand-14">
   <script src="site.js?v=viper-1" defer></script>
 </head>
 <body class="references-page">
@@ -17,37 +17,43 @@
   <header class="site-header">
     <a class="brand brand-logo" href="index.html" aria-label="Vyper Space home"><img src="assets/vyper/vyper-wordmark.png" alt="Vyper" width="1983" height="793" decoding="async"></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Open navigation"><span></span><span></span></button>
-    <nav class="nav-links" id="primaryNav" aria-label="Main navigation"><a href="index.html#mission">Mission</a><a href="prototype.html">Prototype</a><a href="explorer.html">Engineering</a><a href="references.html" aria-current="page">Research</a><a href="about.html">About</a><a class="nav-cta" href="mailto:tamerlan.goglichidze@yale.edu">Contact</a></nav>
+    <nav class="nav-links" id="primaryNav" aria-label="Main navigation"><a href="index.html#mission">Mission</a><div class="nav-group"><a class="nav-parent" href="prototype.html" aria-current="page">Arago V1.1</a><div class="nav-sub"><a href="prototype.html">Prototype</a><a href="explorer.html">Engineering</a><a href="references.html" aria-current="page">Research</a></div></div><div class="nav-group"><a class="nav-parent" href="about.html">About</a><div class="nav-sub"><a href="about.html">Team</a><a href="whitepaper.html">Whitepaper</a></div></div><a class="nav-cta" href="mailto:tamerlan.goglichidze@yale.edu">Contact</a></nav>
   </header>
 
   <main id="main">
     <section class="refs-hero refs-shell" aria-labelledby="page-title">
       <div class="refs-intro">
-        <p class="eyebrow">Research context / Open prior art</p>
-        <h1 id="page-title">Built on a<br>published <em>field.</em></h1>
-        <p class="refs-lead">Magnetic manipulation and detumbling have a research history. These primary sources explain the starting point—and the boundaries of the concept.</p>
-        <a class="refs-jump" href="#source-register">Read the source register <span aria-hidden="true">↓</span></a>
+        <p class="eyebrow">Research / Prior work</p>
+        <h1 id="page-title">Eddy-current<br><em>detumbling</em></h1>
+        <p class="refs-lead">A time-varying magnetic field induces eddy currents in a conductive target; the resulting Lorentz forces produce a torque opposing the target’s rotation relative to the field. Arago V2 builds on the rotating-dipole method developed by Abbott, Hermans and colleagues at the University of Utah (2021–2025) and extends it to a five-axis positioning arm and a gimballed three-axis target.</p>
+        <a class="refs-jump" href="#source-register">Source register <span aria-hidden="true">↓</span></a>
       </div>
       <aside class="refs-position" aria-labelledby="position-title">
-        <span class="refs-position-mark" aria-hidden="true">V / 01</span>
-        <p class="refs-kicker">Vyper Space today</p>
-        <h2 id="position-title">Prototype<br>design study.</h2>
-        <p>Supplied CAD, ground-rig simulation and a proposed build plan. The prototype has not been built or physically validated.</p>
-        <p class="refs-position-note">Published results belong to their authors. The project report is an internal design study and does not establish physical or flight performance.</p>
+        <span class="refs-position-mark" aria-hidden="true">ARAGO V2</span>
+        <p class="refs-kicker">Current rig</p>
+        <h2 id="position-title">Ground-test<br>configuration</h2>
+        <dl class="refs-position-specs">
+          <div><dt>Source</dt><dd>Motor-driven permanent-magnet rotor, transverse dipole</dd></div>
+          <div><dt>Positioning</dt><dd>5-axis arm, 1.127 m reach</dd></div>
+          <div><dt>Target</dt><dd>Aluminum body on a free gimbal</dd></div>
+          <div><dt>Sensing</dt><dd>Two global-shutter cameras, target markers</dd></div>
+          <div><dt>Simulation</dt><dd>MuJoCo, 180 s runs; stable = &lt;1°/s for &gt;2 s</dd></div>
+        </dl>
+        <p class="refs-position-note">Status: CAD and simulation complete. Hardware build not started.</p>
       </aside>
     </section>
 
     <section class="refs-project refs-shell" id="project-report" aria-labelledby="project-report-title">
-      <div><p class="refs-kicker">PROJECT SOURCE / V2</p><h2 id="project-report-title">The supplied<br>design study.</h2><p class="refs-project-status">CAD + SIMULATION · NOT PHYSICAL TEST EVIDENCE</p></div>
-      <div class="refs-project-copy"><h3>Detumbler arm v2: design, loads and simulation report</h3><p>The supplied package includes CAD, proposed parts, load estimates and ground-rig simulation outputs. It describes an unbuilt prototype. The engineering explorer reviews the report alongside its source files and distinguishes design assumptions from results that still require measurement.</p><p>Key qualifications concern bearing-friction baselines, geometric overlaps, preliminary interference checking, unconfirmed actuator patterns and inconsistent magnet mass. Camera fusion and the EtherCAT adapter also remain development work.</p><a class="reference-source" href="explorer.html#report-review">Read the engineering review <span class="source-kind">Interpretation + corrections</span><span aria-hidden="true">↗</span></a><a class="refs-project-downloads" href="prototype.html#downloads">CAD, parts and project downloads <span aria-hidden="true">↗</span></a></div>
+      <div><p class="refs-kicker">PROJECT SOURCE / V2</p><h2 id="project-report-title">Internal<br>design report</h2><p class="refs-project-status">CAD · LOADS · MUJOCO SIMULATION</p></div>
+      <div class="refs-project-copy"><h3>Detumbler arm v2: design, loads and simulation report</h3><p>Covers the five-axis arm CAD (13 GLB components), actuator selection, static load and interference checks, a costed parts list with fabrication schedule, and MuJoCo simulations of the gimballed aluminum target. Selected 180-second runs reach the 1°/s stability threshold in roughly 20–39 s, against a magnet-off bearing-friction baseline of about 60 s.</p><p>Open issues: stop times do not yet isolate magnetic braking from bearing friction; overlap counts of 1,332 and 165 samples include gimbal and arm-link/hull contacts, not only the stand; magnet mass is 574.1 g by catalog versus 491.62 g in CAD; HJ2 actuator bolt patterns are unconfirmed; two-camera fusion and the EtherCAT adapter are incomplete.</p><a class="reference-source" href="explorer.html#report-review">Known issues &amp; corrections <span class="source-kind">Engineering review</span><span aria-hidden="true">↗</span></a><a class="refs-project-downloads" href="prototype.html#downloads">CAD, parts and project downloads <span aria-hidden="true">↗</span></a></div>
     </section>
 
     <section class="refs-register refs-shell" id="source-register" aria-labelledby="register-title">
       <div class="refs-section-heading">
-        <div><p class="refs-kicker">01 / Source register</p><h2 id="register-title">The work behind the idea.</h2></div>
-        <p>Five selected primary sources.<br><span>Reviewed 17 October 2026.</span></p>
+        <div><p class="refs-kicker">01 / Source register</p><h2 id="register-title">Past work</h2></div>
+        <p>Three peer-reviewed papers, two agency releases.<br><span>Reviewed 17 October 2026.</span></p>
       </div>
-      <p class="refs-register-note">A selected reading list, not an exhaustive prior-art or patent review. No novelty, priority, or uniqueness claim is made.</p>
+      <p class="refs-register-note">Selected primary sources; not an exhaustive prior-art or patent search.</p>
 
       <ol class="reference-list">
         <li class="reference-row" id="ref-pham">
@@ -123,31 +129,32 @@
     </section>
 
     <section class="refs-scope refs-shell" aria-labelledby="scope-title">
-      <div class="refs-scope-intro"><p class="refs-kicker">02 / Material scope</p><h2 id="scope-title">Conductivity<br>is a condition.</h2><p>Eddy-current coupling requires an electrically conductive path. This is a material and geometry question, not a blanket claim about space debris. <a href="#ref-pham">[1]</a> <a href="#ref-tabor">[3]</a></p></div>
+      <div class="refs-scope-intro"><p class="refs-kicker">02 / Material scope</p><h2 id="scope-title">Target material<br>requirements</h2><p>In the low-frequency regime, eddy-current torque on a conductor scales approximately with its electrical conductivity σ, the field’s rotation rate relative to the target and the square of the local field strength, and depends strongly on conductor geometry: currents need closed paths, so wall thickness, continuity and size relative to standoff distance all matter. A dipole field falls off as 1/r³, so standoff dominates achievable torque. <a href="#ref-pham">[1]</a> <a href="#ref-tabor">[3]</a></p></div>
       <div class="refs-materials">
         <table>
-          <caption>How to read the concept’s material scope</caption>
-          <thead><tr><th scope="col">Target</th><th scope="col">Boundary</th></tr></thead>
+          <caption>Representative room-temperature conductivities and expected coupling</caption>
+          <thead><tr><th scope="col">Material</th><th scope="col">Coupling</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Aluminum &amp; copper</th><td>Conductive, nonmagnetic materials studied in the cited work. Their presence alone does not establish useful control authority for a particular target.</td></tr>
-            <tr><th scope="row">Nonconductive glass, plastics &amp; rock</th><td>Outside this eddy-current mechanism. Conductive coatings or inclusions require separate assessment; the label “debris” says nothing about conductivity.</td></tr>
-            <tr><th scope="row">Mixed-material objects</th><td>Conditional. Conductive components, their geometry and continuity, relative motion, and source distance must be assessed. A sphere result is not a whole-object qualification.</td></tr>
+            <tr><th scope="row">Aluminum alloys &amp; copper</th><td>Primary target class. Copper ≈ 5.96 × 10⁷ S/m; pure aluminum ≈ 3.8 × 10⁷ S/m; 6061-T6 ≈ 2.5 × 10⁷ S/m. Used in all three cited experimental programs; most spacecraft primary structure, panels and upper-stage tanks are aluminum alloys.</td></tr>
+            <tr><th scope="row">Titanium, stainless steel &amp; CFRP</th><td>Weak. Titanium alloys ≈ 0.6–2.4 × 10⁶ S/m and 304 stainless ≈ 1.4 × 10⁶ S/m, one to two orders below aluminum. CFRP conducts mainly along its fibers (≈ 10⁴–10⁵ S/m in-plane), giving weak, direction-dependent coupling. Ferritic and martensitic stainless grades are ferromagnetic and add forces outside the eddy-current model.</td></tr>
+            <tr><th scope="row">Glass, polymers, solar cells &amp; MLI</th><td>Negligible. Dielectric substrates carry no eddy currents. Multilayer insulation uses vapor-deposited aluminum films around 100 nm thick, typically perforated and segmented, so induced currents are expected to be small.</td></tr>
+            <tr><th scope="row">Mixed-material objects</th><td>Dominated by the largest continuous conductive structures. Requires a per-target model of conductor geometry, continuity and mass distribution; a sphere or plate result does not qualify a whole object.</td></tr>
           </tbody>
         </table>
-        <p class="refs-table-note">This scope is an implication of the electrical-conduction requirement, not a validated target-selection catalog. Other magnetic interactions and materials require their own models.</p>
+        <p class="refs-table-note">Metal conductivity rises as temperature falls, so on-orbit coupling varies with the target’s thermal state. Values are representative handbook figures, not measurements of specific objects.</p>
       </div>
     </section>
 
     <section class="refs-close refs-shell" aria-labelledby="next-title">
-      <div><p class="refs-kicker">03 / Development boundary</p><h2 id="next-title">A design to examine.<br>A system to validate.</h2></div>
-      <div class="refs-close-copy"><p>Vyper Space is developing a ground-test design to investigate observation, robotic positioning and magnetic interaction with a conductive target. Drawing review, hardware characterization and integrated testing remain ahead.</p><p>The supplied CAD replay and earlier illustrative browser model serve different purposes. Neither establishes braking efficacy or capture safety. Detumbling addresses rotation; capture and deorbiting require additional capabilities. Spacecraft reaction, thermal evolution and orbital dynamics are outside these website demonstrations.</p><a class="button button-outline" href="explorer.html">Explore the engineering <span aria-hidden="true">↗</span></a></div>
+      <div><p class="refs-kicker">03 / Validation</p><h2 id="next-title">Test<br>sequence</h2></div>
+      <div class="refs-close-copy"><p>Ground testing runs in four stages: (1) confirm actuator interfaces, magnet mass and recalculated loads; (2) build and balance the gimbal and measure free-spin decay, gravity bias and repeatability before introducing the magnet; (3) complete two-camera fusion and the EtherCAT interface, then test occlusion and whole-arm clearance across the gimbal envelope; (4) run matched magnet-off, static-field and rotating-field trials, measuring torque, temperature and parasitic coupling with repeat runs and uncertainty.</p><p>Stages 2 and 4 address the open questions in prior work: how much of the one-axis braking reported by Allen et al. <a href="#ref-allen">[2]</a> carries over to a three-axis gimbal, and whether wrench models fitted to slowly moving targets <a href="#ref-tabor">[3]</a> hold for tumbling ones. Detumbling addresses rotation only; capture and deorbit are separate capabilities.</p><a class="button button-outline" href="explorer.html">Explore the engineering <span aria-hidden="true">↗</span></a></div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div><p>Control before contact.</p></div>
+    <div><p>Arago V2 · Design stage</p></div>
     <nav aria-label="Footer navigation"><a href="index.html">Mission ↗</a><a href="explorer.html">Engineering explorer ↗</a><a href="references.html" aria-current="page">References &amp; prior art ↗</a></nav>
-    <p class="footer-note">Ground prototype design · Unbuilt<br>© 2026 Vyper Space</p>
+    <p class="footer-note">© 2026 Vyper Space</p>
     <a class="footer-mark" href="index.html" aria-label="Vyper Space home"></a>
   </footer>
 </body>

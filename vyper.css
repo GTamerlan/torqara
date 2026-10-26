@@ -215,3 +215,20 @@ body .site-footer { flex-wrap: wrap; }
 .footer-mark:focus-visible { outline: 1px solid #fff6; outline-offset: 8px; }
 @media (max-width: 1100px) { body .orbit-footer { grid-template-columns: 1fr auto; } }
 @media (max-width: 760px) { body .orbit-footer { grid-template-columns: 1fr; } }
+
+/* About dropdown: Team and Whitepaper. Hover or keyboard focus opens it; on mobile the sub-links list inline. */
+body .site-header .nav-group { position: relative; display: flex; align-items: center; }
+body .site-header .nav-sub { position: absolute; top: 100%; left: 50%; min-width: 168px; padding: 8px; transform: translate(-50%, 6px); display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; background: rgba(14,16,20,.94); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: 0 12px 40px rgba(0,0,0,.35); opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease, visibility .18s; }
+body .site-header .nav-sub::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+body .site-header .nav-group:hover .nav-sub, body .site-header .nav-group:focus-within .nav-sub { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+body .site-header .nav-sub a { padding: 11px 14px; border-radius: 9px; white-space: nowrap; }
+body .site-header .nav-sub a::after { display: none; }
+body .site-header .nav-sub a:hover, body .site-header .nav-sub a[aria-current="page"] { background: rgba(255,255,255,.07); }
+@media (prefers-reduced-motion: reduce) { body .site-header .nav-sub { transition: none; } }
+@media (max-width: 920px) {
+  body .site-header .nav-group { flex-direction: column; align-items: stretch; }
+  body .site-header .nav-sub { position: static; transform: none; min-width: 0; padding: 0 0 0 16px; border: 0; border-radius: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; opacity: 1; visibility: visible; }
+  body .site-header .nav-sub::before { display: none; }
+  body .site-header .nav-sub a { padding: 14px 0; border-radius: 0; color: #c9d1d9; }
+  body .site-header .nav-sub a:hover, body .site-header .nav-sub a[aria-current="page"] { background: none; }
+}
