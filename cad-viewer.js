@@ -50,12 +50,12 @@ async function mount(container) {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const image = node('img', 'cad-poster');
   image.src = container.dataset.poster || new URL('renders/v2_01_hero.png', ASSET_ROOT).href;
-  image.alt = 'Arago V2 CAD render of the ground-test arm and target assembly';
+  image.alt = 'Arago V1.1 CAD render of the ground-test arm and target assembly';
   image.decoding = 'async';
   image.fetchPriority = replay ? 'low' : 'high';
   const stage = node('div', 'cad-stage');
   const overlay = node('div', 'cad-overlay');
-  const badge = node('span', 'cad-badge', replay ? 'MuJoCo trajectory · recorded poses' : 'Arago V2 · ground-test CAD');
+  const badge = node('span', 'cad-badge', replay ? 'MuJoCo trajectory · recorded poses' : 'Arago V1.1 · ground-test CAD');
   const status = node('p', 'cad-status', 'Loading interactive CAD…');
   status.setAttribute('role', 'status');
   const controlsBar = node('div', 'cad-controls');
@@ -110,8 +110,8 @@ async function mount(container) {
       const canvas = node('canvas', 'cad-canvas');
       canvas.tabIndex = 0;
       canvas.setAttribute('aria-label', replay
-        ? 'Interactive Arago V2 simulation replay. Drag to orbit, pinch to zoom. Arrow keys rotate, plus and minus zoom.'
-        : 'Interactive Arago V2 CAD assembly. Drag to orbit, pinch to zoom. Arrow keys rotate, plus and minus zoom.');
+        ? 'Interactive Arago V1.1 simulation replay. Drag to orbit, pinch to zoom. Arrow keys rotate, plus and minus zoom.'
+        : 'Interactive Arago V1.1 CAD assembly. Drag to orbit, pinch to zoom. Arrow keys rotate, plus and minus zoom.');
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
       renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
