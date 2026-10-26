@@ -89,10 +89,6 @@ function setExploring(value) {
 }
 root.classList.add('journey-enabled');
 showCaption(0);
-document.querySelector('[data-start-journey]').addEventListener('click', event => {
-  event.preventDefault();
-  jump(0, true);
-});
 document.querySelectorAll('[data-jump]').forEach(button => button.addEventListener('click', () => jump(Number(button.dataset.jump))));
 previous.addEventListener('click', () => jump(positions[Math.max(0, active - 1)]));
 next.addEventListener('click', () => jump(positions[Math.min(positions.length - 1, active + 1)]));
