@@ -177,3 +177,25 @@ html.journey-exploring .journey-stage .journey-shade{background:linear-gradient(
  .journey-links nav a { padding: 22px 0; }
  .journey-links nav a + a { border-top-color: #ffffff18; }
 }
+
+/* Cost of avoidance: sourced figures between the journey and the project links. */
+.journey-costs { padding: 96px var(--scene-gutter) 88px; border-top: 1px solid #ffffff14; background: #070c13; }
+.costs-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 6%; align-items: end; margin-bottom: 56px; }
+.costs-head .journey-eyebrow { font-size: 9px; color: #8fa3b6; margin-bottom: 14px; }
+.costs-head h2 { margin: 0; text-wrap: balance; font-size: clamp(34px, 4.2vw, 60px); font-weight: 400; letter-spacing: -.045em; line-height: 1.04; color: #f2f6fa; }
+.costs-head > p { margin: 0 0 4px; font-size: 15px; line-height: 1.7; color: #b5c5d5; }
+.costs-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 64px); margin: 0; padding: 0; list-style: none; }
+.costs-grid li { display: flex; flex-direction: column; padding-top: 26px; border-top: 1px solid #ffffff25; }
+.costs-grid p { margin: 0; font-size: 13px; line-height: 1.75; color: #9fb1c4; }
+.costs-grid .costs-kicker { margin-bottom: 22px; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #8fa3b6; }
+.costs-grid .costs-stat { font-size: clamp(44px, 4.6vw, 66px); font-weight: 300; letter-spacing: -.05em; line-height: 1; color: #f2f6fa; }
+.costs-grid .costs-label { margin: 12px 0 22px; font-size: 12px; line-height: 1.55; color: #d0dce8; max-width: 300px; }
+.costs-grid .costs-source { margin-top: auto; padding-top: 22px; font-size: 11px; color: #6f8193; }
+.costs-source a { color: #b5c5d5; text-decoration: underline; text-decoration-color: #b5c5d555; text-underline-offset: 3px; transition: text-decoration-color .2s; }
+.costs-source a:hover { text-decoration-color: #b5c5d5; }
+@media (max-width: 920px) {
+ .journey-costs { padding-top: 64px; padding-bottom: 56px; }
+ .costs-head { grid-template-columns: 1fr; gap: 18px; margin-bottom: 36px; }
+ .costs-head > p { font-size: 14px; }
+ .costs-grid { grid-template-columns: 1fr; gap: 36px; }
+}

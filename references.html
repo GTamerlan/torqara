@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script src="gate.js?v=gate-1"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
   <meta name="description" content="Prior work in rotating-dipole eddy-current manipulation and detumbling, target-material requirements, and the Arago V1.1 design report and validation plan.">
   <title>Research — Vyper Space</title>
   <link rel="icon" href="assets/vyper/favicon.png?v=20261026" type="image/png" sizes="2048x2048">
   <link rel="stylesheet" href="site.css?v=viper-1">
-  <link rel="stylesheet" href="references.css?v=research-2">
+  <link rel="stylesheet" href="references.css?v=research-3">
   <link rel="stylesheet" href="vyper.css?v=brand-14">
   <script src="site.js?v=viper-1" defer></script>
 </head>
@@ -48,9 +49,28 @@
       <div class="refs-project-copy"><h3>Detumbler arm v2: design, loads and simulation report</h3><p>Covers the five-axis arm CAD (13 GLB components), actuator selection, static load and interference checks, a costed parts list with fabrication schedule, and MuJoCo simulations of the gimballed aluminum target. Selected 180-second runs reach the 1°/s stability threshold in roughly 20–39 s, against a magnet-off bearing-friction baseline of about 60 s.</p><p>Open issues: stop times do not yet isolate magnetic braking from bearing friction; overlap counts of 1,332 and 165 samples include gimbal and arm-link/hull contacts, not only the stand; magnet mass is 574.1 g by catalog versus 491.62 g in CAD; HJ2 actuator bolt patterns are unconfirmed; two-camera fusion and the EtherCAT adapter are incomplete.</p><a class="reference-source" href="explorer.html#report-review">Known issues &amp; corrections <span class="source-kind">Engineering review</span><span aria-hidden="true">↗</span></a><a class="refs-project-downloads" href="prototype.html#downloads">CAD, parts and project downloads <span aria-hidden="true">↗</span></a></div>
     </section>
 
+    <section class="refs-scope refs-avoidance refs-shell" id="avoidance" aria-labelledby="avoidance-title">
+      <div class="refs-scope-intro"><p class="refs-kicker">01 / Operational context</p><h2 id="avoidance-title">Collision-avoidance<br>load</h2><p>Derelict satellites and fragments cannot maneuver, so every conjunction involving them is resolved by the active spacecraft, repeatedly, until the object reenters or is removed. The cost is propellant, lifetime and prediction accuracy, paid by every operator in the shell. <a href="#avoidance-sources">[Sources]</a></p></div>
+      <div class="refs-materials">
+        <table>
+          <caption>Starlink collision-avoidance figures and their operational cost</caption>
+          <thead><tr><th scope="col">Factor</th><th scope="col">Evidence</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Maneuver volume</th><td>207,152 avoidance maneuvers from December 2025 to May 2026, up from 148,696 in the previous six months: more than 355,000 in twelve months, over three times the 2024 total and more than 40 per satellite per year. Over the same period Starlink grew from about 6,000 satellites (2024) to more than 10,000 (June 2026), and all operational spacecraft from about 10,000 to about 16,000. The autonomous system maneuvers when collision probability exceeds 3 × 10⁻⁷, against an industry convention of 1 × 10⁻⁴. <a href="https://www.space.com/space-exploration/satellites/every-spacex-starlink-satellite-has-to-dodge-a-collision-almost-weekly-and-experts-fear-the-worst" target="_blank" rel="noopener">[Space.com]</a> <a href="https://www.keeptrack.space/deep-dive/collision-avoidance-conjunction-screening" target="_blank" rel="noopener">[KeepTrack]</a></td></tr>
+            <tr><th scope="row">Aggregate residual risk</th><td>Each maneuver reduces collision probability to roughly one in a million. Hugh Lewis (University of Birmingham): “if you make a million maneuvers and you have a residual probability of one in a million, you end up with an aggregate risk across your entire constellation that you can’t get rid of.” He projects one million cumulative Starlink maneuvers as early as June 2027 and more than a million per year by 2030. <a href="https://www.space.com/space-exploration/satellites/every-spacex-starlink-satellite-has-to-dodge-a-collision-almost-weekly-and-experts-fear-the-worst" target="_blank" rel="noopener">[Space.com]</a></td></tr>
+            <tr><th scope="row">Pair growth</th><td>The number of object pairs to screen scales roughly as n²/2. Tommaso Sgobba (IAASS): “Double the satellites in a shell and you roughly quadruple the number of pairs that need to be watched.” <a href="https://www.space.com/space-exploration/satellites/every-spacex-starlink-satellite-has-to-dodge-a-collision-almost-weekly-and-experts-fear-the-worst" target="_blank" rel="noopener">[Space.com]</a></td></tr>
+            <tr><th scope="row">Prediction error</th><td>Drag varies with space weather and cannot currently be predicted, so conjunction probabilities carry large uncertainty; satellites are “frequently dodging ghosts, burning fuel and shortening their operational lives” (Sgobba). A COMSPOC analysis found a single avoidance maneuver can throw off trajectory forecasts for several days, with position errors reaching 40 km, which generates further warnings for other operators. <a href="https://www.space.com/space-exploration/satellites/every-spacex-starlink-satellite-has-to-dodge-a-collision-almost-weekly-and-experts-fear-the-worst" target="_blank" rel="noopener">[Space.com]</a> <a href="https://www.keeptrack.space/deep-dive/collision-avoidance-conjunction-screening" target="_blank" rel="noopener">[KeepTrack]</a></td></tr>
+            <tr><th scope="row">Propellant &amp; lifetime</th><td>Propellant spent on avoidance cannot be used for station-keeping or a controlled deorbit at end of life. More frequent maneuvers shorten operational life against a design life of roughly 5–6 years. <a href="https://newspaceeconomy.ca/2026/04/10/debris-or-destiny-how-megaconstellation-operators-are-rewriting-the-rules-of-orbital-sustainability/" target="_blank" rel="noopener">[New Space Economy]</a></td></tr>
+            <tr><th scope="row">Single-event concentration</th><td>Debris from the November 2021 COSMOS 1408 anti-satellite test drove more than 1,700 of 6,873 Starlink maneuvers from December 2021 to May 2022, about a quarter of the total, and almost 1,700 of 13,612 from June to November 2022, when fewer than 25% of the test’s fragments remained in orbit. <a href="https://www.planet4589.org/astro/starsim/docs/Star2207.pdf" target="_blank" rel="noopener">[FCC report, 2022-1]</a> <a href="https://www.planet4589.org/astro/starsim/docs/Star2212.pdf" target="_blank" rel="noopener">[FCC report, 2022-2]</a></td></tr>
+          </tbody>
+        </table>
+        <p class="refs-table-note" id="avoidance-sources">Sources: T. Pultarova, “<a href="https://www.space.com/space-exploration/satellites/every-spacex-starlink-satellite-has-to-dodge-a-collision-almost-weekly-and-experts-fear-the-worst" target="_blank" rel="noopener">Every SpaceX Starlink satellite has to dodge a collision almost weekly, and experts fear the worst</a>,” Space.com, 15 July 2026, citing SpaceX’s semiannual report to the FCC; T. Kruczek, “<a href="https://www.keeptrack.space/deep-dive/collision-avoidance-conjunction-screening" target="_blank" rel="noopener">The 300,000 Swerves Keeping Low Earth Orbit From Crashing</a>,” KeepTrack, 13 June 2026; “<a href="https://newspaceeconomy.ca/2026/04/10/debris-or-destiny-how-megaconstellation-operators-are-rewriting-the-rules-of-orbital-sustainability/" target="_blank" rel="noopener">Debris or Destiny</a>,” New Space Economy, 10 April 2026; SpaceX constellation status reports to the FCC for <a href="https://www.planet4589.org/astro/starsim/docs/Star2207.pdf" target="_blank" rel="noopener">1 Dec 2021 – 31 May 2022</a> and <a href="https://www.planet4589.org/astro/starsim/docs/Star2212.pdf" target="_blank" rel="noopener">1 Jun – 30 Nov 2022</a>. Detumbling addresses rotation only: it makes an uncontrolled object safe to capture; capture and deorbit are separate capabilities.</p>
+      </div>
+    </section>
+
     <section class="refs-register refs-shell" id="source-register" aria-labelledby="register-title">
       <div class="refs-section-heading">
-        <div><p class="refs-kicker">01 / Source register</p><h2 id="register-title">Past work</h2></div>
+        <div><p class="refs-kicker">02 / Source register</p><h2 id="register-title">Past work</h2></div>
         <p>Three peer-reviewed papers, two agency releases.<br><span>Reviewed 17 October 2026.</span></p>
       </div>
       <p class="refs-register-note">Selected primary sources; not an exhaustive prior-art or patent search.</p>
@@ -129,7 +149,7 @@
     </section>
 
     <section class="refs-scope refs-shell" aria-labelledby="scope-title">
-      <div class="refs-scope-intro"><p class="refs-kicker">02 / Material scope</p><h2 id="scope-title">Target material<br>requirements</h2><p>In the low-frequency regime, eddy-current torque on a conductor scales approximately with its electrical conductivity σ, the field’s rotation rate relative to the target and the square of the local field strength, and depends strongly on conductor geometry: currents need closed paths, so wall thickness, continuity and size relative to standoff distance all matter. A dipole field falls off as 1/r³, so standoff dominates achievable torque. <a href="#ref-pham">[1]</a> <a href="#ref-tabor">[3]</a></p></div>
+      <div class="refs-scope-intro"><p class="refs-kicker">03 / Material scope</p><h2 id="scope-title">Target material<br>requirements</h2><p>In the low-frequency regime, eddy-current torque on a conductor scales approximately with its electrical conductivity σ, the field’s rotation rate relative to the target and the square of the local field strength, and depends strongly on conductor geometry: currents need closed paths, so wall thickness, continuity and size relative to standoff distance all matter. A dipole field falls off as 1/r³, so standoff dominates achievable torque. <a href="#ref-pham">[1]</a> <a href="#ref-tabor">[3]</a></p></div>
       <div class="refs-materials">
         <table>
           <caption>Representative room-temperature conductivities and expected coupling</caption>
@@ -146,7 +166,7 @@
     </section>
 
     <section class="refs-close refs-shell" aria-labelledby="next-title">
-      <div><p class="refs-kicker">03 / Validation</p><h2 id="next-title">Test<br>sequence</h2></div>
+      <div><p class="refs-kicker">04 / Validation</p><h2 id="next-title">Test<br>sequence</h2></div>
       <div class="refs-close-copy"><p>Ground testing runs in four stages: (1) confirm actuator interfaces, magnet mass and recalculated loads; (2) build and balance the gimbal and measure free-spin decay, gravity bias and repeatability before introducing the magnet; (3) complete two-camera fusion and the EtherCAT interface, then test occlusion and whole-arm clearance across the gimbal envelope; (4) run matched magnet-off, static-field and rotating-field trials, measuring torque, temperature and parasitic coupling with repeat runs and uncertainty.</p><p>Stages 2 and 4 address the open questions in prior work: how much of the one-axis braking reported by Allen et al. <a href="#ref-allen">[2]</a> carries over to a three-axis gimbal, and whether wrench models fitted to slowly moving targets <a href="#ref-tabor">[3]</a> hold for tumbling ones. Detumbling addresses rotation only; capture and deorbit are separate capabilities.</p><a class="button button-outline" href="explorer.html">Explore the engineering <span aria-hidden="true">↗</span></a></div>
     </section>
   </main>
