@@ -213,6 +213,10 @@ body .site-footer { flex-wrap: wrap; }
 }
 .site-footer .footer-mark:hover { opacity: .92; }
 .footer-mark:focus-visible { outline: 1px solid #fff6; outline-offset: 8px; }
+/* Footer background continues the section above it so there is no visible colour step. */
+body.orbit-home .orbit-footer { background: #070c13; }
+body.about-page .site-footer { background: #090a0d; }
+.explorer-page .exp-closing { background: linear-gradient(180deg, #0000 55%, #000), radial-gradient(ellipse at 85% 100%, #1a1d22, #000 60%); }
 @media (max-width: 1100px) { body .orbit-footer { grid-template-columns: 1fr auto; } }
 @media (max-width: 760px) { body .orbit-footer { grid-template-columns: 1fr; } }
 
