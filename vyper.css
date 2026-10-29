@@ -198,7 +198,7 @@ body .site-header .brand-logo img { display: block; width: 98.8px; height: 18.2p
 }
 
 /* Footer wordmark: oversized glass logo across the bottom of every page.
-   The PNG is used as a mask (cropped to its letterforms) and filled with a
+   The SVG (traced from the PNG letterforms) is used as a mask and filled with a
    white-to-dark gradient. */
 body .orbit-footer { grid-template-columns: 1fr auto auto; }
 body .site-footer { flex-wrap: wrap; }
@@ -207,8 +207,8 @@ body .site-footer { flex-wrap: wrap; }
   width: 100%; aspect-ratio: 1883 / 244; margin-top: clamp(28px, 5vw, 72px);
   background:
     linear-gradient(180deg, #fff 0%, rgba(232,240,250,.8) 25%, rgba(150,170,195,.3) 60%, rgba(255,255,255,.04) 88%, rgba(255,255,255,0) 100%);
-  -webkit-mask: url("assets/vyper/vyper-wordmark.png") 47% 49.9% / 105.31% 325% no-repeat;
-          mask: url("assets/vyper/vyper-wordmark.png") 47% 49.9% / 105.31% 325% no-repeat;
+  -webkit-mask: url("assets/vyper/vyper-wordmark.svg") 0 0 / 100% 100% no-repeat;
+          mask: url("assets/vyper/vyper-wordmark.svg") 0 0 / 100% 100% no-repeat;
   opacity: .92;
 }
 .site-footer .footer-mark:hover { opacity: .92; }

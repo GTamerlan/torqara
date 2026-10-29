@@ -19,7 +19,7 @@
 .founder-card:focus-visible { outline: none; }
 .founder-card:focus-visible .founder-photo { outline: 1px solid #fff9; outline-offset: 4px; }
 .founder-photo-placeholder { display: grid; place-items: center; background: radial-gradient(ellipse at 50% 35%, #1b2029 0%, #0d1015 70%); border: 1px solid #ffffff12; }
-.founder-mark { display: block; width: 46%; aspect-ratio: 1883 / 244; background: linear-gradient(180deg, #fff 0%, rgba(232,240,250,.8) 25%, rgba(150,170,195,.3) 60%, rgba(255,255,255,.04) 88%, rgba(255,255,255,0) 100%); -webkit-mask: url("assets/vyper/vyper-wordmark.png") 47% 49.9% / 105.31% 325% no-repeat; mask: url("assets/vyper/vyper-wordmark.png") 47% 49.9% / 105.31% 325% no-repeat; opacity: .8; }
+.founder-mark { display: block; width: 46%; aspect-ratio: 1883 / 244; background: linear-gradient(180deg, #fff 0%, rgba(232,240,250,.8) 25%, rgba(150,170,195,.3) 60%, rgba(255,255,255,.04) 88%, rgba(255,255,255,0) 100%); -webkit-mask: url("assets/vyper/vyper-wordmark.svg") 0 0 / 100% 100% no-repeat; mask: url("assets/vyper/vyper-wordmark.svg") 0 0 / 100% 100% no-repeat; opacity: .8; }
 .founder-meta { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; row-gap: 4px; padding-top: 18px; }
 .founder-meta strong { font-size: 20px; font-weight: 400; letter-spacing: -.03em; line-height: 1.2; color: #f2f6fa; }
 .founder-meta small { grid-column: 1; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #8fa3b6; }
