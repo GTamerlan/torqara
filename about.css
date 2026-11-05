@@ -68,8 +68,6 @@
 
 /* Whitepaper page: live Google Doc preview in a framed viewer. */
 .whitepaper-aside > p { margin: 0 0 22px; font-size: 16px; line-height: 1.6; color: #bbc1c5; }
-.whitepaper-link { display: inline-flex; gap: 26px; padding-bottom: 10px; border-bottom: 1px solid #ffffff66; font-size: 12px; color: #fff; transition: border-color .2s; }
-.whitepaper-link:hover { border-bottom-color: #fff; }
 .whitepaper-viewer { max-width: 1800px; margin: 0 auto; padding: 56px var(--gutter) 120px; }
 .whitepaper-viewer iframe { display: block; width: 100%; max-width: 1100px; height: max(720px, calc(100svh - 160px)); margin: 0 auto; border: 1px solid #ffffff1f; border-radius: 10px; background: #fff; }
 @media (max-width: 920px) {
