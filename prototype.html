@@ -39,7 +39,7 @@
     <section class="prototype-section" id="simulation" aria-labelledby="simulation-title">
       <div class="prototype-heading"><div><p class="prototype-eyebrow">01 / INSPECT THE DESIGN</p><h2 id="simulation-title">Assembly Viewer</h2></div><p>Interactive model of the proposed ground-test assembly. Playback shows a recorded MuJoCo trajectory; the viewer does not run a physics solver.</p></div>
       <div class="cad-viewer" data-cad-viewer="replay" data-poster="assets/viper/renders/v2_01_hero.png"><noscript><img class="cad-poster" src="assets/viper/renders/v2_01_hero.png" alt="Arago V1.1 ground-test assembly CAD"><p class="cad-status">Enable JavaScript to orbit the CAD. The video and original downloads remain available.</p></noscript></div>
-      <div class="prototype-interpretation"><p>Recorded overlap samples include the gimbal and, in one run, arm links against the hull. Target hull, ring and yoke collision response was disabled. These are geometric checks, not validated contact-force events.</p><a class="text-link" href="explorer.html#report-review">Report review <span aria-hidden="true">↗</span></a></div>
+      <div class="prototype-interpretation"><p>Recorded overlap samples include the gimbal and, in one run, arm links against the hull. Target hull, ring and yoke collision response was disabled. These are geometric checks, not validated contact-force events.</p></div>
     </section>
 
     <section class="prototype-section prototype-detail-section" aria-labelledby="architecture-title">
@@ -79,12 +79,11 @@
         <li><span class="build-number">04</span><h3>Observation calibration</h3><p>Calibrate camera-to-arm geometry and verify pose estimates against measured references. Complete two-camera fusion and test marker loss and gimbal occlusion before closed-loop operation.</p></li>
         <li><span class="build-number">05</span><h3>Controlled comparison testing</h3><p>Compare repeatable magnet-inactive, static-magnet and rotating-magnet trials with measured clearance, spin and temperature. Resolve moving-ring avoidance and determine the usable tumble envelope.</p></li>
       </ol>
-      <div class="prototype-interpretation"><p>Status: Design under review. Assumed bolt patterns, unresolved mass differences and preliminary clearance checks mean the CAD is not ready for manufacture. A successful ground test would still not establish flight capability.</p><a class="text-link" href="explorer.html#report-review">Open questions and validation <span aria-hidden="true">↗</span></a></div>
+      <div class="prototype-interpretation"><p>Status: Design under review. Assumed bolt patterns, unresolved mass differences and preliminary clearance checks mean the CAD is not ready for manufacture. A successful ground test would still not establish flight capability.</p></div>
     </section>
 
     <section class="prototype-section prototype-downloads" id="downloads" aria-labelledby="downloads-title">
-      <div class="prototype-heading"><div><p class="prototype-eyebrow">05 / SOURCE FILES</p><h2 id="downloads-title">Design Files</h2></div><p>Complete package: CAD sources, configurations, MuJoCo models and results, the Fusion script, and the original report. The original report contains statements corrected in the report review.</p></div>
-      <div class="prototype-package-note"><a class="text-link" href="explorer.html#report-review">Report review and corrections <span aria-hidden="true">↗</span></a></div>
+      <div class="prototype-heading"><div><p class="prototype-eyebrow">05 / SOURCE FILES</p><h2 id="downloads-title">Design Files</h2></div><p>Complete package: CAD sources, configurations, MuJoCo models and results, the Fusion script, and the original report.</p></div>
       <div class="prototype-download-list">
         <a href="assets/vyper/downloads/detumbler-arm-v2.zip" download><span><strong>Design and simulation package</strong><small>ZIP · full archive · 19.7 MB</small></span><span aria-hidden="true">↓</span></a>
         <a href="assets/vyper/downloads/Detumbler_Arm_v2_Assembly.step" download><span><strong>Full CAD assembly</strong><small>STEP · named parts · proposed geometry · 13.8 MB</small></span><span aria-hidden="true">↓</span></a>
