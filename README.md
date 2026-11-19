@@ -29,7 +29,7 @@ The expandable population notes use ESA's 14 October 2026 figures: approximately
 - `explorer.html`: engineering concepts, supplied report interpretation and corrections, validation priorities, plus the earlier illustrative browser model.
 - `model/index.html`: the preserved numerical concept model, rebranded with no changes to its simulation code.
 - `references.html`: project-source context and published research references.
-- `bench-test.html`: the bench rig in 3D (`bench-viewer.js`, using the Three.js files in `vendor/`) with the six things the bench test checks, plus two renders. Listed under Research in the menu and behind the same access gate as the other Arago V1.1 pages.
+- `bench-test.html`: the bench rig as a rendered turntable video (`bench-video.js` starts it after the page loads and picks the smaller cut on phones) and a still of each of the six things the bench test checks, plus two renders. Listed under Research in the menu and behind the same access gate as the other Arago V1.1 pages.
 
 ## Asset provenance
 
@@ -41,7 +41,7 @@ The Arm v2 files originate from the user-supplied `detumbler-arm-v2.zip` (SHA-25
 
 `cad-viewer.js` renders the supplied GLBs with local Three.js r172 modules. Its replay interpolates recorded joint poses; it does not run the Python/MuJoCo simulation in the browser. The MP4 is a supplied animation, not footage of physical hardware. Full source, simulation configuration and result files are available in the original package download. No software-license grant is implied by hosting the supplied package.
 
-`assets/bench/` holds the Vyper bench rig CAD (rev 0.2) made light for the web (`bench-rig.glb`: decimated, positions quantized, enclosure panels and door left out so the inside shows, and the parts sealed inside the magnet head left out) and renders of the same design: the whole rig (the viewer's poster), the target box in its two rings and the magnet head. They come from the design, not photographs; the rig has not been built yet. The viewer's "Run the test" is a simple simulated spin-down that shows what the rig is for; it is not a measurement.
+`assets/bench/` holds renders of the Vyper bench rig design (rev 0.2): its turntable (`bench-rig-turn.mp4`, `bench-rig-turn-720.mp4` for phones, and its poster), a still of each test point, the target box in its two rings and the magnet head. They come from the design, not photographs; the rig has not been built yet.
 
 The homepage orbital installation is an artistic adaptation of seven supplied arm components, with named ground pedestal and leveling hardware omitted at runtime. The source GLBs are unchanged. The surrounding carrier, satellites, damage and placement are original illustrative geometry, not flight-qualified CAD. Transverse N/S markers on the rotor turn about the shaft so the depicted dipole changes direction. The field and current lines are explanatory graphics; the target's apparent slowdown is a scripted presentation, not computed magnetic torque. There is no physical elapsed-time or braking-efficacy claim. Whether a real rotating field brakes or accelerates a target depends on its relative motion, geometry and control.
 
