@@ -7,16 +7,16 @@
   <meta name="description" content="Explore crowded Earth orbit, contactless detumbling, an imagined microgravity experiment, proposed arm CAD and a concept rocket launch. Illustrative animation, not validated satellite dynamics.">
   <title>Vyper Space — Control without contact</title>
   <link rel="icon" href="assets/vyper/favicon.png?v=20261026" type="image/png" sizes="2048x2048">
-  <link rel="preload" href="assets/films/film-a-poster.webp" as="image" type="image/webp" media="(orientation: landscape)" fetchpriority="high">
-  <link rel="preload" href="assets/films/film-a-poster-portrait.webp" as="image" type="image/webp" media="(orientation: portrait)" fetchpriority="high">
+  <link rel="preload" href="assets/films/film-hero-poster.webp" as="image" type="image/webp" media="(orientation: landscape)" fetchpriority="high">
+  <link rel="preload" href="assets/films/film-hero-poster-portrait.webp" as="image" type="image/webp" media="(orientation: portrait)" fetchpriority="high">
   <link rel="stylesheet" href="site.css?v=orbit-3">
   <link rel="stylesheet" href="vyper.css?v=brand-16">
   <link rel="stylesheet" href="hero.css?v=brand-14">
-  <link rel="stylesheet" href="films.css?v=films-1">
+  <link rel="stylesheet" href="films.css?v=films-2">
   <script src="site.js?v=orbit-3" defer></script>
   <script src="analytics.js?v=1" defer></script>
   <script type="module" src="home.js?v=brand-11"></script>
-  <script src="films.js?v=films-2" defer></script>
+  <script src="films.js?v=films-3" defer></script>
   <noscript><style>.journey-load,.journey-side,.journey-bottom,.journey-explore{display:none}</style></noscript>
 </head>
 <body class="vyper-home orbit-home">
@@ -30,42 +30,18 @@
     <section class="horizon-intro" aria-labelledby="opening-title">
       <div class="hero-film" aria-hidden="true">
         <picture>
-          <source media="(orientation: portrait)" srcset="assets/films/film-a-poster-portrait.webp" type="image/webp">
-          <source media="(orientation: portrait)" srcset="assets/films/film-a-poster-portrait.jpg">
-          <source srcset="assets/films/film-a-poster.webp" type="image/webp">
-          <img src="assets/films/film-a-poster.jpg" alt="" fetchpriority="high">
+          <source media="(orientation: portrait)" srcset="assets/films/film-hero-poster-portrait.webp" type="image/webp">
+          <source media="(orientation: portrait)" srcset="assets/films/film-hero-poster-portrait.jpg">
+          <source srcset="assets/films/film-hero-poster.webp" type="image/webp">
+          <img src="assets/films/film-hero-poster.jpg" alt="" fetchpriority="high">
         </picture>
-        <video muted playsinline loop preload="none" tabindex="-1" disablepictureinpicture disableremoteplayback data-landscape="assets/films/film-a-loop-1080" data-small="assets/films/film-a-loop-720" data-portrait="assets/films/film-a-loop-portrait"></video>
+        <video muted playsinline loop preload="none" tabindex="-1" disablepictureinpicture disableremoteplayback data-landscape="assets/films/film-hero-1080" data-small="assets/films/film-hero-720" data-portrait="assets/films/film-hero-portrait"></video>
       </div>
       <div class="horizon-copy">
         <h1 id="opening-title">Orbit is<br>already crowded.</h1>
         <a class="journey-begin" href="whitepaper.html">Read the whitepaper</a>
-        <a class="journey-begin film-watch" href="assets/films/film-a-full.mp4" data-film-watch>Watch the film</a>
       </div>
       <p class="film-note">Concept animation.</p>
-      <dialog class="film-viewer" aria-label="Concept animation" data-film="assets/films/film-a-full" data-poster="assets/films/film-a-poster.webp">
-        <video controls playsinline preload="none"></video>
-        <button class="film-viewer-close" type="button" aria-label="Close" data-film-close>×</button>
-      </dialog>
-    </section>
-    <section class="film-scrub" id="detumble">
-      <div class="film-stage">
-        <picture>
-          <source media="(orientation: portrait)" srcset="assets/films/film-b-poster-portrait.webp" type="image/webp">
-          <source media="(orientation: portrait)" srcset="assets/films/film-b-poster-portrait.jpg">
-          <source srcset="assets/films/film-b-scrub-poster.webp" type="image/webp">
-          <img src="assets/films/film-b-scrub-poster.jpg" alt="" loading="lazy">
-        </picture>
-        <video muted playsinline preload="none" tabindex="-1" aria-hidden="true" disablepictureinpicture disableremoteplayback data-film="assets/films/film-b-scrub-720" data-formats="mp4"></video>
-        <div class="film-lines" hidden>
-          <p class="film-line" data-at="0" data-t="0">A spent rocket stage, tumbling.</p>
-          <p class="film-line" data-at=".18" data-t="3.1">Vyper pulls alongside.</p>
-          <p class="film-line" data-at=".4" data-t="6.8">The arm holds a spinning magnet just off the hull.</p>
-          <p class="film-line" data-at=".8" data-t="17.4">The tumble stops. Nothing touched it.</p>
-        </div>
-        <noscript><div class="film-lines"><p class="film-line">A spent rocket stage, tumbling.</p><p class="film-line">Vyper pulls alongside.</p><p class="film-line">The arm holds a spinning magnet just off the hull.</p><p class="film-line">The tumble stops. Nothing touched it.</p></div></noscript>
-        <p class="film-note">Concept animation. Time compressed.</p>
-      </div>
     </section>
     <section class="orbital-journey" id="mission" aria-label="An illustrative journey from crowded Earth orbit to the laboratory, launch and orbital detumbling">
       <div class="journey-stage">
