@@ -1,0 +1,16 @@
+/* Bench test page: renders of the bench rig CAD */
+.bench-hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.75fr);gap:90px;align-items:end;padding-block:160px 52px}
+.bench-hero .refs-intro h1{margin:28px 0 0}
+.bench-hero .refs-lead{margin:0 0 8px}
+.bench-media{padding-bottom:110px}
+.bench-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:clamp(10px,1.2vw,18px)}
+.bench-grid figure{position:relative;margin:0;overflow:hidden;background:#03070e;border-radius:4px}
+.bench-grid img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+.bench-film{grid-row:1/span 2}
+.bench-film video{display:block;width:100%;height:100%;object-fit:cover}
+.bench-grid figure:not(.bench-film)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,transparent,#03070ed9);pointer-events:none}
+.bench-grid figcaption{position:absolute;z-index:1;left:18px;bottom:15px;margin:0;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.bench-note{margin:18px 0 0;font-size:11px;line-height:1.7;color:#929292}
+@media(min-width:1450px){.bench-hero{gap:130px}}
+@media(max-width:900px){.bench-hero{grid-template-columns:1.4fr .85fr;gap:42px;padding-top:140px}.bench-media{padding-bottom:80px}}
+@media(max-width:640px){.bench-hero{grid-template-columns:1fr;gap:20px;padding-block:124px 32px}.bench-hero .refs-intro h1{margin-top:22px}.bench-hero .refs-lead{margin:0}.bench-grid{grid-template-columns:1fr 1fr}.bench-film{grid-column:1/-1;grid-row:auto}.bench-film video{height:auto;aspect-ratio:1/1}.bench-grid figcaption{left:12px;bottom:10px;font-size:9px}.bench-media{padding-bottom:60px}}
