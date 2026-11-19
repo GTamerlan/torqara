@@ -1,0 +1,95 @@
+/* Front-page films: the launch loop behind the opening, and the detumble film set by the scroll. */
+
+/* Opening: the poster paints first; the loop fades in over it once it plays. */
+.horizon-intro { isolation: isolate; background: #03070e; }
+.hero-film { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.hero-film img,
+.hero-film video { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.hero-film video { opacity: 0; transition: opacity 1.2s ease; }
+.hero-film video.is-on { opacity: 1; }
+.hero-film::after {
+ content: ""; position: absolute; inset: 0; pointer-events: none;
+ background:
+  linear-gradient(90deg, #03070eb8 0%, #03070e6b 32%, #03070e00 62%),
+  linear-gradient(0deg, #03070e 0%, #03070ec2 20%, #03070e5c 40%, #03070e00 62%),
+  linear-gradient(180deg, #03070e66 0%, #03070e00 22%);
+}
+.horizon-copy .film-watch { margin-left: 30px; }
+
+/* Small notes in a bottom corner of each film. */
+.film-note { position: absolute; right: var(--scene-gutter); bottom: 28px; margin: 0; font-size: 10px; line-height: 1.7; letter-spacing: .03em; color: #a8b9ca; text-align: right; }
+
+/* The full film. Its controls sit in a band under the picture, clear of the words in the film. */
+.film-viewer { --film-w: min(1280px, calc(100vw - 32px), calc((100svh - 150px) * 16 / 9)); width: var(--film-w); max-width: none; max-height: none; padding: 54px 0 0; border: 0; overflow: visible; background: none; color: #f2f6fa; }
+.film-viewer::backdrop { background: rgba(3, 5, 8, .86); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.film-viewer[open], .film-viewer[open]::backdrop { animation: film-fade .35s ease; }
+@keyframes film-fade { from { opacity: 0; } to { opacity: 1; } }
+.film-viewer video { display: block; width: 100%; height: calc(var(--film-w) * 9 / 16 + 56px); object-fit: contain; object-position: 50% 0; border-radius: 16px; background: #0d0f13; }
+.film-viewer video:fullscreen { object-position: 50% 50%; border-radius: 0; background: #000; }
+.film-viewer video:-webkit-full-screen { object-position: 50% 50%; border-radius: 0; background: #000; }
+.film-viewer-close { position: absolute; top: 0; right: 0; width: 42px; height: 42px; border: 1px solid #ffffff24; border-radius: 50%; background: none; color: #f2f6fa; font-size: 22px; line-height: 1; cursor: pointer; transition: background .2s, border-color .2s; }
+.film-viewer-close:hover { background: #ffffff0f; border-color: #ffffff55; }
+
+/* Detumble: without the script, or with less motion, the poster carries all four lines. */
+.film-scrub { position: relative; background: #03070e; }
+.film-stage { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; isolation: isolate; }
+.film-stage img,
+.film-stage video { position: absolute; inset: 0; z-index: -2; display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.film-stage video { opacity: 0; transition: opacity .8s ease; }
+.film-stage video.is-on { opacity: 1; }
+.film-stage::after {
+ content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+ background:
+  linear-gradient(90deg, #03070ee0 0%, #03070eb3 34%, #03070e40 52%, #03070e00 66%),
+  linear-gradient(0deg, #03070ee6 0%, #03070eb3 30%, #03070e59 55%, #03070e00 75%);
+}
+.film-lines { display: flex; flex-direction: column; gap: 20px; width: min(560px, 46%); margin: 0 0 0 var(--scene-gutter); padding: 150px 0 15vh; }
+.film-lines[hidden] { display: none; }
+.film-line { margin: 0; font-size: clamp(24px, 2.3vw, 34px); line-height: 1.14; letter-spacing: -.045em; color: #f3f5f7; text-shadow: 0 2px 30px #0007; text-wrap: balance; }
+
+/* With the script: a tall section, a sticky stage, and one line at a time. */
+.film-scrub.is-scrubbing { height: 300vh; height: 300svh; }
+.is-scrubbing .film-stage { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
+.is-scrubbing .film-stage::after {
+ background:
+  linear-gradient(90deg, #03070ecc 0%, #03070e80 30%, #03070e00 60%),
+  linear-gradient(0deg, #03070ee6 0%, #03070e99 22%, #03070e33 42%, #03070e00 60%);
+}
+.is-scrubbing .film-lines { position: absolute; inset: 0; display: block; width: auto; margin: 0; padding: 0; pointer-events: none; }
+.is-scrubbing .film-line { position: absolute; left: var(--scene-gutter); bottom: 17%; width: min(510px, 42%); font-size: clamp(30px, 3vw, 46px); line-height: 1.12; letter-spacing: -.05em; opacity: 0; transform: translateY(15px); filter: blur(5px); transition: opacity .6s, transform .8s cubic-bezier(.2,.7,.3,1), filter .65s; }
+.is-scrubbing .film-line.is-on { opacity: 1; transform: none; filter: none; }
+
+@media (max-width: 1100px) {
+ .is-scrubbing .film-line { width: 46%; font-size: clamp(30px, 3.6vw, 40px); }
+}
+@media (max-width: 760px), (orientation: portrait) {
+ .hero-film::after { background: linear-gradient(0deg, #03070e 0%, #03070ed6 24%, #03070e80 40%, #03070e1f 56%, #03070e00 68%), linear-gradient(180deg, #03070e59 0%, #03070e00 20%); }
+ .film-stage::after { background: linear-gradient(0deg, #03070ef2 0%, #03070ed9 30%, #03070e99 50%, #03070e40 66%, #03070e00 80%); }
+ .is-scrubbing .film-stage::after { background: linear-gradient(0deg, #03070ef2 0%, #03070ec4 26%, #03070e75 44%, #03070e1a 62%, #03070e00 72%); }
+}
+@media (orientation: landscape) and (max-height: 650px) {
+ .hero-film::after { background: linear-gradient(90deg, #03070ecc 0%, #03070e8f 36%, #03070e00 66%), linear-gradient(0deg, #03070e 0%, #03070ec7 26%, #03070e6b 50%, #03070e00 70%), linear-gradient(180deg, #03070e66 0%, #03070e00 22%); }
+}
+@media (max-width: 760px) {
+ .horizon-copy .film-watch { margin-left: 24px; }
+ .film-note { right: 24px; bottom: 18px; font-size: 9px; }
+ .film-viewer video { border-radius: 12px; }
+ .film-lines { width: auto; max-width: 440px; margin: 0 24px; padding-bottom: 13vh; gap: 16px; }
+ .film-line { font-size: clamp(22px, 6.2vw, 28px); }
+ .is-scrubbing .film-line { left: 24px; right: 24px; bottom: 19%; width: auto; max-width: 440px; font-size: clamp(25px, 7vw, 32px); line-height: 1.12; }
+}
+@media (max-height: 650px) {
+ .film-note { bottom: 14px; }
+ .film-lines { padding-top: 96px; padding-bottom: 12vh; gap: 12px; }
+ .film-line { font-size: clamp(20px, 2.2vw, 28px); }
+ .is-scrubbing .film-line { bottom: 23%; font-size: clamp(26px, 3.6vw, 38px); }
+}
+@media (max-height: 500px) {
+ .is-scrubbing .film-line { font-size: clamp(21px, 5.6vh, 28px); }
+}
+@media (prefers-reduced-motion: reduce) {
+ .hero-film video, .film-stage video { display: none; }
+ .film-line { transition: none !important; filter: none !important; }
+ .film-viewer[open], .film-viewer[open]::backdrop { animation: none; }
+ .film-viewer-close { transition: none; }
+}
