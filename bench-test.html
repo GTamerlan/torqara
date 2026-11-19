@@ -11,9 +11,10 @@
   <link rel="stylesheet" href="site.css?v=viper-1">
   <link rel="stylesheet" href="references.css?v=research-3">
   <link rel="stylesheet" href="vyper.css?v=brand-16">
-  <link rel="stylesheet" href="bench.css?v=1">
+  <link rel="stylesheet" href="bench.css?v=2">
   <script src="site.js?v=viper-1" defer></script>
   <script src="analytics.js?v=1" defer></script>
+  <script type="module" src="bench-viewer.js?v=1"></script>
 </head>
 <body class="references-page bench-page">
   <a class="skip-link" href="#main">Skip to the bench test</a>
@@ -32,11 +33,33 @@
       <p class="refs-lead">A spinning magnet will slow a tumbling aluminum box, without touching it.</p>
     </section>
 
-    <section class="bench-media refs-shell" aria-label="Renders of the bench rig">
-      <div class="bench-grid">
-        <figure class="bench-film">
-          <video src="assets/bench/bench-rig-turn.mp4" poster="assets/bench/bench-rig-turn.jpg" width="960" height="960" autoplay muted loop playsinline preload="metadata" aria-label="The bench rig turning slowly, rendered from our CAD"></video>
-        </figure>
+    <section class="bench-media refs-shell" aria-label="The bench rig in 3D">
+      <div class="bench-viewer" data-bench-viewer data-src="assets/bench/bench-rig.glb">
+        <div class="bv-stage">
+          <img class="bv-poster" src="assets/bench/bench-rig-turn.jpg" width="960" height="960" decoding="async" alt="The bench rig, rendered from our CAD">
+          <div class="bv-markers" aria-hidden="true"></div>
+          <p class="bv-badge">3D model from our CAD</p>
+          <p class="bv-status" role="status"></p>
+          <div class="bv-bar">
+            <button type="button" class="bv-run" data-bv-run disabled>Run the test</button>
+            <div class="bv-sim" aria-live="polite"><span class="bv-sim-label">Simulated</span><span class="bv-phase"></span><span class="bv-meter" aria-hidden="true"><span></span></span></div>
+            <button type="button" class="bv-reset" data-bv-reset disabled>Reset view</button>
+          </div>
+        </div>
+        <div class="bv-panel">
+          <p class="bv-kicker">What it tests</p>
+          <ol class="bv-points">
+            <li><button type="button" data-point="braking" aria-pressed="false"><span class="bv-n">1</span><span class="bv-t">Braking</span><span class="bv-d">How hard the magnet brakes, at each speed.</span></button></li>
+            <li><button type="button" data-point="gap" aria-pressed="false"><span class="bv-n">2</span><span class="bv-t">Gap</span><span class="bv-d">How braking falls off with distance.</span></button></li>
+            <li><button type="button" data-point="angle" aria-pressed="false"><span class="bv-n">3</span><span class="bv-t">Angle</span><span class="bv-d">Braking from any side, at any angle.</span></button></li>
+            <li><button type="button" data-point="tumble" aria-pressed="false"><span class="bv-n">4</span><span class="bv-t">Tumble</span><span class="bv-d">A free tumble on three axes.</span></button></li>
+            <li><button type="button" data-point="rate" aria-pressed="false"><span class="bv-n">5</span><span class="bv-t">Spin rate</span><span class="bv-d">A sensor on each axis logs the slowdown.</span></button></li>
+            <li><button type="button" data-point="track" aria-pressed="false"><span class="bv-n">6</span><span class="bv-t">Tracking</span><span class="bv-d">A depth camera follows the tumble, no markers.</span></button></li>
+          </ol>
+          <p class="bv-hint">Drag to turn. Pinch or scroll to zoom.</p>
+        </div>
+      </div>
+      <div class="bench-stills">
         <figure>
           <img src="assets/bench/bench-target.jpg" width="1200" height="1200" loading="lazy" decoding="async" alt="The aluminum target box inside its two rings, free to tumble">
           <figcaption>The target</figcaption>
@@ -46,8 +69,7 @@
           <figcaption>The magnet head</figcaption>
         </figure>
       </div>
-      <p class="bench-note">Rendered from our CAD. The rig is not built yet.</p>
-      <script>if(matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.bench-film video').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});}</script>
+      <p class="bench-note">Model from our CAD. The run is simulated. The rig is not built yet.</p>
     </section>
   </main>
 
