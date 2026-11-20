@@ -1,0 +1,53 @@
+/* About page: the mission film. A muted loop under the founders (the upright cut on phones), poster first,
+   and the full film one tap away in its own window. */
+.about-mission { max-width: 1800px; margin: 0 auto; padding: 0 var(--gutter) 120px; }
+.about-mission-in { padding-top: 64px; background: linear-gradient(#ffffff1f, #ffffff1f) top left / 100% 1px no-repeat; }
+
+.mission-film { position: relative; display: block; width: min(100%, calc((100svh - 120px) * 16 / 9)); aspect-ratio: 16 / 9; padding: 0; border: 0; border-radius: 6px; overflow: hidden; background: #05070a; color: inherit; cursor: pointer; isolation: isolate; }
+.mission-film img,
+.mission-film video { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.mission-film video { opacity: 0; transition: opacity 1.2s ease; }
+.mission-film video.is-on { opacity: 1; }
+.mission-film::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(0deg, #05070a8c 0%, #05070a00 26%); }
+.mission-film:focus-visible { outline: 1px solid #fff9; outline-offset: 4px; }
+.mission-film-note { position: absolute; right: 18px; bottom: 14px; z-index: 2; font-size: 10px; line-height: 1.7; letter-spacing: .03em; color: #a8b9ca; }
+
+.mission-copy { display: grid; grid-template-columns: minmax(0, 560px) auto; justify-content: space-between; align-items: start; gap: 24px 48px; margin-top: 26px; }
+.mission-copy p { margin: 0; font-size: 16px; line-height: 1.6; color: #bbc1c5; }
+.mission-play { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; padding: 0 0 2px; border: 0; border-bottom: 1px solid #ffffff66; background: none; color: #fff; font-size: 12px; letter-spacing: .02em; white-space: nowrap; transition: border-color .2s; }
+.mission-play:hover { border-bottom-color: #fff; }
+.mission-play svg { width: 10px; height: 10px; }
+
+.mission-full { width: min(1280px, 100vw - 48px); max-width: none; max-height: none; margin: auto; padding: 0; border: 0; background: none; color: #f2f6fa; overflow: visible; }
+.mission-full::backdrop { background: rgba(3, 5, 8, .88); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.mission-full[open] { animation: mission-in .35s cubic-bezier(.2,.7,.3,1); }
+.mission-full[open]::backdrop { animation: mission-fade .3s ease; }
+@keyframes mission-in { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes mission-fade { from { opacity: 0; } to { opacity: 1; } }
+.mission-full video { display: block; width: min(100%, calc((100svh - 150px) * 16 / 9)); aspect-ratio: 16 / 9; margin: 0 auto; border-radius: 6px; background: #05070a; }
+.mission-full-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: min(100%, calc((100svh - 150px) * 16 / 9)); margin: 0 auto 14px; }
+.mission-full-bar p { margin: 0; font-size: 10px; letter-spacing: .03em; color: #a8b9ca; }
+.mission-close { width: 42px; height: 42px; flex: 0 0 42px; border: 1px solid #ffffff24; border-radius: 50%; background: none; color: #f2f6fa; font-size: 22px; line-height: 1; cursor: pointer; transition: background .2s, border-color .2s; }
+.mission-close:hover { background: #ffffff0f; border-color: #ffffff55; }
+.mission-close:focus { outline: none; }
+.mission-close:focus-visible { border-color: #ffffff99; }
+
+@media (max-width: 920px) {
+  .about-mission { padding-bottom: 80px; }
+  .about-mission-in { padding-top: 44px; }
+  .mission-copy { grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
+  .mission-copy p { font-size: 14px; }
+  .mission-full { width: calc(100vw - 32px); }
+}
+/* Phones held upright: the upright cut, as tall as the screen allows. */
+@media (orientation: portrait) and (max-width: 600px) {
+  .mission-film { width: min(100%, calc((100svh - 140px) * 9 / 16)); aspect-ratio: 9 / 16; }
+  .mission-film-note { right: 14px; bottom: 12px; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mission-film video { display: none; }
+  .mission-full[open], .mission-full[open]::backdrop { animation: none; }
+}
+/* Under the founders: the same gap as above them. */
+.about-founders:has(+ .about-mission) { padding-bottom: 56px; }
+@media (max-width: 920px) { .about-founders:has(+ .about-mission) { padding-bottom: 36px; } }
